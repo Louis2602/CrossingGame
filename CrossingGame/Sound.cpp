@@ -1,17 +1,17 @@
-#include "Sound.h"
+#include "Header.h";
 
-void Sound::SoundBackground() {
+void SoundBackground() {
 	PlaySound(TEXT("LegendaryAmadeus.wav"), NULL, SND_ASYNC);
 }
 
-void Sound::SoundByeBye() {
+void SoundByeBye() {
 	PlaySound(TEXT("ByeBye.wav"), NULL, SND_ASYNC);
 }
 
-void Sound::EndSoundGame() {
+void EndSoundGame() {
 	PlaySound(NULL, NULL, SND_FILENAME);
 }
 
-void Sound::SoundRocket() {
+void SoundRocket() {
 	PlaySound(TEXT("SoundRocket.wav"), NULL, SND_ASYNC);
 }

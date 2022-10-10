@@ -1,11 +1,14 @@
-#include "Controller.h"
-#include "Sound.h"
-#include "Graphics.h"
+#include "Header.h"
 
 int Round = 1;
+CPEOPLE people;
+CANIMAL animal[];
+CVEHICLE vehicle[];
+
 
 int main() {
-	Controller::SetUpConsole();
-	Sound::SoundBackground();
-	Graphics::Menu(Round);
+	srand(time(NULL));
+	SetUpConsole();
+	SoundBackground();
+	Menu();
 }
