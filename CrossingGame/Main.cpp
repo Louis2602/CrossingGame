@@ -1,14 +1,19 @@
 #include "Header.h"
 
-int Round = 1;
 CPEOPLE people;
 CANIMAL animal[];
 CVEHICLE vehicle[];
 
+bool Continue = false;
+bool PlayAgain = false;
+bool Impact = false;
 
 int main() {
 	srand(time(NULL));
-	SetUpConsole();
-	SoundBackground();
-	Menu();
+
+	Controller::SetUpConsole();
+	Sound::SoundBackground();
+
+	Menu game;
+	game.MainMenu();
 }

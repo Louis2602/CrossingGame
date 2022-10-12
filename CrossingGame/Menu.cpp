@@ -1,26 +1,121 @@
-#include "Header.h";
+#include "Menu.h";
 
-void MenuGameplay() {
+void Menu::MainMenu() {
+	Graphics::LoadBackground();
+	Graphics::DrawMenuBox();
+	Controller::GotoXY(43, 12);
+	Controller::TextColor(LIGHT_AQUA);
+	printf("CSC10003 - OBJECT ORIENTED PROGRAMMING");
+	Controller::GotoXY(53, 13);
+	cout << "GAME: CROSSING GAME";
 	int idx = 15, idx_t = 15;
-	GotoXY(53, idx);
-	TextColor(14);
+	Controller::GotoXY(53, idx);
+	Controller::TextColor(LIGHT_YELLOW);
 	cout << (char)175;
-	GotoXY(56, 15);
+	Controller::GotoXY(56, 15);
+	cout << "Play    " << endl;
+	Controller::GotoXY(56, 16);
+	Controller::TextColor(WHITE);
+	cout << "Rule       " << endl;
+	Controller::GotoXY(50, 17);
+	cout << "      About      " << endl;
+	Controller::GotoXY(50, 18);
+	cout << "      Score      " << endl;
+	Controller::GotoXY(56, 19);
+	cout << "Quit Game      " << endl;
+
+	while (true)
+	{
+		char s = toupper(_getch());
+		Controller::TextColor(LIGHT_AQUA);
+		idx_t = idx;
+		if (s == 'W' || s == 72)
+			idx--;
+		else
+			if (s == 'S' || s == 80)
+				idx++;
+		if (idx > 19)
+			idx = 15;
+		else
+			if (idx < 15)
+				idx = 19;
+		Controller::GotoXY(53, idx_t);
+		cout << "  ";
+		Controller::GotoXY(53, idx);
+		Controller::TextColor(LIGHT_YELLOW);
+		cout << (char)175;
+		Controller::GotoXY(56, 15);
+		Controller::TextColor(WHITE);
+		if (idx == 15)
+			Controller::TextColor(14);
+		cout << "Play" << endl;
+		Controller::GotoXY(56, 16);
+		Controller::TextColor(WHITE);
+		if (idx == 16)
+			Controller::TextColor(LIGHT_YELLOW);
+		cout << "Rule" << endl;
+		Controller::GotoXY(56, 17);
+		Controller::TextColor(WHITE);
+		if (idx == 17)
+			Controller::TextColor(LIGHT_YELLOW);
+		cout << "About" << endl;
+		Controller::GotoXY(56, 18);
+		Controller::TextColor(WHITE);
+		if (idx == 18)
+			Controller::TextColor(LIGHT_YELLOW);
+		cout << "Score" << endl;
+		Controller::TextColor(WHITE);
+		if (idx == 19)
+			Controller::TextColor(LIGHT_YELLOW);
+		Controller::GotoXY(56, 19);
+		cout << "Quit Game" << endl;
+		if (s == 13)
+		{
+			idx -= 14;
+			break;
+		}
+	}
+	switch (idx)
+	{
+	case 1:
+		MenuGameplay();
+		break;
+	case 2:
+		MenuRule();
+		break;
+	case 3:
+		MenuAbout();
+		break;
+	case 4:
+		MenuScore();
+		break;
+	case 5:
+		MenuQuitGame();
+		break;
+	}
+}
+
+void Menu::MenuGameplay() {
+	int idx = 15, idx_t = 15;
+	Controller::GotoXY(53, idx);
+	Controller::TextColor(LIGHT_YELLOW);
+	cout << (char)175;
+	Controller::GotoXY(56, 15);
 	cout << "New Game  " << endl;
-	GotoXY(56, 16);
-	TextColor(7);
+	Controller::GotoXY(56, 16);
+	Controller::TextColor(WHITE);
 	cout << "Load Game" << endl;
-	GotoXY(56, 17);
+	Controller::GotoXY(56, 17);
 	cout << "Settings " << endl;
-	GotoXY(56, 18);
+	Controller::GotoXY(56, 18);
 	cout << "                 " << endl;
-	GotoXY(56, 19);
+	Controller::GotoXY(56, 19);
 	cout << "                 " << endl;
 
 	while (true)
 	{
 		char s = toupper(_getch());
-		TextColor(11);
+		Controller::TextColor(LIGHT_AQUA);
 		idx_t = idx;
 		if (s == 'W' || s == 72)
 			idx--;
@@ -32,27 +127,27 @@ void MenuGameplay() {
 		else
 			if (idx < 15)
 				idx = 17;
-		GotoXY(53, idx_t);
+		Controller::GotoXY(53, idx_t);
 		cout << "  ";
-		GotoXY(53, idx);
-		TextColor(14);
+		Controller::GotoXY(53, idx);
+		Controller::TextColor(LIGHT_YELLOW);
 		cout << (char)175;
-		GotoXY(56, 15);
-		TextColor(7);
+		Controller::GotoXY(56, 15);
+		Controller::TextColor(WHITE);
 		if (idx == 15)
-			TextColor(14);
+			Controller::TextColor(14);
 		cout << "New Game" << endl;
-		GotoXY(56, 16);
-		TextColor(7);
+		Controller::GotoXY(56, 16);
+		Controller::TextColor(WHITE);
 		if (idx == 16)
-			TextColor(14);
+			Controller::TextColor(LIGHT_YELLOW);
 		cout << "Load Game" << endl;
-		GotoXY(56, 17);
-		TextColor(7);
+		Controller::GotoXY(56, 17);
+		Controller::TextColor(WHITE);
 		if (idx == 17)
-			TextColor(14);
+			Controller::TextColor(LIGHT_YELLOW);
 		cout << "Settings" << endl;
-		TextColor(7);
+		Controller::TextColor(WHITE);
 
 		if (s == 13)	//press Enter
 		{
@@ -63,156 +158,155 @@ void MenuGameplay() {
 	switch (idx)
 	{
 	case 1:
-		Round = 1;
-		//PlayGame();
+		PlayGame();
 		break;
 	case 2:
-		//FlatContinue = true;
-		//PlayGame();
+		Continue = true;
+		//Game::PlayGame();
 		break;
 	case 3:
-		Menu();
+		Menu::MainMenu();
 		break;
 	}
 }
 
-void MenuRule() {
-	ClearConsole();
-	LoadBackground();
-	GotoXY(50, 13);
-	SetColor(7);	cout << "FUNCTION KEYS";
+void Menu::MenuRule() {
+	Controller::ClearConsole();
+	Graphics::LoadBackground();
+	Controller::GotoXY(50, 13);
+	Controller::SetColor(WHITE);	cout << "FUNCTION KEYS";
 
-	GotoXY(48, 15);
-	SetColor(14);	cout << " L  :";
-	SetColor(3);	cout << "   Save game";
-	GotoXY(48, 16);
-	SetColor(14);	cout << " P  :";
-	SetColor(3);	cout << "   Pause game";
-	GotoXY(48, 17);
-	SetColor(14);	cout << "Esc :";
-	SetColor(3);	cout << "   Exit";
-	GotoXY(45, 19);
-	SetColor(4);	cout << "Cross the road and dodge";
-	GotoXY(45, 20); cout << "obstacles (cars & animals)";
+	Controller::GotoXY(48, 15);
+	Controller::SetColor(14);	cout << " L  :";
+	Controller::SetColor(AQUA);	cout << "   Save game";
+	Controller::GotoXY(48, 16);
+	Controller::SetColor(14);	cout << " P  :";
+	Controller::SetColor(AQUA);	cout << "   Pause game";
+	Controller::GotoXY(48, 17);
+	Controller::SetColor(14);	cout << "Esc :";
+	Controller::SetColor(AQUA);	cout << "   Exit";
+	Controller::GotoXY(45, 19);
+	Controller::SetColor(RED);	cout << "Cross the road and dodge";
+	Controller::GotoXY(45, 20); cout << "obstacles (cars & animals)";
 
 
 
-	GotoXY(78, 13);
-	SetColor(7);	cout << "MOVE";
+	Controller::GotoXY(78, 13);
+	Controller::SetColor(WHITE);	cout << "MOVE";
 
-	GotoXY(75, 15);
-	SetColor(14);	cout << "     W   ";
+	Controller::GotoXY(75, 15);
+	Controller::SetColor(LIGHT_YELLOW);	cout << "     W   ";
 
-	GotoXY(75, 16);
-	SetColor(9);	cout << "     ^";
+	Controller::GotoXY(75, 16);
+	Controller::SetColor(LIGHT_BLUE);	cout << "     ^";
 
-	GotoXY(75, 17);
-	SetColor(14);	cout << " A ";
+	Controller::GotoXY(75, 17);
+	Controller::SetColor(LIGHT_YELLOW);	cout << " A ";
 
-	GotoXY(78, 17);
-	SetColor(9);	cout << "<   >";
+	Controller::GotoXY(78, 17);
+	Controller::SetColor(LIGHT_BLUE);	cout << "<   >";
 
-	GotoXY(80, 17);
-	SetColor(4);	cout << "O";
+	Controller::GotoXY(80, 17);
+	Controller::SetColor(RED);	cout << "O";
 
-	GotoXY(84, 17);
-	SetColor(14);	cout << "D";
+	Controller::GotoXY(84, 17);
+	Controller::SetColor(LIGHT_YELLOW);	cout << "D";
 
-	GotoXY(75, 18);
-	SetColor(9);	cout << "     v   ";
+	Controller::GotoXY(75, 18);
+	Controller::SetColor(LIGHT_BLUE);	cout << "     v   ";
 
-	GotoXY(75, 19);
-	SetColor(14);	cout << "     S";
-	SetColor(14);
+	Controller::GotoXY(75, 19);
+	Controller::SetColor(LIGHT_YELLOW);	cout << "     S";
+	Controller::SetColor(LIGHT_YELLOW);
 
-	TextColor(17);
+	Controller::TextColor(17);
 	char c = 219;
 	for (int i = 13; i < 22; i++) {
-		GotoXY(72, i);
+		Controller::GotoXY(72, i);
 		cout << c;
-		GotoXY(88, i);
+		Controller::GotoXY(88, i);
 		cout << c;
 	}
-	TextColor(11);
-	SetColor(0);
-	GotoXY(44, 23);
+	Controller::TextColor(LIGHT_AQUA);
+	Controller::SetColor(BLACK);
+	Controller::GotoXY(44, 23);
 	system("pause");
-	ClearConsole();
-	Menu();
+	Controller::ClearConsole();
+	Menu::MainMenu();
 }
 
-void MenuAbout() {
-	ClearConsole();
-	LoadBackground();
-	GotoXY(40, 12);
-	SetColor(14);
+void Menu::MenuAbout() {
+	Controller::ClearConsole();
+	Graphics::LoadBackground();
+	Controller::GotoXY(40, 12);
+	Controller::SetColor(LIGHT_YELLOW);
 	printf("  GV Huong Dan:                                       ");
-	GotoXY(41, 13);
-	SetColor(7);
+	Controller::GotoXY(41, 13);
+	Controller::SetColor(WHITE);
 	printf("     - Truong Toan Thinh                        ");
-	GotoXY(41, 14);
-	SetColor(14);
+	Controller::GotoXY(41, 14);
+	Controller::SetColor(LIGHT_YELLOW);
 	printf(" Code by:                                          ");
-	GotoXY(41, 15);
-	SetColor(7);
+	Controller::GotoXY(41, 15);
+	Controller::SetColor(WHITE);
 	printf("     - 21127337: Tran Tung Lam                 ");
-	GotoXY(41, 16);
+	Controller::GotoXY(41, 16);
 	printf("     - 21127337: Tran Tung Lam                    ");
-	GotoXY(41, 17);
+	Controller::GotoXY(41, 17);
 	printf("     - 21127337: Tran Tung Lam                    ");
-	GotoXY(41, 18);
+	Controller::GotoXY(41, 18);
 	printf("     - 21127337: Tran Tung Lam                    ");
-	GotoXY(41, 19);
+	Controller::GotoXY(41, 19);
 	printf("                                                     ");
-	GotoXY(40, 21);
-	SetColor(9);
+	Controller::GotoXY(40, 21);
+	Controller::SetColor(LIGHT_BLUE);
 	printf("  HCMUS _ Ho Chi Minh University of Sience.");
-	GotoXY(59, 22);
+	Controller::GotoXY(59, 22);
 	cout << "2022-2023";
-	GotoXY(45, 23);
-	SetColor(0);
+	Controller::GotoXY(45, 23);
+	Controller::SetColor(BLACK);
 	system("pause");
-	ClearConsole();
-	Menu();
+	Controller::ClearConsole();
+	Menu::MainMenu();
 }
 
-void MenuScore() {
-	ClearConsole();
+void Menu::MenuScore() {
+	Controller::ClearConsole();
 }
 
 void draw_bye1() {
-	SetColor(10);
-	GotoXY(20, 113);
+	Controller::SetColor(LIGHT_GREEN);
+	Controller::GotoXY(20, 113);
 	cout << " ____ ";
-	GotoXY(20, 114);
+	Controller::GotoXY(20, 114);
 	cout << "|  _ \\                        ";
-	GotoXY(20, 115);
+	Controller::GotoXY(20, 115);
 	cout << "| |_)|  __  __ ____";
-	GotoXY(20, 116);
+	Controller::GotoXY(20, 116);
 	cout << "|  __`\\ \\ \\/ // __ \\";
-	GotoXY(20, 117);
+	Controller::GotoXY(20, 117);
 	cout << "| |__)|  \\  / | ___/";
-	GotoXY(20, 118);
+	Controller::GotoXY(20, 118);
 	cout << "|_____/  /_/  \\____|";
 }
 void draw_bye2() {
-	SetColor(10);
-	GotoXY(82, 113);
+	Controller::SetColor(LIGHT_GREEN);
+	Controller::GotoXY(82, 113);
 	cout << " ____ ";
-	GotoXY(82, 114);
+	Controller::GotoXY(82, 114);
 	cout << "|  _ \\                        ";
-	GotoXY(82, 115);
+	Controller::GotoXY(82, 115);
 	cout << "| |_)|  __  __ ____";
-	GotoXY(82, 116);
+	Controller::GotoXY(82, 116);
 	cout << "|  __`\\ \\ \\/ // __ \\";
-	GotoXY(82, 117);
+	Controller::GotoXY(82, 117);
 	cout << "| |__)|  \\  / | ___/";
-	GotoXY(82, 118);
+	Controller::GotoXY(82, 118);
 	cout << "|_____/  /_/  \\____|";
 }
 
-void MenuQuitGame() {
-	ClearConsole();
+void Menu::MenuQuitGame() {
+	Controller::ClearConsole();
 	const char rocket[] =R"(       
 							   !
 							   !
@@ -249,73 +343,78 @@ void MenuQuitGame() {
 							   .
 							   .
 )";
-	GotoXY(7, 99); TextColor(9);   cout << "_______  ______    _______  _______  _______  ___   __    _  _______    _______  _______  __   __  _______ \n";
-	GotoXY(5, 100); TextColor(9);  cout << " |       ||    _ |  |       ||       ||       ||   | |  |  | ||       |  |       ||   _   ||  |_|  ||       |\n";
-	GotoXY(5, 101); TextColor(10); cout << " |       ||   | ||  |   _   ||  _____||  _____||   | |   |_| ||    ___|  |    ___||  |_|  ||       ||    ___|\n";
-	GotoXY(5, 102); TextColor(11); cout << " |       ||   |_||_ |  | |  || |_____ | |_____ |   | |       ||   | __   |   | __ |       ||       ||   |___ \n";
-	GotoXY(5, 103); TextColor(12); cout << " |      _||    __  ||  |_|  ||_____  ||_____  ||   | |  _    ||   ||  |  |   ||  ||       ||       ||    ___|\n";
-	GotoXY(5, 104); TextColor(13); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |___ \n";
-	GotoXY(5, 105); TextColor(13); cout << " |_______||___|  |_||_______||_______||_______||___| |_|  |__||_______|  |_______||__| |__||_|   |_||_______|";
+	Controller::GotoXY(7, 101); Controller::TextColor(LIGHT_BLUE);   cout << "_______  ______    _______  _______  _______  ___   __    _  _______    _______  _______  __   __  _______ \n";
+	Controller::GotoXY(5, 102); Controller::TextColor(LIGHT_BLUE);  cout << " |       ||    _ |  |       ||       ||       ||   | |  |  | ||       |  |       ||   _   ||  |_|  ||       |\n";
+	Controller::GotoXY(5, 103); Controller::TextColor(LIGHT_GREEN); cout << " |       ||   | ||  |   _   ||  _____||  _____||   | |   |_| ||    ___|  |    ___||  |_|  ||       ||    ___|\n";
+	Controller::GotoXY(5, 104); Controller::TextColor(LIGHT_AQUA); cout << " |       ||   |_||_ |  | |  || |_____ | |_____ |   | |       ||   | __   |   | __ |       ||       ||   |___ \n";
+	Controller::GotoXY(5, 105); Controller::TextColor(LIGHT_RED); cout << " |      _||    __  ||  |_|  ||_____  ||_____  ||   | |  _    ||   ||  |  |   ||  ||       ||       ||    ___|\n";
+	Controller::GotoXY(5, 106); Controller::TextColor(LIGHT_PURPLE); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |___ \n";
+	Controller::GotoXY(5, 107); Controller::TextColor(LIGHT_PURPLE); cout << " |_______||___|  |_||_______||_______||_______||___| |_|  |__||_______|  |_______||__| |__||_|   |_||_______|";
 
-	GotoXY(43, 108);
-	TextColor(11);
+	Controller::GotoXY(43, 109);
+	Controller::TextColor(LIGHT_AQUA);
 	printf("CSC10003 - OBJECT ORIENTED PROGRAMMING");
-	GotoXY(53, 109);
+	Controller::GotoXY(53, 110);
 	cout << "GAME: CROSSING GAME";
-	SetColor(12);
-	GotoXY(49, 112);
+	Controller::SetColor(LIGHT_RED);
+	Controller::GotoXY(49, 112);
 	cout << "  *******     *******";
-	GotoXY(49, 113);
+	Controller::GotoXY(49, 113);
 	cout << " *       *   *       *";
-	GotoXY(49, 114);
+	Controller::GotoXY(49, 114);
 	cout << "*         ***         *";
-	GotoXY(49, 115);
+	Controller::GotoXY(49, 115);
 	cout << " *                   *";
-	GotoXY(49, 116);
+	Controller::GotoXY(49, 116);
 	cout << "  *";
-	GotoXY(53, 116);
-	SetColor(14);
+	Controller::GotoXY(53, 116);
+	Controller::SetColor(LIGHT_YELLOW);
 	cout << " SEE YOU AGAIN ";
-	GotoXY(68, 116);
-	SetColor(12);
+	Controller::GotoXY(68, 116);
+	Controller::SetColor(LIGHT_RED);
 	cout << " *";
-	GotoXY(49, 117);
+	Controller::GotoXY(49, 117);
 	cout << "    *             *";
-	GotoXY(49, 118);
+	Controller::GotoXY(49, 118);
 	cout << "      *         *";
-	GotoXY(49, 119);
+	Controller::GotoXY(49, 119);
 	cout << "        *     *";
-	GotoXY(49, 120);
+	Controller::GotoXY(49, 120);
 	cout << "          ***";
-	GotoXY(49, 121);
+	Controller::GotoXY(49, 121);
 
 	draw_bye1();
 	draw_bye2();
 
-	GotoXY(0, 67);
-	TextColor(14);
+	Controller::GotoXY(0, 67);
+	Controller::TextColor(LIGHT_YELLOW);
 	cout << rocket;
-	GotoXY(0, 85);
-	TextColor(12);
+	Controller::GotoXY(0, 85);
+	Controller::TextColor(LIGHT_RED);
 	cout << fire;
-	GotoXY(0, 0);	cout << " ";
-	TextColor(11);
+	Controller::GotoXY(0, 0);	cout << " ";
+	Controller::TextColor(LIGHT_AQUA);
 	int rocketSpeed = 300;
-	EndSoundGame();
-	SoundRocket();
+	Sound::EndSoundGame();
+	Sound::SoundRocket();
 	for (int i = 0; i < 63; i++) {
 		Sleep(rocketSpeed); // move faster and faster,
 		rocketSpeed -= 30; // so sleep less each time
 		if (rocketSpeed <= 40)
 			rocketSpeed = 40;
-		GotoXY(0, 66 + i);
+		Controller::GotoXY(0, 66 + i);
 		printf(" "); // move rocket a line upward
 	}
-	EndSoundGame();
+	Sound::EndSoundGame();
 	Sleep(200);
-	SoundByeBye();
-	SetColor(0);
+	Sound::SoundByeBye();
+	Controller::SetColor(BLACK);
 	Sleep(1500);
-	GotoXY(0, 122);
+	Controller::GotoXY(0, 122);
 	exit(0);
+}
+
+void Menu::PlayGame() {
+	Game g(_EASY);
+	g.StartGame();
 }

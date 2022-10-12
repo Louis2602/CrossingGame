@@ -1,9 +1,9 @@
-#include "Header.h";
+#include "Controller.h";
 
 HWND consoleWindow = GetConsoleWindow();
 HANDLE consoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void SetUpConsole() {
+void Controller::SetUpConsole() {
 	SetFontInfo();
 	SetAndCenterWindow();
 	FixConsoleWindow();
@@ -13,30 +13,30 @@ void SetUpConsole() {
 	DisableMouseInput();
 }
 
-void FixConsoleWindow() {
+void Controller::FixConsoleWindow() {
 	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
 	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
 	SetWindowLong(consoleWindow, GWL_STYLE, style);
 }
-void SetAndCenterWindow() {
+void Controller::SetAndCenterWindow() {
 	RECT rectClient, rectWindow;
 	GetClientRect(consoleWindow, &rectClient), GetWindowRect(consoleWindow, &rectWindow);
 	int posX = (GetSystemMetrics(SM_CXSCREEN) - WIDTH_CONSOLE) / 2,
 		posY = (GetSystemMetrics(SM_CYSCREEN) - HEIGH_CONSOLE) / 2;
 	MoveWindow(consoleWindow, posX, posY, WIDTH_CONSOLE, HEIGH_CONSOLE, TRUE);
 }
-void GotoXY(int x, int y) {
+void Controller::GotoXY(int x, int y) {
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(consoleOutput, coord);
 }
 
-void HideScrollBars() {
+void Controller::HideScrollBars() {
 	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
-void SetFontInfo() {
+void Controller::SetFontInfo() {
 	// 12 - 24
 	CONSOLE_FONT_INFOEX info;
 	info.cbSize = sizeof(info);
@@ -47,33 +47,33 @@ void SetFontInfo() {
 	SetCurrentConsoleFontEx(consoleOutput, FALSE, &info);
 }
 
-void DisableMouseInput() {
+void Controller::DisableMouseInput() {
 	DWORD prev_mode;
 	HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
 	GetConsoleMode(hInput, &prev_mode);
 	SetConsoleMode(hInput, prev_mode & ~ENABLE_QUICK_EDIT_MODE);
 }
 
-void ShowCursor(bool show) {
+void Controller::ShowCursor(bool show) {
 	CONSOLE_CURSOR_INFO info = { 1, show };
 	SetConsoleCursorInfo(consoleOutput, &info);
 }
 
-void ConsoleTitle() {
+void Controller::ConsoleTitle() {
 	SetConsoleTitleA("Crossing Game");
 }
 
-void ClearConsole() {
+void Controller::ClearConsole() {
 	system("cls");
 }
 
-void TextColor(int x) {
+void Controller::TextColor(int x) {
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(color, x);
 }
 
-void SetColor(int ForgC) {
+void Controller::SetColor(int ForgC) {
 	WORD wColor;
 
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
