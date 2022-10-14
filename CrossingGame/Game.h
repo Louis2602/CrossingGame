@@ -10,7 +10,6 @@ public:
 	Game(int);
 	~Game() {};
 	void StartGame();
-	void PrintInterface();
 	void EndGame();
 	void PauseGame();
 	void SaveGame();

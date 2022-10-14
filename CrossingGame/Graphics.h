@@ -8,8 +8,8 @@ public:
 	static void LoadBackground();
 	static void DrawMenuBox();
 	static void DrawRectangle(int, int, int, int);
-	void PrintInstruct();
-	void PrintScoreboard();
-	void DrawMap();
-	void PrintInterface();
+	static void PrintInstruct();
+	static void PrintScoreboard();
+	static void DrawMap();
+	static void PrintInterface();
 };

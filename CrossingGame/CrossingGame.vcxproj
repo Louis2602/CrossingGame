@@ -150,15 +150,15 @@
     <ClInclude Include="Sound.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="CANIMAL.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="People.cpp" />
+    <ClCompile Include="CPEOPLE.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="CVEHICLE.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

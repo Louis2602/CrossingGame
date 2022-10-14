@@ -6,8 +6,6 @@ Game::Game(int level) {
 }
 
 void Game::StartGame() {
-	Controller::ClearConsole();
-}
-
-void Game::PrintInterface() {
+	Graphics::PrintInterface();
+	system("pause");
 }

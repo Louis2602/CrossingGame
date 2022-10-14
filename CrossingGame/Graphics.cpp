@@ -1,5 +1,6 @@
 #include "Graphics.h";
 void Graphics::PrintInterface() {
+	Controller::ClearConsole();
 	DrawMap();
 	PrintInstruct();
 	PrintScoreboard();
@@ -113,63 +114,111 @@ void Graphics::LoadBackground() {
 	Controller::GotoXY(55, 29); cout << "    ||     ||       ";
 }
 void Graphics::PrintInstruct() {
-	/*Controller::GotoXY(138, 2); cout << "<Crossing Road Game>";
-	Controller::GotoXY(138, 4); cout << "LV. 1" << endl;
-	Controller::GotoXY(138, 6); cout << "CONTROL MANUAL" << endl;
-	Controller::GotoXY(138, 7); cout << "[" << 'W' << "]: UP" << endl;
-	Controller::GotoXY(138, 8); cout << "[" << 'S' << "]: DOWN" << endl;
-	Controller::GotoXY(138, 9); cout << "[" << 'A' << "]: LEFT" << endl;
-	Controller::GotoXY(138, 10); cout << "[" << 'D' << "]: RIGHT" << endl;
-	Controller::GotoXY(138, 12); cout << "COMMANDS" << endl;
-	Controller::GotoXY(138, 13); cout << "[ L ]: Save game" << endl;
-	Controller::GotoXY(138, 14); cout << "[ T ]: Load game" << endl;
-	Controller::GotoXY(138, 15); cout << "[ P ]: Pause game/Menu" << endl;*/
-
-
-	Controller::SetColor(BLACK);
-	DrawRectangle(59, 24, 33, 2);
-	DrawRectangle(59, 27, 14, 2);
-	DrawRectangle(78, 27, 14, 2);
+	Controller::SetColor(BRIGHT_WHITE);
+	DrawRectangle(79, 24, 33, 2);
+	DrawRectangle(79, 27, 14, 2);
+	DrawRectangle(98, 27, 14, 2);
 
 	Controller::SetColor(PURPLE);
-	Controller::GotoXY(67, 25);
-	cout << "M : Move suggestion";
+	Controller::GotoXY(90, 25);
+	cout << "L : Save Game";
 	Controller::SetColor(GREEN);
-	Controller::GotoXY(63, 28);
-	cout << "H : Help";
-	Controller::SetColor(YELLOW);
-	Controller::GotoXY(81, 28);
+	Controller::GotoXY(83, 28);
+	cout << "P : Pause";
+	Controller::SetColor(GRAY);
+	Controller::GotoXY(101, 28);
 	cout << "Esc : Exit";
 }
 
 void Graphics::DrawMap() {
+	Controller::SetColor(BRIGHT_WHITE);
+	int left = 4, top = 3, size = 8;
+	// Draw top line
+	Controller::GotoXY(left + 1, top);
+	putchar(201);
+	for (int i = 1; i < size * 8; i++)
+	{
+		Sleep(5);
+		if (i % 8 == 0)
+			putchar(205);
+		else
+			putchar(205);
+	}
+	putchar(187);
 
+	// Draw right line
+	for (int i = 1; i < size * 3; i++)
+	{
+		Sleep(10);
+		Controller::GotoXY(size * 8 + left + 1, i + top);
+		if (i % 4 != 0)
+			putchar(186);
+		else
+			putchar(186);
+	}
+	Controller::GotoXY(size * 8 + left + 1, size * 3 + top);
+	putchar(188);
+
+	// Draw bottom line
+	for (int i = 1; i < size * 8; i++)
+	{
+		Controller::GotoXY(size * 8 + left - i + 1, size * 3 + top);
+		Sleep(5);
+		if (i % 8 == 0)
+			putchar(205);
+		else
+			putchar(205);
+	}
+	Controller::GotoXY(left + 1, size * 3 + top);
+	putchar(200);
+
+	// Draw left line
+	for (int i = 1; i < size * 3; i++)
+	{
+		Sleep(10);
+		Controller::GotoXY(left + 1, size * 3 + top - i);
+		if (i % 4 != 0)
+			putchar(186);
+		else
+			putchar(186);
+	}
+
+	// Draw horizontal lines
+	for (int i = 1; i < size * 8; i++)
+	{
+		for (int j = 4; j < size * 3; j += 4)
+		{
+			Controller::GotoXY(i + left + 1, j + top);
+				putchar(196);
+		}
+		Sleep(5);
+	}
 }
 
 void Graphics::PrintScoreboard() {
-	Controller::SetColor(BLACK);
-	DrawRectangle(59, 1, 33, 10);
-	DrawRectangle(59, 12, 33, 10);
+	Controller::SetColor(BRIGHT_WHITE);
+	DrawRectangle(79, 1, 33, 10);
+	DrawRectangle(79, 12, 33, 10);
 
-	DrawRectangle(60, 2, 31, 2);
-	Controller::SetColor(RED);
-	Controller::GotoXY(67, 3);
+	DrawRectangle(80, 2, 31, 2);
+	Controller::SetColor(YELLOW);
+	Controller::GotoXY(87, 3);
 	cout << "PLAYER'S INFORMATION";
 
-	Controller::SetColor(BLUE);
-	Controller::GotoXY(65, 5);
+	Controller::SetColor(AQUA);
+	Controller::GotoXY(85, 5);
 	cout << "Player's name: ";
 
-	Controller::SetColor(BLACK);
-	DrawRectangle(60, 13, 31, 2);
-	Controller::SetColor(RED);
-	Controller::GotoXY(69, 14);
+	Controller::SetColor(BRIGHT_WHITE);
+	DrawRectangle(80, 13, 31, 2);
+	Controller::SetColor(YELLOW);
+	Controller::GotoXY(89, 14);
 	cout << "GAME INFORMATION";
-	Controller::SetColor(BLUE);
-	Controller::GotoXY(65, 16);
+	Controller::SetColor(AQUA);
+	Controller::GotoXY(85, 16);
 	cout << "Moves:";
-	Controller::GotoXY(65, 17);
+	Controller::GotoXY(85, 17);
 	cout << "Current score:";
-	Controller::GotoXY(80, 17);
+	Controller::GotoXY(100, 17);
 	cout << 1;
 }
