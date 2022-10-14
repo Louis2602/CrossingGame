@@ -5,7 +5,7 @@ void Menu::MainMenu() {
 	Graphics::DrawMenuBox();
 	Controller::GotoXY(43, 12);
 	Controller::TextColor(LIGHT_AQUA);
-	printf("CSC10003 - OBJECT ORIENTED PROGRAMMING");
+	cout << "CSC10003 - OBJECT ORIENTED PROGRAMMING";
 	Controller::GotoXY(53, 13);
 	cout << "GAME: CROSSING GAME";
 	int idx = 15, idx_t = 15;
@@ -29,11 +29,15 @@ void Menu::MainMenu() {
 		char s = toupper(_getch());
 		Controller::TextColor(LIGHT_AQUA);
 		idx_t = idx;
-		if (s == 'W' || s == 72)
+
+		if (s == 'W' || s == KEY_UP)
 			idx--;
 		else
-			if (s == 'S' || s == 80)
+			if (s == 'S' || s == KEY_DOWN)
 				idx++;
+		if (s == KEY_ESC)
+			MenuQuitGame();
+
 		if (idx > 19)
 			idx = 15;
 		else
@@ -74,6 +78,7 @@ void Menu::MainMenu() {
 			idx -= 14;
 			break;
 		}
+		
 	}
 	switch (idx)
 	{
@@ -108,25 +113,28 @@ void Menu::MenuGameplay() {
 	Controller::GotoXY(56, 17);
 	cout << "Settings " << endl;
 	Controller::GotoXY(56, 18);
-	cout << "                 " << endl;
+	cout << "Exit " << endl;
 	Controller::GotoXY(56, 19);
 	cout << "                 " << endl;
 
-	while (true)
-	{
+	while (true) {
 		char s = toupper(_getch());
 		Controller::TextColor(LIGHT_AQUA);
 		idx_t = idx;
-		if (s == 'W' || s == 72)
+
+		if (s == 'W' || s == KEY_UP)
 			idx--;
 		else
-			if (s == 'S' || s == 80)
+			if (s == 'S' || s == KEY_DOWN)
 				idx++;
-		if (idx > 17)
+		if (s == KEY_ESC)
+			MenuQuitGame();
+
+		if (idx > 18)
 			idx = 15;
 		else
 			if (idx < 15)
-				idx = 17;
+				idx = 18;
 		Controller::GotoXY(53, idx_t);
 		cout << "  ";
 		Controller::GotoXY(53, idx);
@@ -147,13 +155,19 @@ void Menu::MenuGameplay() {
 		if (idx == 17)
 			Controller::TextColor(LIGHT_YELLOW);
 		cout << "Settings" << endl;
+		Controller::GotoXY(56, 18);
 		Controller::TextColor(WHITE);
+		if (idx == 18)
+			Controller::TextColor(LIGHT_YELLOW);
+		cout << "Exit " << endl;
 
 		if (s == 13)	//press Enter
 		{
 			idx -= 14;
 			break;
 		}
+		if (s == KEY_ESC)
+			MenuQuitGame();
 	}
 	switch (idx)
 	{
@@ -165,7 +179,10 @@ void Menu::MenuGameplay() {
 		//Game::PlayGame();
 		break;
 	case 3:
-		Menu::MainMenu();
+		MainMenu();
+		break;
+	case 4:
+		MenuQuitGame();
 		break;
 	}
 }
@@ -188,8 +205,6 @@ void Menu::MenuRule() {
 	Controller::GotoXY(45, 19);
 	Controller::SetColor(RED);	cout << "Cross the road and dodge";
 	Controller::GotoXY(45, 20); cout << "obstacles (cars & animals)";
-
-
 
 	Controller::GotoXY(78, 13);
 	Controller::SetColor(WHITE);	cout << "MOVE";
@@ -272,6 +287,146 @@ void Menu::MenuAbout() {
 
 void Menu::MenuScore() {
 	Controller::ClearConsole();
+	Controller::SetColor(RED);
+	cout << R"(
+	  _      ______          _____  ______ _____  ____   ____          _____  _____  
+	 | |    |  ____|   /\   |  __ \|  ____|  __ \|  _ \ / __ \   /\   |  __ \|  __ \ 
+	 | |    | |__     /  \  | |  | | |__  | |__) | |_) | |  | | /  \  | |__) | |  | |
+	 | |    |  __|   / /\ \ | |  | |  __| |  _  /|  _ <| |  | |/ /\ \ |  _  /| |  | |
+	 | |____| |____ / ____ \| |__| | |____| | \ \| |_) | |__| / ____ \| | \ \| |__| |
+	 |______|______/_/    \_\_____/|______|_|  \_\____/ \____/_/    \_\_|  \_\_____/                                                                 
+	)";
+	Controller::SetColor(BLACK);
+	Graphics::DrawRectangle(5, 8, 85, 17);
+
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(8, 9);
+	cout << "STT";
+	Controller::SetColor(BLACK);
+	for (int i = 1; i < 17; i++)
+	{
+		Controller::GotoXY(13, 8 + i);
+		putchar(179);
+	}
+	for (int i = 6; i < 13; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(18, 9);
+	cout << "Name";
+	Controller::SetColor(BLACK);
+	for (int i = 1; i < 17; i++)
+	{
+		Controller::GotoXY(30, 8 + i);
+		putchar(179);
+	}
+	for (int i = 14; i < 30; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(36, 9);
+	cout << "ID";
+	Controller::SetColor(BLACK);
+	for (int i = 1; i < 17; i++)
+	{
+		Controller::GotoXY(45, 8 + i);
+		putchar(179);
+	}
+	for (int i = 31; i < 45; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(52, 9);
+	cout << "Class";
+	Controller::SetColor(BLACK);
+	for (int i = 1; i < 17; i++)
+	{
+		Controller::GotoXY(62, 8 + i);
+		putchar(179);
+	}
+	for (int i = 46; i < 62; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(68, 9);
+	cout << "Mode";
+	Controller::SetColor(BLACK);
+	for (int i = 1; i < 17; i++)
+	{
+		Controller::GotoXY(78, 8 + i);
+		putchar(179);
+	}
+	for (int i = 63; i < 78; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+
+	Controller::SetColor(BLUE);
+	Controller::GotoXY(82, 9);
+	cout << "Score";
+	Controller::SetColor(BLACK);
+	for (int i = 79; i < 91; i++)
+	{
+		Controller::GotoXY(i, 10);
+		putchar(196);
+	}
+	int y = 11;
+	int lines = 8;
+	int n = 0;
+	/*string tmp;
+	fstream fs("rank\\leaderboard.txt", ios::in);
+
+	while (!fs.eof()) {
+		getline(fs, p[n].playerName);
+		getline(fs, p[n].playerID);
+		getline(fs, p[n].className);
+		getline(fs, p[n].mode);
+		fs >> p[n].score;
+		fs.ignore();
+		n++;
+	}
+	fs.close();
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			if (p[j].score > p[i].score) {
+				swap(p[i], p[j]);
+			}
+		}
+	}
+	for (int i = 1; i < lines; i++) {
+		Controller::GotoXY(9, y);
+		cout << i;
+		Controller::GotoXY(16, y);
+		cout << p[i - 1].playerName;
+		Controller::GotoXY(33, y);
+		cout << p[i - 1].playerID;
+		Controller::GotoXY(50, y);
+		cout << p[i - 1].className;
+		Controller::GotoXY(68, y);
+		cout << p[i - 1].mode;
+		Controller::GotoXY(84, y);
+		cout << p[i - 1].score;
+		y += 2;
+	}*/
+
+	Controller::SetColor(BLACK);
+	Graphics::DrawRectangle(45, 27, 8, 2);
+	Controller::SetColor(RED);
+	Controller::GotoXY(43, 28);
+	putchar(175);
+	Controller::GotoXY(48, 28);
+	cout << "Back";
+	Controller::GotoXY(56, 28);
+	putchar(174);
 }
 
 void draw_bye1() {
@@ -307,7 +462,7 @@ void draw_bye2() {
 
 void Menu::MenuQuitGame() {
 	Controller::ClearConsole();
-	const char rocket[] =R"(       
+	const char rocket[] = R"(       
 							   !
 							   !
 							   ^
@@ -329,7 +484,7 @@ void Menu::MenuQuitGame() {
 						    | /         \ |
 						    |/           \|
 )";
-	
+
 	const char fire[] = R"(
 							 ( | )  
 							 ( | ) 

@@ -10,5 +10,4 @@ void Game::StartGame() {
 }
 
 void Game::PrintInterface() {
-	gp.PrintInterface();
 }

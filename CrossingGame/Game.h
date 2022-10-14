@@ -5,7 +5,6 @@ class Game {
 private:
 	int score;
 	int _level;
-	Graphics gp;
 
 public:
 	Game(int);

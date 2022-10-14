@@ -7,7 +7,7 @@ public:
 	~Graphics() {};
 	static void LoadBackground();
 	static void DrawMenuBox();
-	void DrawRectangle(int, int, int, int);
+	static void DrawRectangle(int, int, int, int);
 	void PrintInstruct();
 	void PrintScoreboard();
 	void DrawMap();

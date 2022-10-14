@@ -19,6 +19,13 @@
 #define LIGHT_YELLOW 14
 #define BRIGHT_WHITE 15
 
+// MOVEMENT
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+#define KEY_ESC 27
+
 class Controller {
 public:
 	Controller() {};
@@ -35,4 +42,5 @@ public:
 	static void ClearConsole();
 	static void TextColor(int);
 	static void SetColor(int);
+	static int GetConsoleInput();
 };
