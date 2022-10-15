@@ -60,28 +60,8 @@ void Controller::ConsoleTitle() {
 void Controller::ClearConsole() {
 	system("cls");
 }
-void Controller::TextColor(int x) {
-	HANDLE color;
-	color = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(color, x);
-}
 void Controller::SetConsoleColor(int background, int text) {
 	SetConsoleTextAttribute(consoleOutput, background * 16 + text);
-}
-void Controller::SetColor(int ForgC) {
-	WORD wColor;
-
-	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-	//We use csbi for the wAttributes word.
-	if (GetConsoleScreenBufferInfo(hStdOut, &csbi))
-	{
-		//Mask out all but the background attribute, and add in the foreground color
-		wColor = (csbi.wAttributes & 0xF0) + (ForgC & 0x0F);
-		SetConsoleTextAttribute(hStdOut, wColor);
-	}
-	return;
 }
 int Controller::GetConsoleInput()
 {

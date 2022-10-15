@@ -6,7 +6,7 @@ void Graphics::PrintInterface() {
 	PrintScoreboard();
 }
 void Graphics::DrawMenuBox() {
-	Controller::TextColor(17);
+	Controller::SetConsoleColor(BLACK, BLACK);
 	Controller::GotoXY(41, 11); cout << "==========================================";
 	Controller::GotoXY(41, 22); cout << "==========================================";
 
@@ -114,24 +114,24 @@ void Graphics::LoadBackground() {
 	Controller::GotoXY(55, 29); cout << "    ||     ||       ";
 }
 void Graphics::PrintInstruct() {
-	Controller::SetColor(BRIGHT_WHITE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	DrawRectangle(79, 24, 33, 2);
 	DrawRectangle(79, 27, 14, 2);
 	DrawRectangle(98, 27, 14, 2);
 
-	Controller::SetColor(PURPLE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, PURPLE);
 	Controller::GotoXY(90, 25);
 	cout << "L : Save Game";
-	Controller::SetColor(GREEN);
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
 	Controller::GotoXY(83, 28);
 	cout << "P : Pause";
-	Controller::SetColor(GRAY);
+	Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
 	Controller::GotoXY(101, 28);
 	cout << "Esc : Exit";
 }
 
 void Graphics::DrawMap() {
-	Controller::SetColor(BRIGHT_WHITE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	int left = 4, top = 3, size = 8;
 	// Draw top line
 	Controller::GotoXY(left + 1, top);
@@ -196,25 +196,25 @@ void Graphics::DrawMap() {
 }
 
 void Graphics::PrintScoreboard() {
-	Controller::SetColor(BRIGHT_WHITE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	DrawRectangle(79, 1, 33, 10);
 	DrawRectangle(79, 12, 33, 10);
 
 	DrawRectangle(80, 2, 31, 2);
-	Controller::SetColor(YELLOW);
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	Controller::GotoXY(87, 3);
 	cout << "PLAYER'S INFORMATION";
 
-	Controller::SetColor(AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, AQUA);
 	Controller::GotoXY(85, 5);
 	cout << "Player's name: ";
 
-	Controller::SetColor(BRIGHT_WHITE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	DrawRectangle(80, 13, 31, 2);
-	Controller::SetColor(YELLOW);
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	Controller::GotoXY(89, 14);
 	cout << "GAME INFORMATION";
-	Controller::SetColor(AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, AQUA);
 	Controller::GotoXY(85, 16);
 	cout << "Moves:";
 	Controller::GotoXY(85, 17);

@@ -41,7 +41,5 @@ public:
 	static void ShowCursor(bool);
 	static void ConsoleTitle();
 	static void ClearConsole();
-	static void TextColor(int);
-	static void SetColor(int);
 	static int GetConsoleInput();
 };
