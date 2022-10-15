@@ -11,6 +11,7 @@ void Controller::SetUpConsole() {
 	HideScrollBars();
 	ShowCursor(false);
 	DisableMouseInput();
+	system("color F0");
 }
 void Controller::FixConsoleWindow() {
 	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
@@ -63,6 +64,9 @@ void Controller::TextColor(int x) {
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(color, x);
+}
+void Controller::SetConsoleColor(int background, int text) {
+	SetConsoleTextAttribute(consoleOutput, background * 16 + text);
 }
 void Controller::SetColor(int ForgC) {
 	WORD wColor;

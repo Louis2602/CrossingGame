@@ -41,16 +41,16 @@ void Graphics::DrawRectangle(int left, int top, int width, int height) {
 	putchar(217);
 }
 void Graphics::LoadBackground() {
-	Controller::GotoXY(7, 2); Controller::TextColor(LIGHT_BLUE); cout << "_______  ______    _______  _______  _______  ___   __    _  _______    _______  _______  __   __  _______ \n";
-	Controller::GotoXY(5, 3); Controller::TextColor(LIGHT_BLUE); cout << " |       ||    _ |  |       ||       ||       ||   | |  |  | ||       |  |       ||   _   ||  |_|  ||       |\n";
-	Controller::GotoXY(5, 4); Controller::TextColor(LIGHT_GREEN); cout << " |       ||   | ||  |   _   ||  _____||  _____||   | |   |_| ||    ___|  |    ___||  |_|  ||       ||    ___|\n";
-	Controller::GotoXY(5, 5); Controller::TextColor(LIGHT_AQUA); cout << " |       ||   |_||_ |  | |  || |_____ | |_____ |   | |       ||   | __   |   | __ |       ||       ||   |___ \n";
-	Controller::GotoXY(5, 6); Controller::TextColor(LIGHT_RED); cout << " |      _||    __  ||  |_|  ||_____  ||_____  ||   | |  _    ||   ||  |  |   ||  ||       ||       ||    ___|\n";
-	Controller::GotoXY(5, 7); Controller::TextColor(LIGHT_RED); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |\n";
-	Controller::GotoXY(5, 7); Controller::TextColor(LIGHT_PURPLE); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |___ \n";
-	Controller::GotoXY(5, 8); Controller::TextColor(LIGHT_PURPLE); cout << " |_______||___|  |_||_______||_______||_______||___| |_|  |__||_______|  |_______||__| |__||_|   |_||_______|";
+	Controller::GotoXY(7, 2); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE); cout << "_______  ______    _______  _______  _______  ___   __    _  _______    _______  _______  __   __  _______ \n";
+	Controller::GotoXY(5, 3); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE); cout << " |       ||    _ |  |       ||       ||       ||   | |  |  | ||       |  |       ||   _   ||  |_|  ||       |\n";
+	Controller::GotoXY(5, 4); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_GREEN); cout << " |       ||   | ||  |   _   ||  _____||  _____||   | |   |_| ||    ___|  |    ___||  |_|  ||       ||    ___|\n";
+	Controller::GotoXY(5, 5); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA); cout << " |       ||   |_||_ |  | |  || |_____ | |_____ |   | |       ||   | __   |   | __ |       ||       ||   |___ \n";
+	Controller::GotoXY(5, 6); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED); cout << " |      _||    __  ||  |_|  ||_____  ||_____  ||   | |  _    ||   ||  |  |   ||  ||       ||       ||    ___|\n";
+	Controller::GotoXY(5, 7); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |\n";
+	Controller::GotoXY(5, 7); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_PURPLE); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |___ \n";
+	Controller::GotoXY(5, 8); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_PURPLE); cout << " |_______||___|  |_||_______||_______||_______||___| |_|  |__||_______|  |_______||__| |__||_|   |_||_______|";
 
-	Controller::TextColor(11);
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
 	Controller::GotoXY(23, 5); cout << " /";
 	Controller::GotoXY(23, 6); cout << "//";
 	Controller::GotoXY(22, 7); cout << "//";
@@ -105,7 +105,7 @@ void Graphics::LoadBackground() {
 	Controller::GotoXY(32, 28); cout << "========================";
 	Controller::GotoXY(72, 28); cout << "=========================";
 
-	Controller::TextColor(14);
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	Controller::GotoXY(55, 24); cout << "    ||     ||     ";
 	Controller::GotoXY(55, 25); cout << "   |  |___|  |    ";
 	Controller::GotoXY(55, 26); cout << "  [    |_|    ]    ";

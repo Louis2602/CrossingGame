@@ -4,18 +4,18 @@ void Menu::MainMenu() {
 	Graphics::LoadBackground();
 	Graphics::DrawMenuBox();
 	Controller::GotoXY(43, 12);
-	Controller::TextColor(LIGHT_AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
 	cout << "CSC10003 - OBJECT ORIENTED PROGRAMMING";
 	Controller::GotoXY(53, 13);
 	cout << "GAME: CROSSING GAME";
 	int idx = 15, idx_t = 15;
 	Controller::GotoXY(53, idx);
-	Controller::TextColor(LIGHT_YELLOW);
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 	cout << (char)175;
 	Controller::GotoXY(56, 15);
 	cout << "Play    " << endl;
 	Controller::GotoXY(56, 16);
-	Controller::TextColor(WHITE);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	cout << "Rule       " << endl;
 	Controller::GotoXY(50, 17);
 	cout << "      About      " << endl;
@@ -27,7 +27,7 @@ void Menu::MainMenu() {
 	while (true)
 	{
 		char s = toupper(_getch());
-		Controller::TextColor(LIGHT_AQUA);
+		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
 		idx_t = idx;
 
 		if (s == 'W' || s == KEY_UP)
@@ -46,31 +46,31 @@ void Menu::MainMenu() {
 		Controller::GotoXY(53, idx_t);
 		cout << "  ";
 		Controller::GotoXY(53, idx);
-		Controller::TextColor(LIGHT_YELLOW);
+		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << (char)175;
 		Controller::GotoXY(56, 15);
-		Controller::TextColor(WHITE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 15)
-			Controller::TextColor(14);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Play" << endl;
 		Controller::GotoXY(56, 16);
-		Controller::TextColor(WHITE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 16)
-			Controller::TextColor(LIGHT_YELLOW);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Rule" << endl;
 		Controller::GotoXY(56, 17);
-		Controller::TextColor(WHITE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 17)
-			Controller::TextColor(LIGHT_YELLOW);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "About" << endl;
 		Controller::GotoXY(56, 18);
-		Controller::TextColor(WHITE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 18)
-			Controller::TextColor(LIGHT_YELLOW);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Score" << endl;
-		Controller::TextColor(WHITE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 19)
-			Controller::TextColor(LIGHT_YELLOW);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(56, 19);
 		cout << "Quit Game" << endl;
 		if (s == 13)

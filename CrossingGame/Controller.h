@@ -33,6 +33,7 @@ public:
 	static void SetUpConsole();
 	static void FixConsoleWindow();
 	static void SetAndCenterWindow();
+	static void SetConsoleColor(int, int);
 	static void GotoXY(int, int);
 	static void HideScrollBars();
 	static void SetFontInfo();
