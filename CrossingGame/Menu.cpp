@@ -21,7 +21,9 @@ void Menu::MainMenu() {
 	cout << "      About      " << endl;
 	Controller::GotoXY(50, 18);
 	cout << "      Score      " << endl;
-	Controller::GotoXY(56, 19);
+	Controller::GotoXY(50, 19);
+	cout << "      Settings      " << endl;
+	Controller::GotoXY(56, 20);
 	cout << "Quit Game      " << endl;
 
 	while (true)
@@ -38,11 +40,10 @@ void Menu::MainMenu() {
 		if (s == KEY_ESC)
 			MenuQuitGame();
 
-		if (idx > 19)
+		if (idx > 20)
 			idx = 15;
-		else
-			if (idx < 15)
-				idx = 19;
+		else if (idx < 15)
+			idx = 20;
 		Controller::GotoXY(53, idx_t);
 		cout << "  ";
 		Controller::GotoXY(53, idx);
@@ -68,10 +69,15 @@ void Menu::MainMenu() {
 		if (idx == 18)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Score" << endl;
+		Controller::GotoXY(56, 19);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 19)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		Controller::GotoXY(56, 19);
+		cout << "Settings" << endl;
+		Controller::GotoXY(56, 20);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		if (idx == 20)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Quit Game" << endl;
 		if (s == 13)
 		{
@@ -94,7 +100,10 @@ void Menu::MainMenu() {
 	case 4:
 		MenuScore();
 		break;
-	case 5:
+	case 5: 
+		MenuAbout();
+		break;
+	case 6:
 		MenuQuitGame();
 		break;
 	}
@@ -111,12 +120,13 @@ void Menu::MenuGameplay() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	cout << "Load Game" << endl;
 	Controller::GotoXY(56, 17);
-	cout << "Settings " << endl;
+	cout << "Back " << endl;
 	Controller::GotoXY(56, 18);
 	cout << "Exit " << endl;
 	Controller::GotoXY(56, 19);
 	cout << "                 " << endl;
-
+	Controller::GotoXY(56, 20);
+	cout << "                 " << endl;
 	while (true) {
 		char s = toupper(_getch());
 		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
@@ -154,7 +164,7 @@ void Menu::MenuGameplay() {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 17)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Settings" << endl;
+		cout << "Back" << endl;
 		Controller::GotoXY(56, 18);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 18)
