@@ -6,9 +6,11 @@
 #include "Sound.h"
 #include "Game.h"
 #include "Menu.h"
+
 #include "CANIMAL.h"
 #include "CVEHICLE.h"
 #include "CPEOPLE.h"
+#include "CLIGHT.h"
 
 #include <chrono>
 #include <iostream>
