@@ -1,8 +1,22 @@
 #pragma once
+#include "CPOSTION.h"
+#include "Controller.h"
 
 class CANIMAL {
-	int mX, mY;
+private:
+	CPOSITION pos;
+	bool outmap;
 public:
-	virtual void Move(int, int);
-	virtual void Tell();
+	int getX();
+	int getY();
+	CANIMAL();
+	CANIMAL(const CPOSITION&);
+	~CANIMAL() {};
+	CPOSITION getPos();
+	bool isOutMap();
+	virtual int getH() = 0;
+	virtual int getW() = 0;
+	void updatePos(const int x, const int y);
+	void setOutMap();
+	virtual char** kind() = 0;
 };

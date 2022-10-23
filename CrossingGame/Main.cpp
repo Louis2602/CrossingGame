@@ -1,7 +1,7 @@
 #include "Header.h"
 
 CPEOPLE people;
-CANIMAL animal[];
+//CANIMAL animal[];
 CVEHICLE vehicle[];
 
 bool Continue = false;
