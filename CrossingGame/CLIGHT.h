@@ -12,4 +12,5 @@ public:
 	void update_light();
 	bool getState();
 	void setState(bool);
+	static void mainLight();
 };

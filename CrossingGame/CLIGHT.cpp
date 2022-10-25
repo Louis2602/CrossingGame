@@ -30,8 +30,18 @@ void CLIGHT::update_light() {
 		Controller::GotoXY(6, 21);
 		cout << TopDot;
 		setState(true);
-	}	
+	}
 
 	//Set color back.
-	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+}
+
+void CLIGHT::mainLight() {
+	CLIGHT light;
+	int timer = 3000;
+	while (timer) {
+		light.update_light();
+		Sleep(1000);
+		timer -= 50;
+	}
 }

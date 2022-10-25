@@ -5,7 +5,6 @@ class Game {
 private:
 	int score;
 	int level;
-	CPEOPLE p;
 	bool IS_RUNNING = false;
 	bool PAUSE_STATE = false;
 
