@@ -93,6 +93,7 @@ void CPEOPLE::mainPeople() {
 		}
 		else
 		{
+			Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 			p.DRAW_PEOPLE(p.getPosX(), p.getPosY());
 			switch (Controller::GetConsoleInput()) {
 			case 2:
