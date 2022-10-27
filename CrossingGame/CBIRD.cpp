@@ -50,5 +50,5 @@ int CBIRD::getHeight() {
 }
 
 int CBIRD::getWidth() {
-    return 6
+    return 6;
 }
