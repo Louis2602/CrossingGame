@@ -35,28 +35,32 @@ void CPEOPLE::Delete(int mX, int mY) {
 }
 
 void CPEOPLE::Up(int& mY) {
-	Sound::PlayerMove();
+	Sound s;
+	s.PlayerMove();
 	if (mY == 4)
 		return;
 	mY -= 4;
 }
 
 void CPEOPLE::Left(int& mX) {
-	Sound::PlayerMove();
+	Sound s;
+	s.PlayerMove();
 	if (mX == 6)
 		return;
 	mX -= 2;
 }
 
 void CPEOPLE::Right(int& mX) {
-	Sound::PlayerMove();
+	Sound s;
+	s.PlayerMove();
 	if (mX + 3 == 69)
 		return;
 	mX += 2;
 }
 
 void CPEOPLE::Down(int& mY) {
-	Sound::PlayerMove();
+	Sound s;
+	s.PlayerMove();
 	if (mY + 3 == 27)
 		return;
 	mY += 4;

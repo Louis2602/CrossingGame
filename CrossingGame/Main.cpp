@@ -12,7 +12,8 @@ int main() {
 	srand(time(NULL));
 
 	Controller::SetUpConsole();
-	Sound::SoundBackground();
+	Sound s;
+	s.SoundBackground();
 
 	Menu game;
 	game.MainMenu();

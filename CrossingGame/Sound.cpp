@@ -9,25 +9,21 @@ void Sound::setState(bool state) {
 }
 
 void Sound::SoundBackground() {
-	Sound s;
-	if (s.getState())
+	if (getState())
 		PlaySound(TEXT("LegendaryAmadeus.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
-	
 }
 
 void Sound::SoundByeBye() {
-	Sound s;
-	if(s.getState())
+	if(getState())
 		PlaySound(TEXT("ByeBye.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
 }
 
 void Sound::EndSoundGame() {
-	Sound s;
-	if(s.getState())
+	if(getState())
 		PlaySound(NULL, NULL, SND_FILENAME);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
@@ -42,8 +38,7 @@ void Sound::SoundRocket() {
 }
 
 void Sound::PlayerMove() {
-	Sound s;
-	if(s.getState())
+	if(getState())
 		PlaySound(TEXT("Move.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
