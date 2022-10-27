@@ -24,6 +24,5 @@ public:
 	bool isImpact(const CVEHICLE*& vehicle); //Check if player impact with vehicle
 	bool isImpact(const CANIMAL*& animal);   //Check if player impact with animal
 	bool isFinish(int mX);             //Check if player has completed the stage
-	void sound(int s);                //Play character's sound effects
 	static void mainPeople();    //Main function of character
 };

@@ -21,9 +21,7 @@ void Menu::MainMenu() {
 	cout << "      About      " << endl;
 	Controller::GotoXY(50, 18);
 	cout << "      Score      " << endl;
-	Controller::GotoXY(50, 19);
-	cout << "      Settings      " << endl;
-	Controller::GotoXY(56, 20);
+	Controller::GotoXY(56, 19);
 	cout << "Quit Game      " << endl;
 
 	while (true)
@@ -40,10 +38,10 @@ void Menu::MainMenu() {
 		if (s == KEY_ESC)
 			MenuQuitGame();
 
-		if (idx > 20)
+		if (idx > 19)
 			idx = 15;
 		else if (idx < 15)
-			idx = 20;
+			idx = 19;
 		Controller::GotoXY(53, idx_t);
 		cout << "  ";
 		Controller::GotoXY(53, idx);
@@ -73,11 +71,6 @@ void Menu::MainMenu() {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 19)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Settings" << endl;
-		Controller::GotoXY(56, 20);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 20)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "Quit Game" << endl;
 		if (s == 13)
 		{
@@ -100,10 +93,7 @@ void Menu::MainMenu() {
 	case 4:
 		MenuScore();
 		break;
-	case 5: 
-		MenuAbout();
-		break;
-	case 6:
+	case 5:
 		MenuQuitGame();
 		break;
 	}
