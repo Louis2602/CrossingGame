@@ -14,44 +14,44 @@ void CLIGHT::update_light() {
 	if (getState()) {
 		//Draw green light.
 		Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-		Controller::GotoXY(6, 21);
+		Controller::GotoXY(4, 21);
 		cout << TopDot;
-		Controller::GotoXY(68, 17);
+		Controller::GotoXY(70, 17);
 		cout << TopDot;
-		Controller::GotoXY(6, 13);
+		Controller::GotoXY(4, 13);
 		cout << TopDot;
-		Controller::GotoXY(68, 9);
+		Controller::GotoXY(70, 9);
 		cout << TopDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-		Controller::GotoXY(6, 20);
+		Controller::GotoXY(4, 20);
 		cout << BottomDot;
-		Controller::GotoXY(68, 16);
+		Controller::GotoXY(70, 16);
 		cout << BottomDot;
-		Controller::GotoXY(6, 12);
+		Controller::GotoXY(4, 12);
 		cout << BottomDot;
-		Controller::GotoXY(68, 8);
+		Controller::GotoXY(70, 8);
 		cout << BottomDot;
 		setState(false);
 	}
 	else {
 		//Draw red light
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		Controller::GotoXY(6, 20);
+		Controller::GotoXY(4, 20);
 		cout << BottomDot;
-		Controller::GotoXY(68, 16);
+		Controller::GotoXY(70, 16);
 		cout << BottomDot;
-		Controller::GotoXY(6, 12);
+		Controller::GotoXY(4, 12);
 		cout << BottomDot;
-		Controller::GotoXY(68, 8);
+		Controller::GotoXY(70, 8);
 		cout << BottomDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-		Controller::GotoXY(6, 21);
+		Controller::GotoXY(4, 21);
 		cout << TopDot;
-		Controller::GotoXY(68, 17);
+		Controller::GotoXY(70, 17);
 		cout << TopDot;
-		Controller::GotoXY(6, 13);
+		Controller::GotoXY(4, 13);
 		cout << TopDot;
-		Controller::GotoXY(68, 9);
+		Controller::GotoXY(70, 9);
 		cout << TopDot;
 		setState(true);
 	}
