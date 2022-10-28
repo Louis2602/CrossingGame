@@ -2,6 +2,7 @@
 
 #include "CANIMAL.h"
 #include "CVEHICLE.h"
+#include "CLIGHT.h"
 
 class CPEOPLE {
 private:
@@ -24,5 +25,5 @@ public:
 	bool isImpact(const CVEHICLE*& vehicle); //Check if player impact with vehicle
 	bool isImpact(const CANIMAL*& animal);   //Check if player impact with animal
 	bool isFinish(int mX);             //Check if player has completed the stage
-	static void mainPeople(CLIGHT& light);    //Main function of character
+	static void mainPeople(CLIGHT&);    //Main function of character
 };

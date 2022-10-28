@@ -13,7 +13,7 @@ void Game::StartGame() {
 
 
 	thread light(l.mainLight);
-	p.mainPeople();
+	p.mainPeople(l);
 
 	light.join();
 
