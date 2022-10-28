@@ -78,7 +78,7 @@ bool CPEOPLE::isFinish(int mX) {
 	return false;
 }
 
-void CPEOPLE::mainPeople() {
+void CPEOPLE::mainPeople(CLIGHT& light) {
 	CPEOPLE p;
 	int x, y;
 	while (p.isDead()) {
@@ -93,6 +93,12 @@ void CPEOPLE::mainPeople() {
 			Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 			p.DRAW_PEOPLE(p.getPosX(), p.getPosY());
 			switch (Controller::GetConsoleInput()) {
+			case 1:
+			{
+				system("cls");
+				light.setisPlay(false);
+				return;
+			}
 			case 2:
 			{
 				p.Delete(x, y);

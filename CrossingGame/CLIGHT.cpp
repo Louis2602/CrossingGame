@@ -3,6 +3,12 @@
 CLIGHT::CLIGHT() {
 	state = false;
 }
+bool CLIGHT::getisPlay() {
+	return isPlay;
+}
+void CLIGHT::setisPlay(bool play) {
+	isPlay = play;
+}
 bool CLIGHT::getState() {
 	return state;
 }
@@ -63,7 +69,7 @@ void CLIGHT::update_light() {
 void CLIGHT::mainLight() {
 	CLIGHT light;
 	int timer = 3000;
-	while (timer) {
+	while (timer && light.getisPlay()) {
 		light.update_light();
 		Sleep(1000);
 		timer -= 50;
