@@ -1,5 +1,4 @@
 #include"CPEOPLE.h"
-#include"Graphics.h"
 
 const string people[] = { " o ", R"(/|\)", R"(/ \)" };
 
@@ -78,7 +77,7 @@ bool CPEOPLE::isFinish(int mX) {
 	return false;
 }
 
-void CPEOPLE::mainPeople(CLIGHT& light) {
+void CPEOPLE::mainPeople(CLIGHT &light) {
 	CPEOPLE p;
 	int x, y;
 	while (p.isDead()) {

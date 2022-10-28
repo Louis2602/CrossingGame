@@ -197,8 +197,7 @@ void Menu::MenuGameplay() {
 		PlayGame();
 		break;
 	case 2:
-		Continue = true;
-		//Game::PlayGame();
+		PlayGame();
 		break;
 	case 3:
 		MainMenu();

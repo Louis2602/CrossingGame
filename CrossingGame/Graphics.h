@@ -1,5 +1,6 @@
 #pragma once
 #include "Header.h"
+#include "Controller.h"
 
 class Graphics {
 public:

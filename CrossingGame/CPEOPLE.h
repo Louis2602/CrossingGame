@@ -3,6 +3,7 @@
 #include "CANIMAL.h"
 #include "CVEHICLE.h"
 #include "CLIGHT.h"
+#include "Sound.h"
 
 class CPEOPLE {
 private:

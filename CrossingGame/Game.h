@@ -1,5 +1,10 @@
 #pragma once
 #include "Header.h"
+#include "CPEOPLE.h"
+#include "CANIMAL.h"
+#include "CLIGHT.h"
+#include "CVEHICLE.h"
+#include "Graphics.h"
 
 class Game {
 private:
