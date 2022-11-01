@@ -15,5 +15,5 @@ public:
 	void setisPlay(bool);
 	bool getState();
 	void setState(bool);
-	static void mainLight();
+	static void mainLight(bool);
 };

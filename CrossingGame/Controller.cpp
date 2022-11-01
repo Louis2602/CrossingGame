@@ -97,9 +97,9 @@ int Controller::GetConsoleInput()
 			return 5;
 		else if (c == 13)             //Enter
 			return 6;
-		else if (c == 72 || c == 104) //H, h
+		else if (c == 80 || c == 112) //P, p
 			return 7;
-		else if (c == 77 || c == 109) // M, m
+		else if (c == 76 || c == 108) // L, l
 			return 8;
 		else
 			return 0;                 //nút khác

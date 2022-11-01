@@ -66,12 +66,10 @@ void CLIGHT::update_light() {
 	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 }
 
-void CLIGHT::mainLight() {
+void CLIGHT::mainLight(bool PAUSE_STATE) {
 	CLIGHT light;
-	int timer = 3000;
-	while (timer && light.getisPlay()) {
+	while (!PAUSE_STATE) {
 		light.update_light();
 		Sleep(1000);
-		timer -= 50;
 	}
 }

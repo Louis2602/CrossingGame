@@ -10,9 +10,9 @@ class Game {
 private:
 	int score;
 	int level;
-	bool IS_RUNNING = false;
-	bool PAUSE_STATE = false;
-
+	bool IS_RUNNING;
+	bool PAUSE_STATE;
+	bool SAVE_GAME;
 public:
 	Game(int);
 	~Game() {};
@@ -21,4 +21,6 @@ public:
 	void PauseGame();
 	void SaveGame();
 	void LoadGame();
+	void askContinue();
+	void saveGame();
 };
