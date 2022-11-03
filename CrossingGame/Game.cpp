@@ -9,17 +9,23 @@ Game::Game(int _level) {
 }
 
 void Game::StartGame() {
+	Graphics::PrintInterface();
+	thread light([this] { l.mainLight(); });
 	while (IS_RUNNING) {
-		CPEOPLE p;
-		CLIGHT l;
-		int timer = 3000;
-		Graphics::PrintInterface();
-
-
-		thread light(l.mainLight, PAUSE_STATE);
 		//p.mainPeople(l);
+		if (PAUSE_STATE) {
+			//light.join();
+			l.setState(false);
+			askContinue();
+		}
+		if (SAVE_GAME)
+			SaveGame();
 		while (!PAUSE_STATE) {
 			switch (Controller::GetConsoleInput()) {
+			case 1:
+				IS_RUNNING = false;
+				Graphics::DrawGoodbyeScreen();
+				break;
 			case 7:
 				PAUSE_STATE = true;
 				break;
@@ -27,12 +33,7 @@ void Game::StartGame() {
 				SAVE_GAME = true;
 				break;
 			}
-		}
-		if (PAUSE_STATE)
-			askContinue();
-		if (SAVE_GAME)
-			saveGame();
-		light.join();
+		}	
 	}
 
 
@@ -42,12 +43,16 @@ void Game::StartGame() {
 	*/
 }
 
+void Game::SetUpGame() {
+	
+}
+
 void Game::EndGame(thread* t) {
 	Controller::ClearConsole();
 	IS_RUNNING = false;
 	t->join();
 }
-void saveGame() {
+void Game::SaveGame() {
 	fstream fs("gameData\\game.txt", ios::app);
 	fs.close();
 }
@@ -66,7 +71,6 @@ void Game::askContinue()
 	string str[2] = { "Yes", "No" };
 	int left[] = { 35,40,47,58,63,69 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
 	bool choice = 1;
-	Sound s;
 	auto print1 = [&]()
 	{
 		int i = 0;
@@ -89,8 +93,10 @@ void Game::askContinue()
 			print1();
 		else if (key == 6)
 		{
-			if (!choice)
+			if (!choice) {
 				IS_RUNNING = true;
+				PAUSE_STATE = false;
+			}
 			else
 				IS_RUNNING = false;
 			return;

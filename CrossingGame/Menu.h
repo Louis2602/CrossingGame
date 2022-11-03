@@ -12,7 +12,5 @@ public:
 	void MenuRule();
 	void MenuAbout();
 	void MenuScore();
-	void MenuQuitGame();
-	void SoundSettings();
 	void PlayGame();
 };

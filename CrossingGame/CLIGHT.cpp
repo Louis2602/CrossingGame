@@ -1,7 +1,7 @@
 #include "CLIGHT.h"
 
 CLIGHT::CLIGHT() {
-	state = false;
+	state = true;
 }
 bool CLIGHT::getisPlay() {
 	return isPlay;
@@ -66,9 +66,9 @@ void CLIGHT::update_light() {
 	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 }
 
-void CLIGHT::mainLight(bool PAUSE_STATE) {
+void CLIGHT::mainLight() {
 	CLIGHT light;
-	while (!PAUSE_STATE) {
+	while (state) {
 		light.update_light();
 		Sleep(1000);
 	}

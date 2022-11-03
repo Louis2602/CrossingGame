@@ -222,3 +222,144 @@ void Graphics::PrintScoreboard() {
 	Controller::GotoXY(100, 17);
 	cout << 1;
 }
+
+void draw_bye1() {
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_GREEN);
+	Controller::GotoXY(20, 113);
+	cout << " ____ ";
+	Controller::GotoXY(20, 114);
+	cout << "|  _ \\                        ";
+	Controller::GotoXY(20, 115);
+	cout << "| |_)|  __  __ ____";
+	Controller::GotoXY(20, 116);
+	cout << "|  __`\\ \\ \\/ // __ \\";
+	Controller::GotoXY(20, 117);
+	cout << "| |__)|  \\  / | ___/";
+	Controller::GotoXY(20, 118);
+	cout << "|_____/  /_/  \\____|";
+}
+void draw_bye2() {
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_GREEN);
+	Controller::GotoXY(82, 113);
+	cout << " ____ ";
+	Controller::GotoXY(82, 114);
+	cout << "|  _ \\                        ";
+	Controller::GotoXY(82, 115);
+	cout << "| |_)|  __  __ ____";
+	Controller::GotoXY(82, 116);
+	cout << "|  __`\\ \\ \\/ // __ \\";
+	Controller::GotoXY(82, 117);
+	cout << "| |__)|  \\  / | ___/";
+	Controller::GotoXY(82, 118);
+	cout << "|_____/  /_/  \\____|";
+}
+
+void Graphics::DrawGoodbyeScreen() {
+	Controller::ClearConsole();
+	Sleep(500);
+	const char rocket[] = R"(       
+							   !
+							   !
+							   ^
+							  / \
+							 /___\
+							|=   =|
+							|  B  |
+							|  Y  |
+							|  E  |
+							|     |
+							|  B  |
+							|  Y  |
+							|  E  |
+							|     |
+						       /|##!##|\
+						      / |##!##| \
+						     /  |##!##|  \
+						    |  / ^ | ^ \  |
+						    | /         \ |
+						    |/           \|
+)";
+
+	const char fire[] = R"(
+							 ( | )  
+							 ( | ) 
+							((   ))
+						       ((  :  ))
+						       ((  :  ))
+							((   ))
+							 (( ))
+							  ( )
+							   .
+							   .
+							   .
+)";
+	Controller::GotoXY(7, 101); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE); cout << "_______  ______    _______  _______  _______  ___   __    _  _______    _______  _______  __   __  _______ \n";
+	Controller::GotoXY(5, 102); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);  cout << " |       ||    _ |  |       ||       ||       ||   | |  |  | ||       |  |       ||   _   ||  |_|  ||       |\n";
+	Controller::GotoXY(5, 103); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_GREEN); cout << " |       ||   | ||  |   _   ||  _____||  _____||   | |   |_| ||    ___|  |    ___||  |_|  ||       ||    ___|\n";
+	Controller::GotoXY(5, 104); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA); cout << " |       ||   |_||_ |  | |  || |_____ | |_____ |   | |       ||   | __   |   | __ |       ||       ||   |___ \n";
+	Controller::GotoXY(5, 105); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED); cout << " |      _||    __  ||  |_|  ||_____  ||_____  ||   | |  _    ||   ||  |  |   ||  ||       ||       ||    ___|\n";
+	Controller::GotoXY(5, 106); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_PURPLE); cout << " |     |_ |   |  | ||       | _____| | _____| ||   | | | |   ||   |_| |  |   |_| ||   _   || ||_|| ||   |___ \n";
+	Controller::GotoXY(5, 107); Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_PURPLE); cout << " |_______||___|  |_||_______||_______||_______||___| |_|  |__||_______|  |_______||__| |__||_|   |_||_______|";
+
+	Controller::GotoXY(43, 109);
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	printf("CSC10003 - OBJECT ORIENTED PROGRAMMING");
+	Controller::GotoXY(53, 110);
+	cout << "GAME: CROSSING GAME";
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED);
+	Controller::GotoXY(49, 112);
+	cout << "  *******     *******";
+	Controller::GotoXY(49, 113);
+	cout << " *       *   *       *";
+	Controller::GotoXY(49, 114);
+	cout << "*         ***         *";
+	Controller::GotoXY(49, 115);
+	cout << " *                   *";
+	Controller::GotoXY(49, 116);
+	cout << "  *";
+	Controller::GotoXY(53, 116);
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
+	cout << " SEE YOU AGAIN ";
+	Controller::GotoXY(68, 116);
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED);
+	cout << " *";
+	Controller::GotoXY(49, 117);
+	cout << "    *             *";
+	Controller::GotoXY(49, 118);
+	cout << "      *         *";
+	Controller::GotoXY(49, 119);
+	cout << "        *     *";
+	Controller::GotoXY(49, 120);
+	cout << "          ***";
+	Controller::GotoXY(49, 121);
+
+	draw_bye1();
+	draw_bye2();
+	Controller::GotoXY(0, 67);
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
+	cout << rocket;
+	Controller::GotoXY(0, 85);
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_RED);
+	cout << fire;
+	Controller::GotoXY(0, 0);	cout << " ";
+	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	int rocketSpeed = 300;
+	Sound s;
+	s.EndSoundGame();
+	s.SoundRocket();
+	for (int i = 0; i < 63; i++) {
+		Sleep(rocketSpeed); // move faster and faster,
+		rocketSpeed -= 30; // so sleep less each time
+		if (rocketSpeed <= 40)
+			rocketSpeed = 40;
+		Controller::GotoXY(0, 66 + i);
+		cout << " "; // move rocket a line upward
+	}
+	s.EndSoundGame();
+	Sleep(200);
+	s.SoundByeBye();
+	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+	Sleep(1500);
+	Controller::GotoXY(0, 122);
+	exit(0);
+}
