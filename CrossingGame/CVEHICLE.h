@@ -1,5 +1,6 @@
-#ifndef CVehicle
-#define CVehicle
+#ifndef cVehicle_h
+#define cVehicle_h
+
 
 #include "CPOINT.h"
 #include <Windows.h>
@@ -7,7 +8,7 @@
 #include <mmsystem.h>
 
 
-class CVEHICLE {
+class cVehicle {
 private:
 	cPoint pos;
 public:
@@ -22,16 +23,18 @@ public:
 	}
 	
 
-	CVEHICLE();
-	CVEHICLE(cPoint); 
-	virtual ~CVEHICLE() = default;
+	cVehicle();
+	cVehicle(cPoint); 
+	virtual ~cVehicle() = default;
 	virtual char** returnShape() = 0;
 
 	void newPosition(int dx, int dy);
 
 	virtual int getWidth() = 0;
+	virtual int getHeight() = 0;
 
-	int getHeight();
+
+	void updatePosition(int dx, int dy);
 };
 
-#endif 
+#endif // !cVehicle_h

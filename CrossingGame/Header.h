@@ -9,6 +9,8 @@
 #include "CANIMAL.h"
 #include "CVEHICLE.h"
 #include "CPEOPLE.h"
+#include "cLine.h"
+
 
 #include <chrono>
 #include <iostream>

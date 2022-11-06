@@ -1,7 +1,7 @@
-#include "CCAR.h"
+#include "cCar.h"
 
 
-CCAR::CCAR(cPoint pos): CVEHICLE(pos) {
+cCar::cCar(cPoint pos): cVehicle(pos) {
 	//car shape
 	//     ___
 	//   _/ |_\_
@@ -23,30 +23,20 @@ CCAR::CCAR(cPoint pos): CVEHICLE(pos) {
 
 	//Row2
 	for (int i = 0; i < CAR_WIDTH; i++) {
-		switch (i)
-		{
-		case 0: case 3: case 8:
-		{
+		if (i == 0 || i == 3 || i == 8) {
 			shape[1][i] = ' ';
-			break;
 		}
-		case 1: case 5: case 7:
-		{
+		else if (i == 1 || i == 5 || i == 7) {
 			shape[1][i] = '_';
-			break;
 		}
-		case 2:
-		{
+		else if (i == 2) {
 			shape[1][i] = '/';
-			break;
 		}
-		case 6:
-		{
+		else if (i == 6) {
 			shape[1][i] = '\\';
-			break;
 		}
-		default:
-			break;
+		else if (i == 4) {
+			shape[1][i] = '|';
 		}
 	}
 
@@ -75,7 +65,7 @@ CCAR::CCAR(cPoint pos): CVEHICLE(pos) {
 	}
 }
 
-CCAR::CCAR(){
+cCar::cCar(){
 	//car shape
 	//     ___
 	//   _/ |_\_
@@ -97,30 +87,20 @@ CCAR::CCAR(){
 
 	//Row2
 	for (int i = 0; i < CAR_WIDTH; i++) {
-		switch (i)
-		{
-		case 0: case 3: case 8:
-		{
+		if (i == 0 || i == 3 || i == 8) {
 			shape[1][i] = ' ';
-			break;
 		}
-		case 1: case 5: case 7:
-		{
+		else if (i == 1 || i == 5 || i == 7) {
 			shape[1][i] = '_';
-			break;
-		}	
-		case 2:
-		{
+		}
+		else if (i == 2) {
 			shape[1][i] = '/';
-			break;
 		}
-		case 6:
-		{
+		else if (i == 6) {
 			shape[1][i] = '\\';
-			break;
 		}
-			default:
-				break;
+		else if (i == 4) {
+			shape[1][i] = '|';
 		}
 	}
 
@@ -149,18 +129,22 @@ CCAR::CCAR(){
 	}
 }
 
-CCAR::~CCAR() {
+cCar::~cCar() {
 	for (int i = 0; i < CAR_HEIGHT; i++)
 		delete[] shape[i];
 	delete[] shape;
 	delete[] shape;
 }
 
-char** CCAR::returnShape() {
+char** cCar::returnShape() {
 	return shape;
 }
 
-int getWidth() {
-	return 8;
+int cCar::getWidth() {
+	return CAR_WIDTH;
+}
+
+int cCar::getHeight() {
+	return CAR_HEIGHT;
 }
 

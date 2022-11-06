@@ -1,9 +1,9 @@
 #include "Header.h"
-#include "CCAR.h"
+#include "cCar.h"
 
 CPEOPLE people;
 CANIMAL animal[];
-CCAR car[];
+cVehicle* car;
 
 bool Continue = false;
 bool PlayAgain = false;

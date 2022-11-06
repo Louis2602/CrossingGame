@@ -1,7 +1,7 @@
-#include "CTRUCK.h"
+#include "cTruck.h"
 
 
-CTRUCK::CTRUCK(cPoint pos) : CVEHICLE(pos) {
+cTruck::cTruck(cPoint pos) : cVehicle(pos) {
 	//TRUCK shape
 	//.----.__
 	//|____|__|
@@ -44,7 +44,7 @@ CTRUCK::CTRUCK(cPoint pos) : CVEHICLE(pos) {
 	}
 }
 
-CTRUCK::CTRUCK() {
+cTruck::cTruck() {
 	//TRUCK shape
 	//.----.__
 	//|____|__|
@@ -87,17 +87,21 @@ CTRUCK::CTRUCK() {
 	}
 }
 
-CTRUCK::~CTRUCK() {
+cTruck::~cTruck() {
 	for (int i = 0; i < TRUCK_HEIGHT; i++)
 		delete[] shape[i];
 	delete[] shape;
 	delete[] shape;
 }
 
-char** CTRUCK::returnShape() {
+char** cTruck::returnShape() {
 	return shape;
 }
 
-int getWidth() {
-	return 8;
+int cTruck::getWidth() {
+	return TRUCK_WIDTH;
+}
+
+int cTruck::getHeight() {
+	return TRUCK_HEIGHT;
 }

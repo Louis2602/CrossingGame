@@ -1,17 +1,18 @@
 #pragma once
 
-#include "CVEHICLE.h"
+#include "cVehicle.h"
 
 #define TRUCK_HEIGHT 3
 #define TRUCK_WIDTH 9
 
-class CTRUCK : public CVEHICLE
+class cTruck : public cVehicle
 {
 	char** shape; //a[3][8]
 public:
-	CTRUCK(cPoint);
-	CTRUCK();
-	~CTRUCK();
+	cTruck(cPoint);
+	cTruck();
+	~cTruck();
 	char** returnShape();
 	int getWidth();
+	int getHeight();
 };

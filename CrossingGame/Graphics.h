@@ -1,5 +1,6 @@
 #pragma once
 #include "Header.h"
+#include "Controller.h"
 
 class Graphics {
 public:
@@ -12,4 +13,8 @@ public:
 	static void PrintScoreboard();
 	static void DrawMap();
 	static void PrintInterface();
+	
+	void init();
+
+
 };

@@ -1,9 +1,27 @@
 #include "Graphics.h";
+#include "cLine.h"
+#include "cCar.h"
+
 void Graphics::PrintInterface() {
 	Controller::ClearConsole();
 	DrawMap();
 	PrintInstruct();
 	PrintScoreboard();
+
+	//	test
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	cPoint pos(4, 11);
+	cVehicle* car;
+	car = new cCar(pos);
+	cLine* line;
+	line = new cLine;
+	line->pushVehicle(car);
+
+
+
+	/*Controller::GotoXY(41, 11); cout << "aaaaa";*/
+
+	//	end test
 }
 void Graphics::DrawMenuBox() {
 	Controller::SetConsoleColor(BLACK, BLACK);
@@ -222,3 +240,33 @@ void Graphics::PrintScoreboard() {
 	Controller::GotoXY(100, 17);
 	cout << 1;
 }
+
+//void Graphics::init() {
+//	_lines.~cLine();
+//	new(&_lines) cLine();
+//	int n = _level.getLine();
+//	int* road = new int[n];
+//	for (int i = 0; i < n; ++i) {
+//		road[i] = 0;
+//		int speed = rand() % (_level.getMinSpeed() - _level.getMaxSpeed() + 1) + _level.getMaxSpeed();
+//		bool trafficLight = rand() % 2;
+//		bool direction = rand() % 2;
+//		_lines.PushLine(new CLine(speed, direction, trafficLight, i * 4));
+//	}
+//	CObject* newObj;
+//	CPos pos;
+//	int tryCount = 10000;
+//	while (tryCount--) {
+//		int LineNb = (rand() % (n - 1)) + 1;
+//		road[LineNb] += (rand() % 20) + 9;
+//		pos = CPos(LineNb * 4, road[LineNb]);
+//		newObj = _level.randObj(pos);
+//		if (!newObj)
+//			break;
+//		if (!_lines.PushObj(newObj, LineNb)) {
+//			_level.reNbObj(1);
+//			delete newObj;
+//		};
+//	}
+//	Sleep(200);
+//}

@@ -139,13 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cAllLines.h" />
     <ClInclude Include="CANIMAL.h" />
-    <ClInclude Include="CCAR.h" />
+    <ClInclude Include="cCar.h" />
+    <ClInclude Include="cLine.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CPEOPLE.h" />
-    <ClInclude Include="CPOINT.h" />
-    <ClInclude Include="CTRUCK.h" />
-    <ClInclude Include="CVEHICLE.h" />
+    <ClInclude Include="cPoint.h" />
+    <ClInclude Include="cTruck.h" />
+    <ClInclude Include="cVehicle.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Header.h" />
@@ -153,18 +155,20 @@
     <ClInclude Include="Sound.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cAllLines.cpp" />
     <ClCompile Include="CANIMAL.cpp" />
-    <ClCompile Include="CCAR.cpp" />
+    <ClCompile Include="cCar.cpp" />
+    <ClCompile Include="cLine.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="CPOINT.cpp" />
-    <ClCompile Include="CTRUCK.cpp" />
+    <ClCompile Include="cPoint.cpp" />
+    <ClCompile Include="cTruck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="CPEOPLE.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="CVEHICLE.cpp" />
+    <ClCompile Include="cVehicle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

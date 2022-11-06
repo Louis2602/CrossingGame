@@ -39,16 +39,22 @@
     <ClInclude Include="CANIMAL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CVEHICLE.h">
+    <ClInclude Include="cVehicle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CCAR.h">
+    <ClInclude Include="cCar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CPOINT.h">
+    <ClInclude Include="cPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTRUCK.h">
+    <ClInclude Include="cTruck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cAllLines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +68,7 @@
     <ClCompile Include="CPEOPLE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CVEHICLE.cpp">
+    <ClCompile Include="cVehicle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CANIMAL.cpp">
@@ -80,14 +86,20 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CCAR.cpp">
+    <ClCompile Include="cCar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPOINT.cpp">
+    <ClCompile Include="cPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTRUCK.cpp">
+    <ClCompile Include="cTruck.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cAllLines.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
