@@ -219,8 +219,6 @@ void Graphics::PrintScoreboard() {
 	cout << "Moves:";
 	Controller::GotoXY(85, 17);
 	cout << "Current score:";
-	Controller::GotoXY(100, 17);
-	cout << 1;
 }
 
 void draw_bye1() {

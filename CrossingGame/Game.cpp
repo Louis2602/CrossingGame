@@ -11,36 +11,74 @@ Game::Game(int _level) {
 void Game::StartGame() {
 	Graphics::PrintInterface();
 	thread light([this] { l.mainLight(); });
+	CPEOPLE p;
+	int x, y;
 	while (IS_RUNNING) {
-		//p.mainPeople(l);
+		
 		if (PAUSE_STATE) {
-			//light.join();
 			l.setState(false);
-			askContinue();
-		}
-		if (SAVE_GAME)
-			SaveGame();
-		while (!PAUSE_STATE) {
-			switch (Controller::GetConsoleInput()) {
-			case 1:
-				IS_RUNNING = false;
-				Graphics::DrawGoodbyeScreen();
-				break;
-			case 7:
-				PAUSE_STATE = true;
-				break;
-			case 8:
-				SAVE_GAME = true;
-				break;
+			while (PAUSE_STATE) {
+				askContinue();
 			}
-		}	
+		}
+		while (SAVE_GAME)
+			SaveGame();
+		while (!PAUSE_STATE && p.isDead()) {
+			Controller::GotoXY(100, 17);
+			cout << p.getScore();
+			x = p.getPosX();
+			y = p.getPosY();
+			if (p.isFinish(x))
+			{
+				p.updatePos(36, 24);
+			}
+			else
+			{
+				Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
+				p.DRAW_PEOPLE(p.getPosX(), p.getPosY());
+				switch (Controller::GetConsoleInput()) {
+				case 1:  //ESC
+					IS_RUNNING = false;
+					l.setState(false);
+					light.join();
+					Graphics::DrawGoodbyeScreen();
+					break;
+				case 2: //UP
+				{
+					p.Delete(x, y);
+					p.Up(y);
+					break;
+				}
+				case 3: //LEFT
+				{
+					p.Delete(x, y);
+					p.Left(x);
+					break;
+				}
+				case 4: //RIGHT
+				{
+					p.Delete(x, y);
+					p.Right(x);
+					break;
+				}
+				case 5: //DOWN
+				{
+					p.Delete(x, y);
+					p.Down(y);
+					break;
+				}
+				case 7: //PAUSE GAME
+					PAUSE_STATE = true;
+					break;
+
+				case 8: // SAVE GAME
+					SAVE_GAME = true;
+					break;
+				}
+				p.updatePos(x, y);
+			}
+		}
 	}
-
-
-	/*Để people là thread chính, các hàm sử dụng std::thread là các thread phụ chạy song song vs thread chính
-	* các thread phụ sẽ được tạo và gọi trước khi thread chính chạy
-	* hàm join() dùng để cho thread phụ và thread chính kêt thúc cùng nhau
-	*/
 }
 
 void Game::SetUpGame() {
@@ -52,11 +90,14 @@ void Game::EndGame(thread* t) {
 	IS_RUNNING = false;
 	t->join();
 }
-void Game::SaveGame() {
+
+void Game::SaveGame() //Save game
+{
 	fstream fs("gameData\\game.txt", ios::app);
 	fs.close();
 }
-void Game::askContinue()
+
+void Game::askContinue() //ask player to continue or not when pause game
 {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	Controller::GotoXY(0, 0);
@@ -65,9 +106,9 @@ void Game::askContinue()
 	Graphics::DrawRectangle(34, 13, 35, 8);
 	Graphics::DrawRectangle(37, 18, 7, 2);
 	Graphics::DrawRectangle(60, 18, 6, 2);
-	Controller::GotoXY(36, 16);
+	Controller::GotoXY(41, 16);
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-	cout << "Do you want to play another round?";
+	cout << "Do you want to continue?";
 	string str[2] = { "Yes", "No" };
 	int left[] = { 35,40,47,58,63,69 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
 	bool choice = 1;
