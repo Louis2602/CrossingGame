@@ -1,18 +1,14 @@
 #include "Header.h"
-
-CPEOPLE people;
-CANIMAL animal[];
-CVEHICLE vehicle[];
-
-bool Continue = false;
-bool PlayAgain = false;
-bool Impact = false;
+#include "Controller.h"
+#include "Menu.h"
+#include "Sound.h"
 
 int main() {
 	srand(time(NULL));
 
 	Controller::SetUpConsole();
-	//Sound::SoundBackground();
+	Sound s;
+	s.SoundBackground();
 
 	Menu game;
 	game.MainMenu();

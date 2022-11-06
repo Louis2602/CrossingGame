@@ -26,6 +26,7 @@
 #define KEY_RIGHT 77
 #define KEY_ESC 27
 
+
 class Controller {
 public:
 	Controller() {};

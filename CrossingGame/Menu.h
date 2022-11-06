@@ -1,6 +1,9 @@
 #pragma once
 #include "Header.h"
-
+#include "Graphics.h"
+#include "Controller.h"
+#include "Sound.h"
+#include "Game.h"
 
 class Menu {
 public:	
@@ -9,6 +12,5 @@ public:
 	void MenuRule();
 	void MenuAbout();
 	void MenuScore();
-	void MenuQuitGame();
 	void PlayGame();
 };
