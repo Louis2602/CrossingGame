@@ -10,9 +10,34 @@ int CPEOPLE::getPosY() {
 	return mY;
 }
 
+int CPEOPLE::getScore() {
+	return score;
+}
+
+int CPEOPLE::getForward() {
+	return forward;
+}
+
+int CPEOPLE::getBack() {
+	return back;
+}
+
+void CPEOPLE::updateScore() {
+	if (score < getForward() - getBack())
+		this->score++;
+}
+
 void CPEOPLE::updatePos(int x, int y) {
 	mX = x;
 	mY = y;
+}
+
+void CPEOPLE::setBack() {
+	this->back++;
+}
+
+void CPEOPLE::setForward() {
+	this->forward++;
 }
 
 bool CPEOPLE::isDead() {
@@ -39,6 +64,8 @@ void CPEOPLE::Up(int& mY) {
 	if (mY == 4)
 		return;
 	mY -= 4;
+	setForward();
+	updateScore();
 }
 
 void CPEOPLE::Left(int& mX) {
@@ -63,6 +90,7 @@ void CPEOPLE::Down(int& mY) {
 	if (mY + 3 == 27)
 		return;
 	mY += 4;
+	setBack();
 }
 
 /*
@@ -75,55 +103,4 @@ bool CPEOPLE::isFinish(int mX) {
 	if (mY == 4)
 		return true;
 	return false;
-}
-
-void CPEOPLE::mainPeople(CLIGHT &light) {
-	CPEOPLE p;
-	int x, y;
-	while (p.isDead()) {
-		x = p.getPosX();
-		y = p.getPosY();
-		if (p.isFinish(x))
-		{
-			p.updatePos(36, 24);
-		}
-		else
-		{
-			Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
-			p.DRAW_PEOPLE(p.getPosX(), p.getPosY());
-			switch (Controller::GetConsoleInput()) {
-			case 1:
-			{
-				system("cls");
-				light.setisPlay(false);
-				return;
-			}
-			case 2:
-			{
-				p.Delete(x, y);
-				p.Up(y);
-				break;
-			}
-			case 3:
-			{
-				p.Delete(x, y);
-				p.Left(x);
-				break;
-			}
-			case 4:
-			{
-				p.Delete(x, y);
-				p.Right(x);
-				break;
-			}
-			case 5:
-			{
-				p.Delete(x, y);
-				p.Down(y);
-				break;
-			}
-			}
-			p.updatePos(x, y);
-		}
-	}
 }
