@@ -7,7 +7,7 @@
 #include "Game.h"
 #include "Menu.h"
 #include "CANIMAL.h"
-#include "cVehicle.h"
+#include "CVEHICLE.h"
 #include "cCar.h"
 #include "cTruck.h"
 #include "CPEOPLE.h"

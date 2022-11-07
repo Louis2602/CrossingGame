@@ -3,12 +3,12 @@
 #ifndef cCar_h
 #define cCar_h
 
-#include "cVehicle.h"
+#include "CVEHICLE.h"
 
 #define CAR_HEIGHT 3
 #define CAR_WIDTH 9
 
-class cCar : public cVehicle 
+class cCar : public CVEHICLE 
 {
 	char** shape; //a[3][8]
 public:

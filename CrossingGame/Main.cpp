@@ -3,7 +3,7 @@
 
 CPEOPLE people;
 CANIMAL animal[];
-cVehicle* car;
+CVEHICLE* car;
 
 bool Continue = false;
 bool PlayAgain = false;

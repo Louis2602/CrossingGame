@@ -10,7 +10,7 @@
 #include <mmsystem.h>
 
 
-class cVehicle {
+class CVEHICLE {
 private:
 	cPoint pos;
 public:
@@ -25,9 +25,9 @@ public:
 	}
 	
 
-	cVehicle();
-	cVehicle(cPoint); 
-	virtual ~cVehicle() = default;
+	CVEHICLE();
+	CVEHICLE(cPoint); 
+	virtual ~CVEHICLE() = default;
 	virtual char** returnShape() = 0;
 
 	void newPosition(int dx, int dy);

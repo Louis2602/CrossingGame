@@ -1,7 +1,7 @@
 #include "cCar.h"
 
 
-cCar::cCar(cPoint pos): cVehicle(pos) {
+cCar::cCar(cPoint pos): CVEHICLE(pos) {
 	//car shape
 	//     ___
 	//   _/ |_\_

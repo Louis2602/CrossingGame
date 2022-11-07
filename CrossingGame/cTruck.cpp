@@ -1,7 +1,7 @@
 #include "cTruck.h"
 
 
-cTruck::cTruck(cPoint pos) : cVehicle(pos) {
+cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 	//TRUCK shape
 	//.----.__
 	//|____|__|
