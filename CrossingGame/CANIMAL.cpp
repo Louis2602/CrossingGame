@@ -1,29 +1,26 @@
 #include "CANIMAL.h"
 
-CANIMAL::CANIMAL() : outmap(false) {}
+CANIMAL::CANIMAL() {}
 
-CANIMAL::CANIMAL(const CPOSITION& start) : pos(start), outmap(false) {}
+CANIMAL::CANIMAL(cPoint point) : pos(point) {}
 
-int CANIMAL::getX() {
-	return pos.getX();
+cPoint CANIMAL::getPos() {
+	return this->pos;
 }
 
-int CANIMAL::getY() {
-	return pos.getY();
+void CANIMAL::newPosition(int _x, int _y) {
+	this->pos.setX(_x);
+	this->pos.setY(_y);
 }
 
-CPOSITION CANIMAL::getPos() {
-	return pos;
+int CANIMAL::getHeight() {
+	return 3;
 }
 
-bool CANIMAL::isOutMap() {
-	return outmap;
-}
-
-void CANIMAL::setOutMap() {
-	outmap = true;
-}
-
-void CANIMAL::updatePos(const int x, const int y) {
-	pos.setPos(pos.getX() + x, pos.getY() + y);
+void CANIMAL::updatePosition(int _x, int _y) {
+	if ((pos.getY() + _y) > 50) {
+		pos.setXY(10, 0);
+	}
+	else
+		pos.setXY(pos.getX() + _x, pos.getY() + _y);
 }

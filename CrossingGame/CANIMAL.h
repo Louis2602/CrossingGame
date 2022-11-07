@@ -1,22 +1,32 @@
 #pragma once
-#include "CPOSTION.h"
+#ifndef CANIMAL_h
+#define CANIMAL_h
+
+#include "cPoint.h"
 #include "Controller.h"
+#include <Windows.h>
+#include <iostream>
+#include <mmsystem.h>
 
 class CANIMAL {
 private:
-	CPOSITION pos;
-	bool outmap;
+	cPoint pos;
 public:
-	int getX();
-	int getY();
-	CANIMAL();
-	CANIMAL(const CPOSITION&);
-	~CANIMAL() {};
-	CPOSITION getPos();
-	bool isOutMap();
-	virtual int getH() = 0;
-	virtual int getW() = 0;
-	void updatePos(const int x, const int y);
-	void setOutMap();
-	virtual char** kind() = 0;
+	cPoint getPos();
+	int getX() {
+		return pos.getX();
+	}
+	int getY() {
+		return pos.getY();
+	}
+	CANIMAL() = default;
+	CANIMAL(cPoint);
+	virtual ~CANIMAL() = default;
+	virtual char** returnShape() = 0;
+	void newPosition(int _x, int _y);
+	virtual int getWidth() = 0;
+	virtual int getHeight() = 0;
+	void updatePosition(int _x, int _y);
 };
+
+#endif // !CANIMAL_h
