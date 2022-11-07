@@ -1,8 +1,15 @@
 #pragma once
+
+#ifndef cLine_h
+#define cLine_h
+
+#include <vector>
 #include "cVehicle.h"
 #include "Controller.h"
-#include <vector>
+
+
 using namespace std;
+
 #define RIGHT 65
 #define LEFT 2
 
@@ -25,3 +32,5 @@ public:
 	vector<cVehicle*> getVehicle();
 	bool getDirection();
 };
+
+#endif // !cLine_h

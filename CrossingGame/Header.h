@@ -7,10 +7,12 @@
 #include "Game.h"
 #include "Menu.h"
 #include "CANIMAL.h"
-#include "CVEHICLE.h"
+#include "cVehicle.h"
+#include "cCar.h"
+#include "cTruck.h"
 #include "CPEOPLE.h"
 #include "cLine.h"
-
+#include "cAllLines.h"
 
 #include <chrono>
 #include <iostream>

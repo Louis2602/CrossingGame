@@ -3,6 +3,7 @@
 #include "Controller.h"
 
 class Graphics {
+//cAllLines _lineData;
 public:
 	Graphics() {};
 	~Graphics() {};

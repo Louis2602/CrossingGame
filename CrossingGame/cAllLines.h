@@ -1,20 +1,27 @@
-#pragma once
+//#pragma once
 
+#ifndef cAllLines_h
+#define cAllLines_h
+	
+#include <vector>
 #include "cLine.h"
 
-using namespace std;
 
-class cRows
+using namespace std;
+#define RIGHT 65
+#define LEFT 2
+
+class cAllLines
 {
 private:
-	vector <cLine*> subRows;
+	vector <cLine*> lines;
 public:
-	cRows();
-	~cRows() = default;
-	bool pushEnemy(int row, cVehicle* enemy); //  push a new enemy to a row
+	cAllLines();
+	~cAllLines() = default;
+	bool pushVehicle(int line, cVehicle* vehicle); //  push a new enemy to a row
 	void pushRow(cLine*);
-	vector <cVehicle*> listEnemy(); // return all enemies from all rowsgit ad
+	vector <cVehicle*> listVehicle(); // return all enemies from all rowsgit ad
 	vector <cLine*> listRow();
-	void redrawState();
-
 };
+
+#endif // !cAllLines_h

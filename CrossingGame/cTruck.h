@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "cVehicle.h"
 
 #define TRUCK_HEIGHT 3

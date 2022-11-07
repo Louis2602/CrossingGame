@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef cVehicle_h
 #define cVehicle_h
 
