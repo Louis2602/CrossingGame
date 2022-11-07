@@ -3,10 +3,9 @@
 #ifndef cLine_h
 #define cLine_h
 
-#include <vector>
 #include "cVehicle.h"
 #include "Controller.h"
-
+#include <vector>
 
 using namespace std;
 
@@ -27,7 +26,6 @@ public:
 	bool printVehicle(cPoint pos, char** shape, int width, int height);
 	bool pushVehicle(cVehicle* vehicle);
 	void deleteVehicle(cPoint pos, int w, int h);
-	int Transfer(int t);
 	int getSpeed();
 	vector<cVehicle*> getVehicle();
 	bool getDirection();

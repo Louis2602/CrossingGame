@@ -2,10 +2,12 @@
 
 #ifndef cAllLines_h
 #define cAllLines_h
-	
-#include <vector>
-#include "cLine.h"
 
+#include <iostream>
+#include <vector>
+
+#include "cLine.h"
+#include "Controller.h"
 
 using namespace std;
 #define RIGHT 65
@@ -13,12 +15,11 @@ using namespace std;
 
 class cAllLines
 {
-private:
-	vector <cLine*> lines;
+	vector<cLine*> _lines;
 public:
 	cAllLines();
 	~cAllLines() = default;
-	bool pushVehicle(int line, cVehicle* vehicle); //  push a new enemy to a row
+	//bool pushVehicle(int line, cVehicle* vehicle); //  push a new enemy to a row
 	void pushRow(cLine*);
 	vector <cVehicle*> listVehicle(); // return all enemies from all rowsgit ad
 	vector <cLine*> listRow();
