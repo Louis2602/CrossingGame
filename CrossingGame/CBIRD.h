@@ -1,15 +1,17 @@
 #pragma once
 #include "CANIMAL.h"
-#include "CPOSTION.h"
+#define BIRD_HEIGHT 4
+#define BIRD_WIDTH 6
 
 class CBIRD : public CANIMAL {
 private:
-	char** birdShape;
+	char** shape;
 
 public:
-	CBIRD(CPOSITION pos);
+	CBIRD(cPoint);
+	CBIRD();
 	~CBIRD();
-	char** shape();
-	int getWidth();
+	char** returnShape();
 	int getHeight();
+	int getWidth();
 };
