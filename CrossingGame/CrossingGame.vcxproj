@@ -140,10 +140,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CANIMAL.h" />
+    <ClInclude Include="cCar.h" />
     <ClInclude Include="CLIGHT.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CPEOPLE.h" />
+    <ClInclude Include="cPoint.h" />
     <ClInclude Include="CPOSITION.h" />
+    <ClInclude Include="cTruck.h" />
     <ClInclude Include="CVEHICLE.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
@@ -153,8 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CANIMAL.cpp" />
+    <ClCompile Include="cCar.cpp" />
     <ClCompile Include="CLIGHT.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="cPoint.cpp" />
+    <ClCompile Include="cTruck.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Main.cpp" />

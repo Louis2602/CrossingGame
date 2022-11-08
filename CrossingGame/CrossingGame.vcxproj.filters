@@ -48,6 +48,15 @@
     <ClInclude Include="CPOSITION.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cCar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cTruck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.cpp">
@@ -78,6 +87,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CLIGHT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cTruck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
