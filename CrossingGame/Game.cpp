@@ -11,6 +11,7 @@ Game::Game(int _level) {
 void Game::StartGame() {
 	Graphics::PrintInterface();
 	thread light([this] { l.mainLight(); });
+	Sleep(100);
 	CPEOPLE p;
 	int x, y;
 	while (IS_RUNNING) {
