@@ -22,6 +22,9 @@ int CPEOPLE::getBack() {
 	return back;
 }
 
+void CPEOPLE::setScore(int score) {
+	this->score = score;
+}
 void CPEOPLE::updateScore() {
 	if (score < getForward() - getBack())
 		this->score++;

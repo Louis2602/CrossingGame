@@ -20,7 +20,7 @@ public:
 	Game(int);
 	~Game() {};
 	void SetUpGame();
-	void StartGame();
+	void StartGame(CPEOPLE);
 	void EndGame(thread*);
 	void PauseGame();
 	void SaveGame();

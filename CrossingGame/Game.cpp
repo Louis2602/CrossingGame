@@ -8,12 +8,11 @@ Game::Game(int _level) {
 	SAVE_GAME = false;
 }
 
-void Game::StartGame() {
+void Game::StartGame(CPEOPLE p) {
 	Graphics::PrintInterface();
 
 	thread light([this] { l.mainLight(); });
 	Sleep(100);
-	CPEOPLE p;
 	int x, y;
 
 	while (IS_RUNNING) {

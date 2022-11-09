@@ -478,6 +478,7 @@ void Menu::MenuScore() {
 
 
 void Menu::PlayGame() {
+	CPEOPLE p;
 	Game g(_EASY);
-	g.StartGame();
+	g.StartGame(p);
 }

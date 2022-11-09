@@ -16,6 +16,10 @@ public:
 	CPEOPLE() {
 		pos.setXY(36, 24);
 	}
+	CPEOPLE(int x, int y, int score) {
+		pos.setXY(x, y);
+		setScore(score);
+	}
 	~CPEOPLE() {};
 	int getPosX();     //Get mX value of character
 	int getPosY();     //Get mY value of character
@@ -24,6 +28,7 @@ public:
 	int getBack();
 	bool isDead();     //Return if character is dead or not
 
+	void setScore(int score); //Set score after getting from file
 	void updateScore(); //Update score when player move
 	void updatePos(int, int);  //Update position of character after move
 	void setForward();
