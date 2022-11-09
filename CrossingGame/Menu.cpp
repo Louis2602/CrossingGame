@@ -309,11 +309,11 @@ void Menu::MenuAbout() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	printf("     - 21127337: Tran Tung Lam                 ");
 	Controller::GotoXY(41, 16);
-	printf("     - 21127337: Tran Tung Lam                    ");
+	printf("     - 21127333: Nguyen Viet Kim                    ");
 	Controller::GotoXY(41, 17);
-	printf("     - 21127337: Tran Tung Lam                    ");
+	printf("     - 21127105: Bui Nguyen Nhat Minh                    ");
 	Controller::GotoXY(41, 18);
-	printf("     - 21127337: Tran Tung Lam                    ");
+	printf("     - 21127233: Vo Quoc Binh                    ");
 	Controller::GotoXY(41, 19);
 	printf("                                                     ");
 	Controller::GotoXY(40, 21);
@@ -470,6 +470,10 @@ void Menu::MenuScore() {
 	cout << "Back";
 	Controller::GotoXY(56, 28);
 	putchar(174);
+
+	system("pause");
+	Controller::ClearConsole();
+	Menu::MainMenu();
 }
 
 
