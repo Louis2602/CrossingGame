@@ -3,11 +3,11 @@
 const string people[] = { " o ", R"(/|\)", R"(/ \)" };
 
 int CPEOPLE::getPosX() {
-	return mX;
+	return this->pos.getX();
 }
 
 int CPEOPLE::getPosY() {
-	return mY;
+	return pos.getY();
 }
 
 int CPEOPLE::getScore() {
@@ -28,8 +28,7 @@ void CPEOPLE::updateScore() {
 }
 
 void CPEOPLE::updatePos(int x, int y) {
-	mX = x;
-	mY = y;
+	pos.setXY(x, y);
 }
 
 void CPEOPLE::setBack() {
@@ -100,7 +99,7 @@ bool isImpact(const CANIMAL*& animal) {
 }
 */
 bool CPEOPLE::isFinish(int mX) {
-	if (mY == 4)
+	if (pos.getY() == 4)
 		return true;
 	return false;
 }

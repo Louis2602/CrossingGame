@@ -4,15 +4,18 @@
 #include "CVEHICLE.h"
 #include "CLIGHT.h"
 #include "Sound.h"
+#include "cPoint.h"
 
 class CPEOPLE {
 private:
-	int mX = 36, mY = 24;   //Position of character
+	cPoint pos; //Position of character
 	bool mState = true;		// dead or alive state
 	int level = 0, score = 0;
 	int back = 0, forward = 0;
 public:
-	CPEOPLE() {};
+	CPEOPLE() {
+		pos.setXY(36, 24);
+	}
 	~CPEOPLE() {};
 	int getPosX();     //Get mX value of character
 	int getPosY();     //Get mY value of character

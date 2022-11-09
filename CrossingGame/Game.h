@@ -1,6 +1,9 @@
 #pragma once
 #include "CPEOPLE.h"
 #include "Graphics.h"
+#include "cCar.h"
+#include "CANIMAL.h"
+#
 
 class Game {
 private:
