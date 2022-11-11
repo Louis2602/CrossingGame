@@ -7,17 +7,15 @@ Game::Game(int _level) {
 	PAUSE_STATE = false;
 	SAVE_GAME = false;
 }
-
-void Game::StartGame() {
-	Graphics::PrintInterface();
-
-	thread light([this] { l.mainLight(); });
-	Sleep(100);
+void renderLight(CLIGHT l) {
+	l.mainLight();
+}
+void Game::playing() {
+	mtx.lock();
 	CPEOPLE p;
 	int x, y;
-
 	while (IS_RUNNING) {
-		
+
 		if (PAUSE_STATE) {
 			l.setState(false);
 			while (PAUSE_STATE) {
@@ -43,7 +41,6 @@ void Game::StartGame() {
 				case 1:  //ESC
 					IS_RUNNING = false;
 					l.setState(false);
-					light.join();
 					Graphics::DrawGoodbyeScreen();
 					break;
 				case 2: //UP
@@ -82,10 +79,16 @@ void Game::StartGame() {
 			}
 		}
 	}
+	mtx.unlock();
 }
-
-void Game::SetUpGame() {
-	
+void Game::StartGame() {
+	Graphics::PrintInterface();
+	thread t1(Graphics::DrawAnimalLine, line);
+	thread light([this] {l.mainLight();  });
+	thread t2([this] {playing();  });	
+	t1.join();
+	light.join();
+	t2.join();
 }
 
 void Game::EndGame(thread* t) {

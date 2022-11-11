@@ -6,6 +6,7 @@
 #include "Sound.h"
 #include "cPoint.h"
 
+
 class CPEOPLE {
 private:
 	cPoint pos; //Position of character

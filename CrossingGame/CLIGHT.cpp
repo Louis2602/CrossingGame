@@ -17,6 +17,7 @@ void CLIGHT::setState(bool _state) {
 }
 
 void CLIGHT::update_light() {
+	mtx.lock();
 	if (getState()) {
 		//Draw green light.
 		Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
@@ -28,6 +29,7 @@ void CLIGHT::update_light() {
 		cout << TopDot;
 		Controller::GotoXY(70, 9);
 		cout << TopDot;
+
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
 		Controller::GotoXY(4, 20);
 		cout << BottomDot;
@@ -62,6 +64,7 @@ void CLIGHT::update_light() {
 		setState(true);
 	}
 
+	mtx.unlock();
 	//Set color back.
 	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 }

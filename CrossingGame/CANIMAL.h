@@ -8,6 +8,7 @@
 #include <iostream>
 #include <mmsystem.h>
 
+
 class CANIMAL {
 private:
 	cPoint pos;

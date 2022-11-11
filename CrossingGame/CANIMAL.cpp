@@ -18,8 +18,8 @@ int CANIMAL::getHeight() {
 }
 
 void CANIMAL::updatePosition(int _x, int _y) {
-	if ((pos.getY() + _y) > 50) {
-		pos.setXY(10, 0);
+	if ((pos.getY() + _y) >= 31 ) {
+		pos.setXY(4, 3);
 	}
 	else
 		pos.setXY(pos.getX() + _x, pos.getY() + _y);

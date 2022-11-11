@@ -15,7 +15,7 @@ bool CLINEAnimal::printAnimal(cPoint pos, char** shape, int width, int height) {
 	if (Y > RIGHT)
 		return false;
 	for (int i = 0; i < height; ++i) {
-		for (int j = max(1, Y); j <= min(RIGHT, Y + width - 1); ++j) {
+		for (int j = max(4, Y); j <= min(31, Y + width - 1); ++j) {
 			Controller::GotoXY(Y + j, X + i);
 			cout << shape[i][j - max(1, Y)];
 		}
@@ -41,7 +41,7 @@ void CLINEAnimal::deleteAnimal(cPoint pos, int width, int height) {
 	//if (Y > RIGHT)
 	//	return;
 	for (int i = 0; i < height; ++i) {
-		for (int j = max(1, Y); j <= min(RIGHT, Y + width - 1); ++j) {
+		for (int j = max(4, Y); j <= min(31, Y + width - 1); ++j) {
 			Controller::GotoXY(Y + j, X + i);
 			cout << ' ';
 		}

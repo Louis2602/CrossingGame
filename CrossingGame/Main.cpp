@@ -3,6 +3,8 @@
 #include "Menu.h"
 #include "Sound.h"
 
+mutex mtx;
+
 int main() {
 	srand(time(NULL));
 

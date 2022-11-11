@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 #define RIGHT 65
-#define LEFT 2
+#define LEFT 4
 
 class CLINEAnimal
 {
