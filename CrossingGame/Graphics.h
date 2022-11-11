@@ -1,7 +1,9 @@
 #pragma once
 #include "Controller.h"
 #include "Sound.h"
-
+#include "cLine.h"
+#include "cCar.h"
+#include "cTruck.h"
 
 class Graphics {
 public:
@@ -15,4 +17,5 @@ public:
 	static void DrawMap();
 	static void PrintInterface();
 	static void DrawGoodbyeScreen();
+	static void initLine();
 };

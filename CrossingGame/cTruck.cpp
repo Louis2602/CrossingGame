@@ -19,6 +19,8 @@ cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 			shape[0][i] = '.';
 		else if (i > 0 && i < 5)
 			shape[0][i] = '-';
+		else if (i == TRUCK_WIDTH - 1)
+			shape[0][i] = ' ';
 		else
 			shape[0][i] = '_';
 	}
@@ -37,7 +39,7 @@ cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 		if (i == 0 || i == 8)
 			shape[2][i] = '\'';
-		else if (i == 2 && i == 6)
+		else if (i == 2 || i == 6)
 			shape[2][i] = '0';
 		else
 			shape[2][i] = '-';
@@ -62,6 +64,8 @@ cTruck::cTruck() {
 			shape[0][i] = '.';
 		else if (i > 0 && i < 5)
 			shape[0][i] = '-';
+		else if (i == TRUCK_WIDTH - 1)
+			shape[0][i] = ' ';
 		else
 			shape[0][i] = '_';
 	}
@@ -80,7 +84,7 @@ cTruck::cTruck() {
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 		if (i == 0 || i == 8)
 			shape[2][i] = '\'';
-		else if (i == 2 && i == 6)
+		else if (i == 2 || i == 6)
 			shape[2][i] = '0';
 		else
 			shape[2][i] = '-';

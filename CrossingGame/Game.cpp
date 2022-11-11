@@ -14,7 +14,8 @@ void Game::StartGame() {
 	CPEOPLE p;
 	int x, y;
 	while (IS_RUNNING) {
-		
+		Graphics::initLine();
+
 		if (PAUSE_STATE) {
 			l.setState(false);
 			while (PAUSE_STATE) {
@@ -77,7 +78,9 @@ void Game::StartGame() {
 				}
 				p.updatePos(x, y);
 			}
+
 		}
+
 	}
 }
 
