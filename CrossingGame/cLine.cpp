@@ -4,10 +4,18 @@ cLine::cLine() {
 	objectInLine = 0;
 }
 
-cLine::cLine(int speed, bool direction, bool redLight, int currentRow) {
+void cLine::changeLight(bool light) {
+	this->greenLight = light;
+}
+
+bool cLine::getLight() {
+	return this->greenLight;
+}
+
+cLine::cLine(int speed, bool direction, bool greenLight, int currentRow) {
 	this->speed = speed;
 	this->direction = direction;
-	this->redLight = redLight;
+	this->greenLight = greenLight;
 	this->currentRow = currentRow;
 	this->objectInLine = 0;
 }

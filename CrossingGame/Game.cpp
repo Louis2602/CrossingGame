@@ -11,10 +11,11 @@ Game::Game(int _level) {
 void Game::StartGame() {
 	Graphics::PrintInterface();
 	thread light([this] { l.mainLight(); });
+	thread vehicle([this] {initLine(); });
 	CPEOPLE p;
 	int x, y;
 	while (IS_RUNNING) {
-		Graphics::initLine();
+		//Graphics::initLine();
 
 		if (PAUSE_STATE) {
 			l.setState(false);
@@ -85,7 +86,6 @@ void Game::StartGame() {
 }
 
 void Game::SetUpGame() {
-	
 }
 
 void Game::EndGame(thread* t) {
@@ -147,5 +147,124 @@ void Game::askContinue() //ask player to continue or not when pause game
 		}
 		else
 			s.PlayerMove();
+	}
+}
+
+void Game::initLine() {
+	int dx = -6, dy = 4;
+
+	//cLine* line1;
+	cLine* line2;
+	cLine* line3;
+	cLine* line4;
+	cLine* line5;
+	//cLine* line6;
+	//line1 = new cLine;
+	line2 = new cLine;
+	line3 = new cLine;
+	line4 = new cLine;
+	line5 = new cLine;
+	//line6 = new cLine;
+
+
+	int t2 = 0;
+	int t3 = 0;
+	int t4 = 0;
+	int t5 = 0;
+	
+	while (true) {
+
+
+		if (t2 % 15 && line2->getLight()) {
+			//cPoint pos1(dx - t * 15, dy);
+			cPoint pos2(dx - t2 * 15, dy + 4);
+			/*cPoint pos3(dx - t3 * 15, dy + 4 * 2);
+			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
+			cPoint pos5(dx - t5 * 15, dy + 4 * 4);*/
+			//cPoint pos6(dx - t * 15, dy + 4 * 5);
+			
+			//CVEHICLE* car1;
+			CVEHICLE* car2;
+			/*CVEHICLE* car3;
+			CVEHICLE* car4;
+			CVEHICLE* car5;*/
+			//CVEHICLE* car6;
+			
+			//car1 = new cCar(pos1);
+			car2 = new cTruck(pos2);
+			//car3 = new cCar(pos3);
+			//car4 = new cTruck(pos4);
+			//car5 = new cCar(pos5);
+			//car6 = new cTruck(pos6);
+
+			//line1->pushVehicle(car1);
+			line2->pushVehicle(car2);
+			//line3->pushVehicle(car3);
+			//line4->pushVehicle(car4);
+			//line5->pushVehicle(car5);
+			//line6->pushVehicle(car6);
+		}
+
+		if (t3 % 15 && line3->getLight()) {
+			cPoint pos3(dx - t3 * 15, dy + 4 * 2);
+
+			CVEHICLE* car3;
+
+			car3 = new cCar(pos3);
+
+			line3->pushVehicle(car3);
+		}
+
+		if (t4 % 15 && line4->getLight()) {
+			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
+
+			CVEHICLE* car4;
+
+			car4 = new cTruck(pos4);
+
+			line4->pushVehicle(car4);
+		}
+
+		if (t5 % 15 && line5->getLight()) {
+			cPoint pos5(dx - t5 * 15, dy + 4 * 4);
+			
+			CVEHICLE* car5;
+			
+			car5 = new cCar(pos5);
+
+			line5->pushVehicle(car5);
+		}
+
+		line2->changeLight(l.getState());
+		line3->changeLight(l.getState());
+		line4->changeLight(l.getState());
+		line5->changeLight(l.getState());
+
+		if (line2->getLight()) {
+			//line1->nextMove();
+			line2->nextMove();
+			t2++;
+			/*line3->nextMove();
+			line4->nextMove();
+			line5->nextMove();*/
+			//line6->nextMove();
+		}
+
+		if (line3->getLight()) {
+			line3->nextMove();
+			t3++;
+		}
+
+		if (line4->getLight()) {
+			line4->nextMove();
+			t4++;
+		}
+
+		if (line5->getLight()) {
+			line5->nextMove();
+			t5++;
+		}
+
+		Sleep(100);
 	}
 }

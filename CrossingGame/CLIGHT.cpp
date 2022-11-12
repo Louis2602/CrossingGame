@@ -70,6 +70,6 @@ void CLIGHT::mainLight() {
 	CLIGHT light;
 	while (state) {
 		light.update_light();
-		Sleep(1000);
+		Sleep(5000);
 	}
 }

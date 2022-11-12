@@ -17,5 +17,4 @@ public:
 	static void DrawMap();
 	static void PrintInterface();
 	static void DrawGoodbyeScreen();
-	static void initLine();
 };

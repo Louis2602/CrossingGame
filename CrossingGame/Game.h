@@ -1,6 +1,7 @@
 #pragma once
 #include "CPEOPLE.h"
 #include "Graphics.h"
+#include "cLine.h"
 
 class Game {
 private:
@@ -11,6 +12,7 @@ private:
 	bool SAVE_GAME;
 	CPEOPLE p;
 	CLIGHT l;
+	cLine line;
 	Sound s;
 public:
 	Game(int);
@@ -22,4 +24,5 @@ public:
 	void SaveGame();
 	void LoadGame();
 	void askContinue();
+	void initLine();
 };
