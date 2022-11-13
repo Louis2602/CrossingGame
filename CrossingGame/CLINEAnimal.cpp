@@ -63,3 +63,33 @@ vector<CANIMAL*> CLINEAnimal::getAnimal() {
 bool CLINEAnimal::getDirection() {
 	return _direction;
 }
+void CLINEAnimal::setTrafficLightState(bool curState) {
+	_trafficLight = curState;
+}
+
+void CLINEAnimal::DrawAnimalLine() {
+	for (int i = 0; i < 3; i++) {
+		CBIRD* bird = new CBIRD;
+		bird->newPosition(4, i * 7 + 5);
+		pushAnimal(bird);
+	}
+	while (_trafficLight) {
+		mtx.lock();
+		for (int i = 0; i < getAnimal().size(); i++) {
+			printAnimal(getAnimal()[i]->getPos(),
+				getAnimal()[i]->returnShape(),
+				getAnimal()[i]->getWidth(),
+				getAnimal()[i]->getHeight());
+		}
+		Sleep(100);
+		for (int i = 0; i < getAnimal().size(); i++) {
+			deleteAnimal(getAnimal()[i]->getPos(),
+				getAnimal()[i]->getWidth(),
+				getAnimal()[i]->getHeight());
+		}
+		mtx.unlock();
+		for (int i = 0; i < getAnimal().size(); i++) {
+			getAnimal()[i]->updatePosition(0, 1);
+		}
+	}
+}

@@ -361,31 +361,3 @@ void Graphics::DrawGoodbyeScreen() {
 	Controller::GotoXY(0, 122);
 	exit(0);
 }
-
-void Graphics::DrawAnimalLine(CLINEAnimal line) {
-	for (int i = 0; i < 3; i++) {
-		CBIRD* bird = new CBIRD;
-		bird->newPosition(4, i*7 + 5);
-		line.pushAnimal(bird);
-	}
-		
-	while (true) {
-		mtx.lock();
-		for (int i = 0; i < line.getAnimal().size(); i++) {
-			line.printAnimal(line.getAnimal()[i]->getPos(),
-				line.getAnimal()[i]->returnShape(),
-				line.getAnimal()[i]->getWidth(),
-				line.getAnimal()[i]->getHeight());
-		}
-		Sleep(100);
-		for (int i = 0; i < line.getAnimal().size(); i++) {
-			line.deleteAnimal(line.getAnimal()[i]->getPos(),
-				line.getAnimal()[i]->getWidth(),
-				line.getAnimal()[i]->getHeight());
-		}
-		for (int i = 0; i < line.getAnimal().size(); i++) {
-			line.getAnimal()[i]->updatePosition(0,1);
-		}
-		mtx.unlock();
-	}
-}

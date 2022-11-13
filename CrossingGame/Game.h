@@ -1,10 +1,11 @@
 #pragma once
-#ifndef Game
+#ifndef GAME_h
+#define GAME_h
 
 #include "Header.h"
 #include "CPEOPLE.h"
 #include "Graphics.h"
-#include "cCar.h"
+#include "CLINEAnimal.h"
 
 class Game {
 private:
@@ -13,10 +14,10 @@ private:
 	bool IS_RUNNING;
 	bool PAUSE_STATE;
 	bool SAVE_GAME;
-	CLINEAnimal line;
-	CPEOPLE p;
-	CLIGHT l;
-	Sound s;
+	CLINEAnimal mLine;
+	CPEOPLE mPeople;
+	CLIGHT mLight;
+	Sound mSound;
 public:
 	Game(int);
 	~Game() {};
@@ -27,6 +28,7 @@ public:
 	void SaveGame();
 	void LoadGame();
 	void askContinue();
-	void playing();
+	void askSaveGame();
+	void playGame();
 };
 #endif // !Game

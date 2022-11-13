@@ -7,13 +7,16 @@ private:
 	char TopDot = 223;
 	bool state; //red is false, green is true.
 	bool isPlay = true;
+	int posX, posY;
+	int timer;
 public:
 	CLIGHT();
 	~CLIGHT() {};
-	void update_light();
+	void spawn_light(int, int);
 	bool getisPlay();
 	void setisPlay(bool);
 	bool getState();
 	void setState(bool);
-	void mainLight();
+	void setTimer(int);
+	void setPos(int, int);
 };

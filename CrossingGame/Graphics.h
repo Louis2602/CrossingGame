@@ -1,8 +1,9 @@
 #pragma once
+#ifndef Graphics
+
 #include "Controller.h"
 #include "Sound.h"
-#include "CLINEAnimal.h"
-#include "CBIRD.h"
+
 
 class Graphics {
 public:
@@ -16,5 +17,6 @@ public:
 	static void DrawMap();
 	static void PrintInterface();
 	static void DrawGoodbyeScreen();
-	static void DrawAnimalLine(CLINEAnimal);
 };
+
+#endif // !Graphics

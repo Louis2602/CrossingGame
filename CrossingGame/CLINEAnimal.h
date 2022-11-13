@@ -2,6 +2,8 @@
 #include "CANIMAL.h"
 #include "Controller.h"
 #include <vector>
+#include "CBIRD.h"
+
 using namespace std;
 #define RIGHT 65
 #define LEFT 4
@@ -24,4 +26,6 @@ public:
 	int getSpeed();
 	vector<CANIMAL*> getAnimal();
 	bool getDirection();
+	void setTrafficLightState(bool);
+	void DrawAnimalLine();
 };
