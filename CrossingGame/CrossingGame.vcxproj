@@ -143,6 +143,7 @@
     <ClInclude Include="CBIRD.h" />
     <ClInclude Include="cCar.h" />
     <ClInclude Include="CLIGHT.h" />
+    <ClInclude Include="cLine.h" />
     <ClInclude Include="CLINEAnimal.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CPEOPLE.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="CBIRD.cpp" />
     <ClCompile Include="cCar.cpp" />
     <ClCompile Include="CLIGHT.cpp" />
+    <ClCompile Include="cLine.cpp" />
     <ClCompile Include="CLINEAnimal.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="cPoint.cpp" />

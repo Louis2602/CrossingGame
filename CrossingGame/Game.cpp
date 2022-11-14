@@ -7,21 +7,66 @@ Game::Game(int _level) {
 	PAUSE_STATE = false;
 	SAVE_GAME = false;
 }
-void setLight(CLIGHT& mLight) {
-	// Green
-	mLight.spawn_light(70, 3);
-	mLight.setTimer(50);
-	// Red
-	mLight.spawn_light(70, 3);
-	mLight.setTimer(30);
-	std::this_thread::sleep_for(chrono::milliseconds(100));
+void Game::renderLight() {
+	Sleep(10);
+	while (mLight.getState() && mLight.getisPlay()) {
+		// Green
+		mLight.spawn_light(70, 7);
+		mLight.spawn_light(70, 11);
+		mLight.spawn_light(70, 15);
+		mLight.spawn_light(70, 19);
+		mLight.setTimer(50);
+		// Red
+		mLight.spawn_light(70, 7);
+		mLight.spawn_light(70, 11);
+		mLight.spawn_light(70, 15);
+		mLight.spawn_light(70, 19);
+		mLight.setTimer(30);
+	}
 }
-void setAnimal(CLINEAnimal mLine, CLIGHT& mLight) {
+void Game::renderAnimal(thread& tL) {
 	mLine.setTrafficLightState(mLight.getState());
-	mLine.DrawAnimalLine();
-	std::this_thread::sleep_for(chrono::milliseconds(100));
+	//mLine.DrawAnimalLine();
+	for (int i = 0; i < 3; i++) {
+		CBIRD* bird = new CBIRD;
+		bird->newPosition(4, i * 7 + 5);
+		mLine.pushAnimal(bird);
+	}
+	while (mLine.getTrafficLightState()) {
+		for (int i = 0; i < mLine.getAnimal().size(); i++) {
+			mLine.printAnimal(mLine.getAnimal()[i]->getPos(),
+				mLine.getAnimal()[i]->returnShape(),
+				mLine.getAnimal()[i]->getWidth(),
+				mLine.getAnimal()[i]->getHeight());
+		}
+		Sleep(100);
+		for (int i = 0; i < mLine.getAnimal().size(); i++) {
+			mLine.deleteAnimal(mLine.getAnimal()[i]->getPos(),
+				mLine.getAnimal()[i]->getWidth(),
+				mLine.getAnimal()[i]->getHeight());
+		}
+		for (int i = 0; i < mLine.getAnimal().size(); i++) {
+			mLine.getAnimal()[i]->updatePosition(0, 1);
+		}
+	}
 }
-void Game::playGame() {
+
+void Game::StartGame() {
+	Graphics::PrintInterface();
+
+	thread light;
+	thread vehicle;
+	thread animal;
+
+	thread mainGame([&] {playGame(light, vehicle, animal); });
+
+	mainGame.join();
+}
+void Game::playGame(thread& tL, thread& tV, thread& tA) {
+	tL = thread([this] {renderLight(); });
+	tV = thread([&] {renderVehicle(tL); });
+	//tA = thread([&] {renderAnimal(tL); });
+
 	while (IS_RUNNING) {
 		while (!PAUSE_STATE && mPeople.isDead()) {
 			Controller::GotoXY(100, 17);
@@ -86,23 +131,12 @@ void Game::playGame() {
 			while (SAVE_GAME)
 				SaveGame();
 		}
-		std::this_thread::sleep_for(chrono::milliseconds(100));
 	}
+	tV.join();
+	//tA.join();
+	tL.join(); 
 	SaveGame();
 }
-void Game::StartGame() {
-	Graphics::PrintInterface();
-
-	//thread light(&setLight, ref(mLight));
-	//thread animal(&setAnimal, mLine, ref(mLight));
-	thread mainGame([this] {playGame(); });
-	setLight(mLight);
-	setAnimal(mLine, mLight);
-	Controller::GotoXY(75, 5);
-	cout << mLight.getState();
-	mainGame.join();
-}
-
 void Game::EndGame(thread* t) {
 	Controller::ClearConsole();
 	IS_RUNNING = false;
@@ -216,5 +250,122 @@ void Game::askSaveGame() //ask player to continue or not when pause game
 		}
 		else
 			mSound.PlayerMove();
+	}
+}
+
+void Game::renderVehicle(thread& tL) {
+	int dx = -6, dy = 4;
+
+	//cLine* line1;
+	cLine* line2;
+	cLine* line3;
+	cLine* line4;
+	cLine* line5;
+	//cLine* line6;
+	//line1 = new cLine;
+	line2 = new cLine;
+	line3 = new cLine;
+	line4 = new cLine;
+	line5 = new cLine;
+	//line6 = new cLine;
+
+
+	int t2 = 0;
+	int t3 = 0;
+	int t4 = 0;
+	int t5 = 0;
+
+	//thread light([this] {renderLight(); });
+	while (true) {
+		if (t2 % 15 && line2->getLight()) {
+			//cPoint pos1(dx - t * 15, dy);
+			cPoint pos2(dx - t2 * 15, dy + 4);
+			/*cPoint pos3(dx - t3 * 15, dy + 4 * 2);
+			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
+			cPoint pos5(dx - t5 * 15, dy + 4 * 4);*/
+			//cPoint pos6(dx - t * 15, dy + 4 * 5);
+
+			//CVEHICLE* car1;
+			CVEHICLE* car2;
+			/*CVEHICLE* car3;
+			CVEHICLE* car4;
+			CVEHICLE* car5;*/
+			//CVEHICLE* car6;
+
+			//car1 = new cCar(pos1);
+			car2 = new cTruck(pos2);
+			//car3 = new cCar(pos3);
+			//car4 = new cTruck(pos4);
+			//car5 = new cCar(pos5);
+			//car6 = new cTruck(pos6);
+
+			//line1->pushVehicle(car1);
+			line2->pushVehicle(car2);
+			//line3->pushVehicle(car3);
+			//line4->pushVehicle(car4);
+			//line5->pushVehicle(car5);
+			//line6->pushVehicle(car6);
+		}
+
+		if (t3 % 15 && line3->getLight()) {
+			cPoint pos3(dx - t3 * 15, dy + 4 * 2);
+
+			CVEHICLE* car3;
+
+			car3 = new cCar(pos3);
+
+			line3->pushVehicle(car3);
+		}
+
+		if (t4 % 15 && line4->getLight()) {
+			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
+
+			CVEHICLE* car4;
+
+			car4 = new cTruck(pos4);
+
+			line4->pushVehicle(car4);
+		}
+
+		if (t5 % 15 && line5->getLight()) {
+			cPoint pos5(dx - t5 * 15, dy + 4 * 4);
+
+			CVEHICLE* car5;
+
+			car5 = new cCar(pos5);
+
+			line5->pushVehicle(car5);
+		}
+
+		line2->changeLight(mLight.getState());
+		line3->changeLight(mLight.getState());
+		line4->changeLight(mLight.getState());
+		line5->changeLight(mLight.getState());
+
+		if (line2->getLight()) {
+			//line1->nextMove();
+			line2->nextMove();
+			t2++;
+			/*line3->nextMove();
+			line4->nextMove();
+			line5->nextMove();*/
+			//line6->nextMove();
+		}
+
+		if (line3->getLight()) {
+			line3->nextMove();
+			t3++;
+		}
+
+		if (line4->getLight()) {
+			line4->nextMove();
+			t4++;
+		}
+
+		if (line5->getLight()) {
+			line5->nextMove();
+			t5++;
+		}
+		Sleep(100);
 	}
 }

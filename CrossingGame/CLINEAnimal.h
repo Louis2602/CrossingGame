@@ -27,5 +27,6 @@ public:
 	vector<CANIMAL*> getAnimal();
 	bool getDirection();
 	void setTrafficLightState(bool);
+	bool getTrafficLightState();
 	void DrawAnimalLine();
 };

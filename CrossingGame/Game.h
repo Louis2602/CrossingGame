@@ -6,6 +6,7 @@
 #include "CPEOPLE.h"
 #include "Graphics.h"
 #include "CLINEAnimal.h"
+#include "cLine.h"
 
 class Game {
 private:
@@ -29,6 +30,9 @@ public:
 	void LoadGame();
 	void askContinue();
 	void askSaveGame();
-	void playGame();
+	void playGame(thread&, thread&, thread&);
+	void renderLight();
+	void renderVehicle(thread&);
+	void renderAnimal(thread&);
 };
 #endif // !Game

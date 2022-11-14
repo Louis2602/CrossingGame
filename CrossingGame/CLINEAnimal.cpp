@@ -66,7 +66,9 @@ bool CLINEAnimal::getDirection() {
 void CLINEAnimal::setTrafficLightState(bool curState) {
 	_trafficLight = curState;
 }
-
+bool CLINEAnimal::getTrafficLightState() {
+	return _trafficLight;
+}
 void CLINEAnimal::DrawAnimalLine() {
 	for (int i = 0; i < 3; i++) {
 		CBIRD* bird = new CBIRD;
@@ -74,7 +76,6 @@ void CLINEAnimal::DrawAnimalLine() {
 		pushAnimal(bird);
 	}
 	while (_trafficLight) {
-		mtx.lock();
 		for (int i = 0; i < getAnimal().size(); i++) {
 			printAnimal(getAnimal()[i]->getPos(),
 				getAnimal()[i]->returnShape(),
@@ -87,7 +88,6 @@ void CLINEAnimal::DrawAnimalLine() {
 				getAnimal()[i]->getWidth(),
 				getAnimal()[i]->getHeight());
 		}
-		mtx.unlock();
 		for (int i = 0; i < getAnimal().size(); i++) {
 			getAnimal()[i]->updatePosition(0, 1);
 		}

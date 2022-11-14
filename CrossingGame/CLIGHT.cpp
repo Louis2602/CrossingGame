@@ -31,26 +31,31 @@ void CLIGHT::setPos(int x, int y) {
 }
 void CLIGHT::spawn_light(int x, int y) {
 	setPos(x, y);
-	mtx.lock();
 	if (this->getState() && this->getisPlay()) {
 		//Draw green light.
+		mtx.lock();
+
 		Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
 		Controller::GotoXY(x, y + 1);
 		cout << TopDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
 		Controller::GotoXY(x, y);
 		cout << BottomDot;
+		mtx.unlock();
 	}
 	else {
 		//Draw red light
+		mtx.lock();
+
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(x, y);
 		cout << BottomDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
 		Controller::GotoXY(x, y + 1);
 		cout << TopDot;
+		mtx.unlock();
+
 	}
-	mtx.unlock();
 	//Set color back.
 	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 }
