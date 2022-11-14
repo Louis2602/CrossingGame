@@ -1,6 +1,6 @@
 #include "CBIRD.h"
 
-CBIRD::CBIRD(cPoint pos) : CANIMAL(pos) {
+CBIRD::CBIRD(cPoint pos) : COBJECT(pos) {
     /*
           (o>
        \\-//)

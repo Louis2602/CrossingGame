@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include "CVEHICLE.h"
+#include "COBJECT.h"
 
 #define TRUCK_HEIGHT 3
 #define TRUCK_WIDTH 9
 
-class cTruck : public CVEHICLE
+class cTruck : public COBJECT
 {
 	char** shape; //a[3][8]
 public:

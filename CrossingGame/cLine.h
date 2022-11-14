@@ -5,9 +5,11 @@
 
 #include "cCar.h"
 #include "cTruck.h"
-#include "CVEHICLE.h"
+#include "COBJECT.h"
 #include "cPoint.h"
 #include "Controller.h"
+#include "CBIRD.h"
+#include "CDINO.h"
 
 #define LINE_1 8
 #define LINE_2 12
@@ -16,7 +18,7 @@
 using namespace std;
 
 class cLine {
-	vector<CVEHICLE*> lineData;
+	vector<COBJECT*> lineData;
 	bool direction; //0: to the left, 1: to the right
 	bool greenLight = true;
 	int speed;
@@ -26,8 +28,8 @@ public:
 	cLine();
 	cLine(int speed, bool direction, bool greenLight, int currentRow);
 	~cLine() = default;
-	void pushVehicle(CVEHICLE* vehicle);
-	CVEHICLE* generateVehicle(cPoint pos);
+	void pushVehicle(COBJECT* Object);
+	COBJECT* generateVehicle(cPoint pos);
 	bool doHaveSlot();
 	void popVehicle();
 	void printVehicle(cPoint pos, char** shape, int height, int width);

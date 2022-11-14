@@ -2,6 +2,7 @@
 
 cLine::cLine() {
 	objectInLine = 0;
+	speed = 10;
 }
 
 void cLine::changeLight(bool light) {
@@ -20,22 +21,22 @@ cLine::cLine(int speed, bool direction, bool greenLight, int currentRow) {
 	this->objectInLine = 0;
 }
 
-void cLine::pushVehicle(CVEHICLE* vehicle) {
-	lineData.push_back(vehicle);
-	printVehicle(vehicle->getPos(), vehicle->returnShape(), vehicle->getHeight(), vehicle->getWidth());
+void cLine::pushVehicle(COBJECT* Object) {
+	lineData.push_back(Object);
+	printVehicle(Object->getPos(), Object->returnShape(), Object->getHeight(), Object->getWidth());
 	objectInLine += 1;
 }
 
-CVEHICLE* cLine::generateVehicle(cPoint pos) {
+COBJECT* cLine::generateVehicle(cPoint pos) {
 	int randomType = rand() % 2;
-	CVEHICLE* vehicle = NULL;
+	COBJECT* Object = NULL;
 	switch (randomType) {
 	case 0:
-		vehicle = new cCar(pos);
+		Object = new cCar(pos);
 	default:
-		vehicle = new cTruck(pos);
+		Object = new cTruck(pos);
 	}
-	return vehicle;
+	return Object;
 }
 
 bool cLine::doHaveSlot() {
@@ -78,10 +79,11 @@ void cLine::deleteVehicle(cPoint pos, char** shape, int height, int width) {
 	for (int i = 0; i < height; i++) {
 		for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
 			if ((x + j > 5) && (x + j < 67)) {
+				mtx.lock();
 				Controller::GotoXY(x + j, y + i);
 				cout << ' ';
+				mtx.unlock();
 				//cout << i << " " << j;
-
 			}
 
 		}
@@ -95,7 +97,7 @@ void cLine::deleteVehicle(cPoint pos, char** shape, int height, int width) {
 void cLine::nextMove() {
 	for (int i{}; i < lineData.size(); i++) {
 		deleteVehicle(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
-		lineData[i]->updatePosition(1, 0);
+		lineData[i]->updatePosition(this->speed, 0);
 		printVehicle(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 
 	}

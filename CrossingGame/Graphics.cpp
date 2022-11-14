@@ -219,6 +219,7 @@ void Graphics::PrintScoreboard() {
 	cout << "Moves:";
 	Controller::GotoXY(85, 17);
 	cout << "Current score:";
+
 }
 
 void draw_bye1() {

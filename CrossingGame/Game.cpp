@@ -24,41 +24,15 @@ void Game::renderLight() {
 		mLight.setTimer(30);
 	}
 }
-void Game::renderAnimal(thread& tL) {
-	mLine.setTrafficLightState(mLight.getState());
-	//mLine.DrawAnimalLine();
-	for (int i = 0; i < 3; i++) {
-		CBIRD* bird = new CBIRD;
-		bird->newPosition(4, i * 7 + 5);
-		mLine.pushAnimal(bird);
-	}
-	while (mLine.getTrafficLightState()) {
-		for (int i = 0; i < mLine.getAnimal().size(); i++) {
-			mLine.printAnimal(mLine.getAnimal()[i]->getPos(),
-				mLine.getAnimal()[i]->returnShape(),
-				mLine.getAnimal()[i]->getWidth(),
-				mLine.getAnimal()[i]->getHeight());
-		}
-		Sleep(100);
-		for (int i = 0; i < mLine.getAnimal().size(); i++) {
-			mLine.deleteAnimal(mLine.getAnimal()[i]->getPos(),
-				mLine.getAnimal()[i]->getWidth(),
-				mLine.getAnimal()[i]->getHeight());
-		}
-		for (int i = 0; i < mLine.getAnimal().size(); i++) {
-			mLine.getAnimal()[i]->updatePosition(0, 1);
-		}
-	}
-}
 
 void Game::StartGame() {
 	Graphics::PrintInterface();
 
 	thread light;
-	thread vehicle;
+	thread Object;
 	thread animal;
 
-	thread mainGame([&] {playGame(light, vehicle, animal); });
+	thread mainGame([&] {playGame(light, Object, animal); });
 
 	mainGame.join();
 }
@@ -69,8 +43,10 @@ void Game::playGame(thread& tL, thread& tV, thread& tA) {
 
 	while (IS_RUNNING) {
 		while (!PAUSE_STATE && mPeople.isDead()) {
+			mtx.lock();
 			Controller::GotoXY(100, 17);
 			cout << mPeople.getScore();
+			mtx.unlock();
 			int x = mPeople.getPosX();
 			int y = mPeople.getPosY();
 			if (mPeople.isFinish(x))
@@ -79,7 +55,6 @@ void Game::playGame(thread& tL, thread& tV, thread& tA) {
 			}
 			else
 			{
-				Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 				mPeople.DRAW_PEOPLE(mPeople.getPosX(), mPeople.getPosY());
 				switch (Controller::GetConsoleInput()) {
 				case 1:  //ESC
@@ -115,7 +90,7 @@ void Game::playGame(thread& tL, thread& tV, thread& tA) {
 					Controller::GotoXY(75, 10);
 					mLight.setisPlay(false);
 					mLight.setState(false);
-					mLine.setTrafficLightState(false);
+					//mLine.setTrafficLightState(false);
 					PAUSE_STATE = true;
 					break;
 
@@ -285,15 +260,15 @@ void Game::renderVehicle(thread& tL) {
 			cPoint pos5(dx - t5 * 15, dy + 4 * 4);*/
 			//cPoint pos6(dx - t * 15, dy + 4 * 5);
 
-			//CVEHICLE* car1;
-			CVEHICLE* car2;
-			/*CVEHICLE* car3;
-			CVEHICLE* car4;
-			CVEHICLE* car5;*/
-			//CVEHICLE* car6;
+			//COBJECT* car1;
+			COBJECT* car2;
+			/*COBJECT* car3;
+			COBJECT* car4;
+			COBJECT* car5;*/
+			//COBJECT* car6;
 
 			//car1 = new cCar(pos1);
-			car2 = new cTruck(pos2);
+			car2 = new CBIRD(pos2);
 			//car3 = new cCar(pos3);
 			//car4 = new cTruck(pos4);
 			//car5 = new cCar(pos5);
@@ -310,7 +285,7 @@ void Game::renderVehicle(thread& tL) {
 		if (t3 % 15 && line3->getLight()) {
 			cPoint pos3(dx - t3 * 15, dy + 4 * 2);
 
-			CVEHICLE* car3;
+			COBJECT* car3;
 
 			car3 = new cCar(pos3);
 
@@ -320,7 +295,7 @@ void Game::renderVehicle(thread& tL) {
 		if (t4 % 15 && line4->getLight()) {
 			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
 
-			CVEHICLE* car4;
+			COBJECT* car4;
 
 			car4 = new cTruck(pos4);
 
@@ -330,9 +305,9 @@ void Game::renderVehicle(thread& tL) {
 		if (t5 % 15 && line5->getLight()) {
 			cPoint pos5(dx - t5 * 15, dy + 4 * 4);
 
-			CVEHICLE* car5;
+			COBJECT* car5;
 
-			car5 = new cCar(pos5);
+			car5 = new CDINO(pos5);
 
 			line5->pushVehicle(car5);
 		}

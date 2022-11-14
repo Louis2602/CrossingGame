@@ -45,15 +45,20 @@ bool CPEOPLE::isDead() {
 
 void CPEOPLE::DRAW_PEOPLE(int mX, int mY) {
 	for (int i = 0; i < 3; i++) {
+		mtx.lock();
+		//Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 		Controller::GotoXY(mX, mY + i);
 		cout << people[i];
+		mtx.unlock();
 	}
 }
 
 void CPEOPLE::Delete(int mX, int mY) {
 	for (int i = 0; i < 3; i++) {
+		mtx.lock();
 		Controller::GotoXY(mX, mY + i);
 		cout << "   ";
+		mtx.unlock();
 	}
 }
 
@@ -93,7 +98,7 @@ void CPEOPLE::Down(int& mY) {
 }
 
 /*
-bool isImpact(const CVEHICLE*& vehicle);
+bool isImpact(const COBJECT*& Object);
 bool isImpact(const CANIMAL*& animal) {
 
 }

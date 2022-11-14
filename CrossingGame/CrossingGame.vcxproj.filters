@@ -39,7 +39,7 @@
     <ClInclude Include="CANIMAL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CVEHICLE.h">
+    <ClInclude Include="COBJECT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CLIGHT.h">
@@ -60,10 +60,10 @@
     <ClInclude Include="CBIRD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CLINEAnimal.h">
+    <ClInclude Include="cLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cLine.h">
+    <ClInclude Include="CDINO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClCompile Include="CPEOPLE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CVEHICLE.cpp">
+    <ClCompile Include="COBJECT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CANIMAL.cpp">
@@ -110,10 +110,10 @@
     <ClCompile Include="CBIRD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CLINEAnimal.cpp">
+    <ClCompile Include="cLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cLine.cpp">
+    <ClCompile Include="CDINO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

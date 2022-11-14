@@ -4,7 +4,6 @@
 #include "Controller.h"
 #include "Sound.h"
 
-
 class Graphics {
 public:
 	Graphics() {};

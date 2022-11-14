@@ -5,7 +5,6 @@
 #include "Header.h"
 #include "CPEOPLE.h"
 #include "Graphics.h"
-#include "CLINEAnimal.h"
 #include "cLine.h"
 
 class Game {
@@ -15,7 +14,7 @@ private:
 	bool IS_RUNNING;
 	bool PAUSE_STATE;
 	bool SAVE_GAME;
-	CLINEAnimal mLine;
+	//CLINEAnimal mLine;
 	CPEOPLE mPeople;
 	CLIGHT mLight;
 	Sound mSound;
@@ -33,6 +32,5 @@ public:
 	void playGame(thread&, thread&, thread&);
 	void renderLight();
 	void renderVehicle(thread&);
-	void renderAnimal(thread&);
 };
 #endif // !Game

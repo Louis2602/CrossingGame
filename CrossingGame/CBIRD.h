@@ -1,9 +1,13 @@
 #pragma once
-#include "CANIMAL.h"
+
+#ifndef CBIRD_h
+#define CBIRD_h
+
+#include "COBJECT.h"
 #define BIRD_HEIGHT 3
 #define BIRD_WIDTH 5
 
-class CBIRD : public CANIMAL {
+class CBIRD : public COBJECT {
 private:
 	char** shape;
 
@@ -15,3 +19,5 @@ public:
 	int getHeight();
 	int getWidth();
 };
+
+#endif 

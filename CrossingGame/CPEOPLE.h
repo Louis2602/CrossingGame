@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CANIMAL.h"
-#include "CVEHICLE.h"
+#include "COBJECT.h"
 #include "CLIGHT.h"
 #include "Sound.h"
 #include "cPoint.h"
@@ -38,7 +38,7 @@ public:
 	void Right(int& mX);         //Move character right
 	void Down(int& mY);          //Move character down
 
-	bool isImpact(const CVEHICLE*& vehicle); //Check if player impact with vehicle
+	bool isImpact(const COBJECT*& Object); //Check if player impact with Object
 	bool isImpact(const CANIMAL*& animal);   //Check if player impact with animal
 	bool isFinish(int mX);             //Check if player has completed the stage
 };

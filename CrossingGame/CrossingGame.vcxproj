@@ -142,15 +142,15 @@
     <ClInclude Include="CANIMAL.h" />
     <ClInclude Include="CBIRD.h" />
     <ClInclude Include="cCar.h" />
+    <ClInclude Include="CDINO.h" />
     <ClInclude Include="CLIGHT.h" />
     <ClInclude Include="cLine.h" />
-    <ClInclude Include="CLINEAnimal.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CPEOPLE.h" />
     <ClInclude Include="cPoint.h" />
     <ClInclude Include="CPOSITION.h" />
     <ClInclude Include="cTruck.h" />
-    <ClInclude Include="CVEHICLE.h" />
+    <ClInclude Include="COBJECT.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Header.h" />
@@ -161,9 +161,9 @@
     <ClCompile Include="CANIMAL.cpp" />
     <ClCompile Include="CBIRD.cpp" />
     <ClCompile Include="cCar.cpp" />
+    <ClCompile Include="CDINO.cpp" />
     <ClCompile Include="CLIGHT.cpp" />
     <ClCompile Include="cLine.cpp" />
-    <ClCompile Include="CLINEAnimal.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="cPoint.cpp" />
     <ClCompile Include="cTruck.cpp" />
@@ -173,7 +173,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="CPEOPLE.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="CVEHICLE.cpp" />
+    <ClCompile Include="COBJECT.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
