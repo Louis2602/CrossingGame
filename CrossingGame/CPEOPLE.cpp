@@ -46,7 +46,7 @@ bool CPEOPLE::isDead() {
 void CPEOPLE::DRAW_PEOPLE(int mX, int mY) {
 	for (int i = 0; i < 3; i++) {
 		mtx.lock();
-		//Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 		Controller::GotoXY(mX, mY + i);
 		cout << people[i];
 		mtx.unlock();

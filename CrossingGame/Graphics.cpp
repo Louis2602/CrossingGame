@@ -203,23 +203,13 @@ void Graphics::PrintScoreboard() {
 	DrawRectangle(80, 2, 31, 2);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	Controller::GotoXY(87, 3);
-	cout << "PLAYER'S INFORMATION";
-
-	Controller::SetConsoleColor(BRIGHT_WHITE, AQUA);
-	Controller::GotoXY(85, 5);
-	cout << "Player's name: ";
+	cout << "PLAYER'S INFORMATION";	
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	DrawRectangle(80, 13, 31, 2);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	Controller::GotoXY(89, 14);
 	cout << "GAME INFORMATION";
-	Controller::SetConsoleColor(BRIGHT_WHITE, AQUA);
-	Controller::GotoXY(85, 16);
-	cout << "Moves:";
-	Controller::GotoXY(85, 17);
-	cout << "Current score:";
-
 }
 
 void draw_bye1() {

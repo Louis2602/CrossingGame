@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 
 #ifndef COBJECT_h
 #define COBJECT_h

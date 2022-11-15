@@ -28,12 +28,12 @@ public:
 	cLine();
 	cLine(int speed, bool direction, bool greenLight, int currentRow);
 	~cLine() = default;
-	void pushVehicle(COBJECT* Object);
-	COBJECT* generateVehicle(cPoint pos);
+	void pushObject(COBJECT* Object);
+	COBJECT* generateObject(cPoint pos);
 	bool doHaveSlot();
-	void popVehicle();
-	void printVehicle(cPoint pos, char** shape, int height, int width);
-	void deleteVehicle(cPoint pos, char** shape, int height, int width);
+	void popObject();
+	void printObject(cPoint pos, char** shape, int height, int width);
+	void deleteObject(cPoint pos, char** shape, int height, int width);
 	void nextMove();
 	void changeLight(bool light);
 	bool getLight();
