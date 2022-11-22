@@ -22,6 +22,14 @@ int CPEOPLE::getBack() {
 	return back;
 }
 
+int CPEOPLE::getHeight() {
+	return height;
+}
+
+int CPEOPLE::getWidth() {
+	return width;
+}
+
 void CPEOPLE::updateScore() {
 	if (score < getForward() - getBack())
 		this->score++;
@@ -39,14 +47,10 @@ void CPEOPLE::setForward() {
 	this->forward++;
 }
 
-bool CPEOPLE::isDead() {
-	return mState;
-}
-
 void CPEOPLE::DRAW_PEOPLE(int mX, int mY) {
 	for (int i = 0; i < 3; i++) {
 		mtx.lock();
-		//Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
+		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 		Controller::GotoXY(mX, mY + i);
 		cout << people[i];
 		mtx.unlock();
@@ -97,12 +101,14 @@ void CPEOPLE::Down(int& mY) {
 	setBack();
 }
 
-/*
-bool isImpact(const COBJECT*& Object);
-bool isImpact(const CANIMAL*& animal) {
-
+bool CPEOPLE::isImpact(COBJECT* Object) {
+	if (getPosX() + 3 == Object->getX() || getPosX() == Object->getX() + Object->getWidth())
+		return true;
+	if ((getPosX() >= Object->getX() && getPosX() + 3 <= Object->getX() + Object->getWidth()) && getPosY() == Object->getY())
+		return true;
+	return false;
 }
-*/
+
 bool CPEOPLE::isFinish(int mX) {
 	if (pos.getY() == 4)
 		return true;

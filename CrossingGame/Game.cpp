@@ -9,7 +9,7 @@ Game::Game(int _level) {
 }
 void Game::renderLight() {
 	Sleep(10);
-	while (mLight.getState() && mLight.getisPlay()) {
+	while (IS_RUNNING) {
 		// Green
 		mLight.spawn_light(70, 7);
 		mLight.spawn_light(70, 11);
@@ -35,15 +35,20 @@ void Game::StartGame() {
 	thread mainGame([&] {playGame(light, Object, animal); });
 
 	mainGame.join();
+	light.join();
+	Object.join();
+	animal.join();
 }
+
 void Game::playGame(thread& tL, thread& tV, thread& tA) {
 	tL = thread([this] {renderLight(); });
 	tV = thread([&] {renderVehicle(tL); });
 	//tA = thread([&] {renderAnimal(tL); });
 
 	while (IS_RUNNING) {
-		while (!PAUSE_STATE && mPeople.isDead()) {
+		while (!PAUSE_STATE) {
 			mtx.lock();
+			Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 			Controller::GotoXY(100, 17);
 			cout << mPeople.getScore();
 			mtx.unlock();
@@ -343,4 +348,6 @@ void Game::renderVehicle(thread& tL) {
 		}
 		Sleep(100);
 	}
+
+	PAUSE_STATE = true;
 }

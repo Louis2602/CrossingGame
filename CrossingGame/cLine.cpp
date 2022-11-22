@@ -60,6 +60,7 @@ void cLine::printVehicle(cPoint pos, char** shape, int height, int width) {
 		for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
 			if ((x + j > 5) && (x + j < 67)) {
 				mtx.lock();
+				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 				Controller::GotoXY(x + j, y + i);
 				cout << shape[i][j - max(1, y)];
 				//cout << i << " " << j;

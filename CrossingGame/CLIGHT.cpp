@@ -31,7 +31,7 @@ void CLIGHT::setPos(int x, int y) {
 }
 void CLIGHT::spawn_light(int x, int y) {
 	setPos(x, y);
-	if (this->getState() && this->getisPlay()) {
+	if (this->getState()) {
 		//Draw green light.
 		mtx.lock();
 
