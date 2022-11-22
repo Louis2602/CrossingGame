@@ -9,7 +9,8 @@
 
 class Game {
 private:
-	int score;
+	char playerName[15] = "", playerID[9] = "", className[8] = "";
+	string filename;
 	int level;
 	bool IS_RUNNING;
 	bool PAUSE_STATE;
@@ -29,8 +30,8 @@ public:
 	void LoadGame();
 	void askContinue();
 	void askSaveGame();
-	void playGame(thread&, thread&, thread&);
+	void playGame(thread&, thread&);
 	void renderLight();
-	void renderVehicle(thread&);
+	void renderObject();
 };
 #endif // !Game

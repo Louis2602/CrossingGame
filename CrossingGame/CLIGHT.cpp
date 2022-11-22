@@ -18,7 +18,7 @@ void CLIGHT::setState(bool _state) {
 	state = _state;
 }
 void CLIGHT::setTimer(int timer) {
-	while (timer) {
+	while (timer && isPlay) {
 		spawn_light(posX, posY);
 		Sleep(1000);
 		timer -= 10;

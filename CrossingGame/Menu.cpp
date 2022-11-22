@@ -479,5 +479,6 @@ void Menu::MenuScore() {
 
 void Menu::PlayGame() {
 	Game g(_EASY);
+	g.SetUpGame();
 	g.StartGame();
 }

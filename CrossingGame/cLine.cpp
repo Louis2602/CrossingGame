@@ -21,13 +21,13 @@ cLine::cLine(int speed, bool direction, bool greenLight, int currentRow) {
 	this->objectInLine = 0;
 }
 
-void cLine::pushVehicle(COBJECT* Object) {
+void cLine::pushObject(COBJECT* Object) {
 	lineData.push_back(Object);
-	printVehicle(Object->getPos(), Object->returnShape(), Object->getHeight(), Object->getWidth());
+	printObject(Object->getPos(), Object->returnShape(), Object->getHeight(), Object->getWidth());
 	objectInLine += 1;
 }
 
-COBJECT* cLine::generateVehicle(cPoint pos) {
+COBJECT* cLine::generateObject(cPoint pos) {
 	int randomType = rand() % 2;
 	COBJECT* Object = NULL;
 	switch (randomType) {
@@ -46,14 +46,14 @@ bool cLine::doHaveSlot() {
 	return false;
 }
 
-void cLine::popVehicle() {
+void cLine::popObject() {
 	if (objectInLine > 0) {
 		lineData.erase(lineData.begin());
 		this->objectInLine -= 1;
 	}
 }
 
-void cLine::printVehicle(cPoint pos, char** shape, int height, int width) {
+void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
 	for (int i = 0; i < height; i++) {
@@ -70,11 +70,11 @@ void cLine::printVehicle(cPoint pos, char** shape, int height, int width) {
 		}
 	}
 	if (x > 80) {
-		popVehicle();
+		popObject();
 	}
 }
 
-void cLine::deleteVehicle(cPoint pos, char** shape, int height, int width) {
+void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
 	for (int i = 0; i < height; i++) {
@@ -90,18 +90,18 @@ void cLine::deleteVehicle(cPoint pos, char** shape, int height, int width) {
 		}
 	}
 	if (x > 80) {
-		popVehicle();
+		popObject();
 	}
 }
 
 
 void cLine::nextMove() {
 	for (int i{}; i < lineData.size(); i++) {
-		deleteVehicle(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
+		deleteObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 		lineData[i]->updatePosition(this->speed, 0);
-		printVehicle(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
+		printObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 
 	}
 }
 
-//void cLine::stillContainVehicle
+//void cLine::stillContainObject
