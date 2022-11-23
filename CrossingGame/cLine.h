@@ -30,6 +30,9 @@ public:
 	~cLine() = default;
 	void pushObject(COBJECT* Object);
 	COBJECT* generateObject(cPoint pos);
+	void setSpeed(int _x) {
+		this->speed = _x;
+	}
 	bool doHaveSlot();
 	void popObject();
 	void printObject(cPoint pos, char** shape, int height, int width);

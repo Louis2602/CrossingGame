@@ -23,6 +23,9 @@ private:
 public:
 	Game(int);
 	~Game() {};
+	int curLevel() {
+		return this->level;
+	}
 	void SetUpGame();
 	void StartGame();
 	void EndGame(thread*);

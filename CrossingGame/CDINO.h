@@ -5,7 +5,7 @@
 
 #include "COBJECT.h"
 #define DINO_HEIGHT 3
-#define DINO_WIDTH 11
+#define DINO_WIDTH 7
 
 class CDINO : public COBJECT {
 private:

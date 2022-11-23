@@ -302,14 +302,17 @@ void Game::renderObject() {
 	line4 = new cLine;
 	line5 = new cLine;
 	//line6 = new cLine;
-
-
+	cout << curLevel();
 	int t2 = 0;
 	int t3 = 0;
 	int t4 = 0;
 	int t5 = 0;
 
 	while (IS_RUNNING) {
+		line2->setSpeed(curLevel() * 5);
+		line3->setSpeed(curLevel() * 4);
+		line4->setSpeed(curLevel() * 3);
+		line5->setSpeed(curLevel() * 2);
 		if (t2 % 15 && line2->getLight()) {
 			//cPoint pos1(dx - t * 15, dy);
 			cPoint pos2(dx - t2 * 15, dy + 4);
@@ -399,7 +402,7 @@ void Game::renderObject() {
 			line5->nextMove();
 			t5++;
 		}
-		Sleep(100);
+		Sleep(500);
 	}
 
 	PAUSE_STATE = true;
