@@ -80,15 +80,16 @@ void Game::StartGame() {
 	mainGame.join();
 	light.join();
 	Object.join();
-	animal.join();
+	//animal.join();
 }
-void Game::playGame(thread& tL, thread& tV, thread& tA) {
-	tL = thread([this] {renderLight(); });
-	tV = thread([&] {renderVehicle(tL); });
-	//tA = thread([&] {renderAnimal(tL); });
 
+void Game::playGame(thread& tL, thread& tV)
+{
+	tL = thread([this] {renderLight(); });
+	tV = thread([&] {renderObject(); });
+	//tA = thread([&] {renderAnimal(tL); });
 	while (IS_RUNNING) {
-		while (!PAUSE_STATE && mPeople.isDead()) {
+		while (!PAUSE_STATE) {
 			mtx.lock();
 			Controller::GotoXY(100, 17);
 			cout << mPeople.getScore();
@@ -140,26 +141,27 @@ void Game::playGame(thread& tL, thread& tV, thread& tA) {
 					PAUSE_STATE = true;
 					break;
 
-			case 8: // SAVE GAME
-				mLight.setisPlay(false);
-				SAVE_GAME = true;
-				break;
+				case 8: // SAVE GAME
+					mLight.setisPlay(false);
+					SAVE_GAME = true;
+					break;
+				}
+				mPeople.updatePos(x, y);
 			}
-			mPeople.updatePos(x, y);
-		}
-		if (PAUSE_STATE) {
-			mtx.lock();
-			askContinue();
-			mtx.unlock();
-		}
-		if (SAVE_GAME) {
-			mtx.lock();
-			SaveGame();
-			mtx.unlock();
+			if (PAUSE_STATE) {
+				mtx.lock();
+				askContinue();
+				mtx.unlock();
+			}
+			if (SAVE_GAME) {
+				mtx.lock();
+				SaveGame();
+				mtx.unlock();
+			}
 		}
 	}
 	tL.join();
-	tO.join();
+	//tO.join();
 	Graphics::DrawGoodbyeScreen();
 }
 void Game::EndGame(thread* game) {
