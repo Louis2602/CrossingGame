@@ -302,7 +302,6 @@ void Game::renderObject() {
 	line4 = new cLine;
 	line5 = new cLine;
 	//line6 = new cLine;
-	cout << curLevel();
 	int t2 = 0;
 	int t3 = 0;
 	int t4 = 0;
