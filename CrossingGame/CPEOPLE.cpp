@@ -102,6 +102,9 @@ void CPEOPLE::Down(int& mY) {
 }
 
 bool CPEOPLE::isImpact(COBJECT* Object) {
+	Controller::GotoXY(100, 17);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	cout << Object->getX();
 	if (getPosX() + 3 == Object->getX() || getPosX() == Object->getX() + Object->getWidth())
 		return true;
 	if ((getPosX() >= Object->getX() && getPosX() + 3 <= Object->getX() + Object->getWidth()) && getPosY() == Object->getY())

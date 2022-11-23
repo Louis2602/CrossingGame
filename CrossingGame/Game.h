@@ -6,6 +6,7 @@
 #include "CPEOPLE.h"
 #include "Graphics.h"
 #include "cLine.h"
+#include "Menu.h"
 
 class Game {
 private:
@@ -25,12 +26,11 @@ public:
 	void SetUpGame();
 	void StartGame();
 	void EndGame(thread*);
-	void PauseGame();
 	void SaveGame();
+	void PauseGame();
 	void LoadGame();
-	void askContinue();
-	void askSaveGame();
 	void playGame(thread&, thread&);
+	void printHelp();
 	void renderLight();
 	void renderObject();
 };

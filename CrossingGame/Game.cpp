@@ -48,30 +48,27 @@ void Game::SetUpGame() {
 void Game::StartGame() {
 	Graphics::PrintInterface();
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-	Controller::GotoXY(85, 5);
+	Controller::GotoXY(85, 7);
 	if (strlen(playerName) != 0)
 		cout << "Player's name: " << playerName;
 	else {
 		strcpy_s(playerName, "unknown");
 		cout << "Player's name: " << playerName;
 	}
-	Controller::GotoXY(85, 7);
+	Controller::GotoXY(85, 9);
 	if (strlen(playerID) != 0)
 		cout << "Student's ID: " << playerID;
 	else {
 		strcpy_s(playerID, "unknown");
 		cout << "Student's ID: " << playerID;
 	}
-	Controller::GotoXY(85, 9);
+	Controller::GotoXY(85, 11);
 	if (strlen(className) != 0)
 		cout << "Class: " << className;
 	else {
 		strcpy_s(className, "unknown");
 		cout << "Class: " << className;
 	}
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-	Controller::GotoXY(89, 16);
-	cout << "Current score:";
 	thread light;
 	thread Object;
 
@@ -80,89 +77,101 @@ void Game::StartGame() {
 	mainGame.join();
 	light.join();
 	Object.join();
-	//animal.join();
 }
 
-void Game::playGame(thread& tL, thread& tV)
-{
+void Game::playGame(thread& tL, thread& tO) {
 	tL = thread([this] {renderLight(); });
-	tV = thread([&] {renderObject(); });
-	//tA = thread([&] {renderAnimal(tL); });
-	while (IS_RUNNING) {
-		while (!PAUSE_STATE) {
-			mtx.lock();
-			Controller::GotoXY(100, 17);
-			cout << mPeople.getScore();
-			mtx.unlock();
-			int x = mPeople.getPosX();
-			int y = mPeople.getPosY();
-			if (mPeople.isFinish(x))
+	tO = thread([&] {renderObject(); });
+	while (!PAUSE_STATE && IS_RUNNING) {
+		mtx.lock();
+		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		Controller::GotoXY(10, 1);
+		cout << "LEVEL: " << level;
+		Controller::GotoXY(88, 1);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
+		cout << mPeople.getScore();
+		mtx.unlock();
+		int x = mPeople.getPosX();
+		int y = mPeople.getPosY();
+		if (level == 5) {
+			mLight.setisPlay(false);
+			IS_RUNNING = false;
+			break;
+		}
+		if (mPeople.isFinish(x))
+		{
+			mPeople.updatePos(36, 24);
+			level++;
+		}
+		else
+		{
+			mPeople.DRAW_PEOPLE(mPeople.getPosX(), mPeople.getPosY());
+			switch (Controller::GetConsoleInput()) {
+			case 1:  //ESC
+				IS_RUNNING = false;
+				mLight.setisPlay(false);
+				mLight.setState(false);
+				Graphics::DrawGoodbyeScreen();
+				break;
+			case 2: //UP
 			{
-				mPeople.updatePos(36, 24);
+				mPeople.Delete(x, y);
+				mPeople.Up(y);
+				break;
 			}
-			else
+			case 3: //LEFT
 			{
-				mPeople.DRAW_PEOPLE(mPeople.getPosX(), mPeople.getPosY());
-				switch (Controller::GetConsoleInput()) {
-				case 1:  //ESC
-					IS_RUNNING = false;
-					mLight.setisPlay(false);
-					Graphics::DrawGoodbyeScreen();
-					break;
-				case 2: //UP
-				{
-					mPeople.Delete(x, y);
-					mPeople.Up(y);
-					break;
-				}
-				case 3: //LEFT
-				{
-					mPeople.Delete(x, y);
-					mPeople.Left(x);
-					break;
-				}
-				case 4: //RIGHT
-				{
-					mPeople.Delete(x, y);
-					mPeople.Right(x);
-					break;
-				}
-				case 5: //DOWN
-				{
-					mPeople.Delete(x, y);
-					mPeople.Down(y);
-					break;
-				}
-				case 7: //PAUSE GAME
-					Controller::GotoXY(75, 10);
-					mLight.setisPlay(false);
-					mLight.setState(false);
-					//mLine.setTrafficLightState(false);
-					PAUSE_STATE = true;
-					break;
+				mPeople.Delete(x, y);
+				mPeople.Left(x);
+				break;
+			}
+			case 4: //RIGHT
+			{
+				mPeople.Delete(x, y);
+				mPeople.Right(x);
+				break;
+			}
+			case 5: //DOWN
+			{
+				mPeople.Delete(x, y);
+				mPeople.Down(y);
+				break;
+			}
+			case 7: //PAUSE GAME
+				mLight.setisPlay(false);
+				mLight.setState(false);
+				PAUSE_STATE = true;
+				break;
 
-				case 8: // SAVE GAME
-					mLight.setisPlay(false);
-					SAVE_GAME = true;
-					break;
-				}
-				mPeople.updatePos(x, y);
-			}
-			if (PAUSE_STATE) {
+			case 8: // SAVE GAME
+				mLight.setisPlay(false);
+				mLight.setState(false);
+				SAVE_GAME = true;
+				break;
+			case 9: // HELP
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				mtx.lock();
-				askContinue();
+				printHelp();
 				mtx.unlock();
+				break;
 			}
-			if (SAVE_GAME) {
-				mtx.lock();
-				SaveGame();
-				mtx.unlock();
-			}
+			mPeople.updatePos(x, y);
+		}
+		if (SAVE_GAME) {
+			mtx.lock();
+			SaveGame();
+			mtx.unlock();
+		}
+		if (PAUSE_STATE) {
+			mtx.lock();
+			PauseGame();
+			mtx.unlock();
 		}
 	}
-	tL.join();
-	//tO.join();
 	Graphics::DrawGoodbyeScreen();
+	tL.join();
+	tO.join();
 }
 void Game::EndGame(thread* game) {
 	Controller::ClearConsole();
@@ -171,138 +180,113 @@ void Game::EndGame(thread* game) {
 	Graphics::DrawGoodbyeScreen();
 }
 
-void Game::SaveGame() //Save game
-{
-	askSaveGame();
-	Controller::ClearConsole();
-	Graphics::LoadBackground();
+void Game::SaveGame() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Controller::GotoXY(50, 15);
+	Graphics::DrawRectangle(79, 20, 33, 8);
+	Graphics::DrawRectangle(80, 23, 31, 2);
+	Controller::GotoXY(89, 22);
 	Controller::ShowCursor(true);
-	cout << "Enter a filename: ";
+	cout << "Enter a filename";
+	Controller::GotoXY(81, 24);
 	cin >> filename;
 	Controller::ShowCursor(false);
 	filename = "gameData\\" + filename + ".txt";
 	fstream fs(filename, ios::app);
 	if (SAVE_GAME) {
-		fs << playerName << '\n' << playerID << '\n' << className << '\n' << mPeople.getScore() << '\n';
+		fs << "Player's name: " << playerName << '\n' << "ID: " << playerID << '\n' << "Class: " <<
+			className << '\n' << "Score: " << mPeople.getScore() << '\n';
 	}
-	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-	Controller::GotoXY(40, 17);
-	cout << "---------Save game successfully---------";
-	Sleep(1000);
 	fs.close();
-	IS_RUNNING = false;
-}
-
-void Game::askContinue() //ask player to continue or not when pause game
-{
-	Controller::ClearConsole();
-	Graphics::LoadBackground();
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Controller::GotoXY(0, 0);
-	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Graphics::DrawRectangle(44, 13, 35, 8);
-	Graphics::DrawRectangle(47, 18, 7, 2);
-	Graphics::DrawRectangle(70, 18, 6, 2);
-	Controller::GotoXY(51, 16);
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-	cout << "Do you want to continue?";
-	string str[2] = { "Yes", "No" };
-	int left[] = { 45,50,57,68,73,79 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
-	bool choice = 1;
-	auto print1 = [&]()
+	Controller::GotoXY(82, 26);
+	cout << "----Save game successfully----";
+	Sleep(500);
+	// Clear up save game board
+	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+	for (int i = 79; i < 114; i++)
 	{
-		int i = 0;
-		while (i < 2)
-		{
-			mSound.PlayerMove();
-			Controller::SetConsoleColor(BRIGHT_WHITE, color[i]);
-			Controller::GotoXY(left[choice * 3], top);        putchar(word[i * 2]);
-			Controller::GotoXY(left[choice * 3 + 1], top);    cout << str[choice];
-			Controller::GotoXY(left[choice * 3 + 2], top);    putchar(word[i * 2 + 1]);
-			if (!i++)
-				choice = !choice;
+		for (int j = 20; j < 29; j++) {
+			Controller::GotoXY(i, j);
+			cout << " ";
 		}
-	};
-	print1();
-	while (true)
-	{
-		int key = Controller::GetConsoleInput();
-		if ((key == 3 && choice == 1) || (key == 4 && choice == 0))
-			print1();
-		else if (key == 6)
-		{
-			if (!choice) {
-				IS_RUNNING = true;
-				PAUSE_STATE = false;
-			}
-			else {
-				IS_RUNNING = false;
-				PAUSE_STATE = true;
-				SAVE_GAME = true;
-			}
-			return;
-		}
-		else
-			mSound.PlayerMove();
 	}
+	mLight.setisPlay(true);
+	SAVE_GAME = false;
 }
-void Game::askSaveGame()
-{
-	Controller::ClearConsole();
+void Game::LoadGame() {
 	Graphics::LoadBackground();
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Controller::GotoXY(0, 0);
-	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Graphics::DrawRectangle(44, 13, 35, 8);
-	Graphics::DrawRectangle(47, 18, 7, 2);
-	Graphics::DrawRectangle(70, 18, 6, 2);
-	Controller::GotoXY(51, 16);
-	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-	cout << "Do you want to save game?";
-	string str[2] = { "Yes", "No" };
-	int left[] = { 45,50,57,68,73,79 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
-	bool choice = 1;
-	auto print1 = [&]()
-	{
-		int i = 0;
-		while (i < 2)
-		{
-			mSound.PlayerMove();
-			Controller::SetConsoleColor(BRIGHT_WHITE, color[i]);
-			Controller::GotoXY(left[choice * 3], top);        putchar(word[i * 2]);
-			Controller::GotoXY(left[choice * 3 + 1], top);    cout << str[choice];
-			Controller::GotoXY(left[choice * 3 + 2], top);    putchar(word[i * 2 + 1]);
-			if (!i++)
-				choice = !choice;
-		}
-	};
-	print1();
-	while (true)
-	{
-		int key = Controller::GetConsoleInput();
-		if ((key == 3 && choice == 1) || (key == 4 && choice == 0))
-			print1();
-		else if (key == 6)
-		{
-			if (!choice) {
-				SAVE_GAME = true;
-				IS_RUNNING = true;
-			}
-			else {
-				SAVE_GAME = false;
-				IS_RUNNING = false;
-			}
-			return;
-		}
-		else
-			mSound.PlayerMove();
-	}
 }
+void Game::printHelp() {
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Graphics::DrawRectangle(79, 20, 33, 8);
 
+	Controller::GotoXY(90, 21);
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	cout << "Instructions";
+
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE); 
+	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge";
+	Controller::GotoXY(80, 23); cout << "obstacles (cars & animals)";
+
+	Controller::GotoXY(80, 24); cout << "- Use W, A, S, D to move";
+
+	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
+	Controller::GotoXY(80, 25); cout << "- Finish 5 levels to win!!!";
+
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Controller::GotoXY(91, 27);
+	putchar(175);
+	Controller::GotoXY(93, 27);
+	cout << "Close";
+	Controller::GotoXY(99, 27);
+	putchar(174);
+	while (Controller::GetConsoleInput() != 6) {
+		mSound.PlayerMove();
+	}
+	mSound.SoundSuccess();
+	// Clear up HELP board
+	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+	for (int i = 79; i < 114; i++)
+	{
+		for (int j = 20; j < 29; j++) {
+			Controller::GotoXY(i, j);
+			cout << " ";
+		}
+	}
+	mLight.setisPlay(true);
+	mLight.setState(true);
+}
+void Game::PauseGame() {
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	Controller::GotoXY(79, 20); cout << R"(  _____       _    _  _____ ______  )";
+	Controller::GotoXY(79, 21); cout << R"( |  __ \ /\  | |  | |/ ____|  ____| )";
+	Controller::GotoXY(79, 22); cout << R"( | |__) /  \ | |  | | (___ | |__    )";
+	Controller::GotoXY(79, 23); cout << R"( |  ___/ /\ \| |  | |\___ \|  __|   )";
+	Controller::GotoXY(79, 24); cout << R"( | |  / ____ \ |__| |____) | |____  )";
+	Controller::GotoXY(79, 25); cout << R"( |_| /_/    \_\____/|_____/|______| )";
+
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Controller::GotoXY(88, 27);
+	cout << "Press enter to Resume";
+
+	while (Controller::GetConsoleInput() != 6) {
+		mSound.PlayerMove();
+	}
+	mSound.SoundSuccess();
+	// Clear up Pause board
+	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
+	for (int i = 79; i < 114; i++)
+	{
+		for (int j = 20; j < 29; j++) {
+			Controller::GotoXY(i, j);
+			cout << " ";
+		}
+	}
+	Sleep(10);
+	PAUSE_STATE = false;
+	mLight.setisPlay(true);
+	mLight.setState(true);
+}
 void Game::renderObject() {
 	int dx = -6, dy = 4;
 

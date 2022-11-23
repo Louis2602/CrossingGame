@@ -15,4 +15,5 @@ public:
 	void SoundRocket();
 	void EndSoundGame();         //End sound game
 	void PlayerMove();
+	void SoundSuccess();
 };

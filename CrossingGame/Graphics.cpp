@@ -3,7 +3,7 @@ void Graphics::PrintInterface() {
 	Controller::ClearConsole();
 	DrawMap();
 	PrintInstruct();
-	PrintScoreboard();
+	PrintInfo();
 }
 void Graphics::DrawMenuBox() {
 	Controller::SetConsoleColor(BLACK, BLACK);
@@ -115,18 +115,22 @@ void Graphics::LoadBackground() {
 }
 void Graphics::PrintInstruct() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	DrawRectangle(79, 24, 33, 2);
-	DrawRectangle(79, 27, 14, 2);
-	DrawRectangle(98, 27, 14, 2);
+	DrawRectangle(79, 14, 14, 2);
+	DrawRectangle(98, 14, 14, 2);
+	DrawRectangle(79, 17, 14, 2);
+	DrawRectangle(98, 17, 14, 2);
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, PURPLE);
-	Controller::GotoXY(90, 25);
-	cout << "L : Save Game";
+	Controller::GotoXY(83, 15);
+	cout << "L : Save";
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	Controller::GotoXY(102, 15);
+	cout << "H : Help";
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-	Controller::GotoXY(83, 28);
+	Controller::GotoXY(83, 18);
 	cout << "P : Pause";
 	Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-	Controller::GotoXY(101, 28);
+	Controller::GotoXY(101, 18);
 	cout << "Esc : Exit";
 }
 
@@ -195,21 +199,13 @@ void Graphics::DrawMap() {
 	}
 }
 
-void Graphics::PrintScoreboard() {
+void Graphics::PrintInfo() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	DrawRectangle(79, 1, 33, 10);
-	DrawRectangle(79, 12, 33, 10);
-
-	DrawRectangle(80, 2, 31, 2);
+	DrawRectangle(79, 3, 33, 10);
+	DrawRectangle(80, 4, 31, 2);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
-	Controller::GotoXY(87, 3);
+	Controller::GotoXY(87, 5);
 	cout << "PLAYER'S INFORMATION";	
-
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	DrawRectangle(80, 13, 31, 2);
-	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
-	Controller::GotoXY(89, 14);
-	cout << "GAME INFORMATION";
 }
 
 void draw_bye1() {

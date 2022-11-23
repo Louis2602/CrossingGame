@@ -30,8 +30,7 @@ void Sound::EndSoundGame() {
 }
 
 void Sound::SoundRocket() {
-	Sound s;
-	if(s.getState())
+	if(getState())
 		PlaySound(TEXT("SoundRocket.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
@@ -40,6 +39,12 @@ void Sound::SoundRocket() {
 void Sound::PlayerMove() {
 	if(getState())
 		PlaySound(TEXT("Move.wav"), NULL, SND_ASYNC);
+	else
+		PlaySound(NULL, NULL, SND_ASYNC);
+}
+void Sound::SoundSuccess() {
+	if (getState())
+		PlaySound(TEXT("Success.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
 }
