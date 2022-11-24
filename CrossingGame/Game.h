@@ -12,6 +12,7 @@ class Game {
 private:
 	char playerName[15] = "", playerID[9] = "", className[8] = "";
 	string filename;
+	vector<string> listSaveFile;
 	int level;
 	bool IS_RUNNING;
 	bool PAUSE_STATE;
@@ -21,6 +22,7 @@ private:
 	CLIGHT mLight;
 	Sound mSound;
 public:
+	Game() = default;
 	Game(int);
 	~Game() {};
 	int curLevel() {

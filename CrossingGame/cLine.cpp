@@ -20,7 +20,9 @@ cLine::cLine(int speed, bool direction, bool greenLight, int currentRow) {
 	this->currentRow = currentRow;
 	this->objectInLine = 0;
 }
-
+void cLine::setSpeed(int _x) {
+	this->speed = _x;
+}
 void cLine::pushObject(COBJECT* Object) {
 	lineData.push_back(Object);
 	printObject(Object->getPos(), Object->returnShape(), Object->getHeight(), Object->getWidth());

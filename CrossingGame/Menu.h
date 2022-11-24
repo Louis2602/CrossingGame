@@ -13,4 +13,5 @@ public:
 	void MenuAbout();
 	void MenuScore();
 	void PlayGame();
+	void LoadGame();
 };
