@@ -3,3 +3,4 @@
 ./gameData/trankha.txt
 ./gameData/binhvo.txt
 ./gameData/nguyenkim.txt
+./gameData/test.txt

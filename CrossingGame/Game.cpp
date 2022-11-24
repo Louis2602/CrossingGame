@@ -193,7 +193,7 @@ void Game::SaveGame() {
 	filename = "./gameData/" + filename + ".txt";
 
 	fstream saveFile("listFile.txt", ios::app);
-	saveFile << filename << endl;
+	saveFile << filename << "\n";
 	saveFile.close();
 
 	if (_mkdir("./gameData") == -1) {
@@ -201,11 +201,11 @@ void Game::SaveGame() {
 		Controller::GotoXY(82, 26);
 		cerr << " Error : " << strerror(errno) << endl;
 	}
-
 	fstream fs(filename, ios::app);
 	if (SAVE_GAME) {
 		fs << "Player's name: " << playerName << '\n' << "ID: " << playerID << '\n' << "Class: " <<
 			className << '\n' << "Level: " << level << "\n" << "Score: " << mPeople.getScore() << '\n';
+		fs << "Position: " << mPeople.getPosX() << "," << mPeople.getPosY() << '\n';
 	}
 	fs.close();
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
@@ -243,7 +243,7 @@ void Game::LoadGame() {
 	for (int i = 0; i < listSaveFile.size(); i++) {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		Controller::GotoXY(51, i + 13);
-		cout << listSaveFile[i];
+		cout << listSaveFile[i] << endl;
 		if (i > 6)
 			break;
 	}
@@ -295,6 +295,7 @@ void Game::LoadGame() {
 		}
 	}
 	fstream readFile(listSaveFile[idx], ios::in);
+	int posX, posY;
 	while (!readFile.eof()) {
 		getline(readFile, tmp, ':');
 		readFile.get();
@@ -314,9 +315,16 @@ void Game::LoadGame() {
 		readFile.get();
 		readFile >> score;
 		readFile.ignore();
+		getline(readFile, tmp, ':');
+		readFile.get();
+		readFile >> posX;
+		readFile.ignore();
+		readFile >> posY;
+		readFile.ignore();
 	}
 	readFile.close();
 	IS_RUNNING = true;
+	mPeople.updatePos(posX, posY);
 	StartGame();
 }
 void Game::printHelp() {
