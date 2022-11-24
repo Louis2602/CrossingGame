@@ -81,8 +81,8 @@ void Game::StartGame() {
 
 void Game::playGame(thread& tL, thread& tO) {
 	tL = thread([this] {renderLight(); });
-	tO = thread([&] {renderObject(mPeople); });
-	while (IS_RUNNING) {
+	tO = thread([&] {renderObject(); });
+	do{
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(10, 1);
@@ -93,6 +93,7 @@ void Game::playGame(thread& tL, thread& tO) {
 		mtx.unlock();
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
+
 		if (level == 5) {
 			mLight.setisPlay(false);
 			IS_RUNNING = false;
@@ -162,13 +163,16 @@ void Game::playGame(thread& tL, thread& tO) {
 			mtx.lock();
 			SaveGame();
 			mtx.unlock();
+			break;
 		}
 		if (PAUSE_STATE) {
 			mtx.lock();
 			PauseGame();
 			mtx.unlock();
+			break;
 		}
-	}
+	} while (IS_RUNNING);
+
 	Graphics::DrawGoodbyeScreen();
 	tL.join();
 	tO.join();
@@ -287,7 +291,7 @@ void Game::PauseGame() {
 	mLight.setisPlay(true);
 	mLight.setState(true);
 }
-void Game::renderObject(CPEOPLE& p) {
+void Game::renderObject() {
 	int dx = -6, dy = 4;
 
 	//cLine* line1;
@@ -302,16 +306,14 @@ void Game::renderObject(CPEOPLE& p) {
 	line4 = new cLine;
 	line5 = new cLine;
 	//line6 = new cLine;
+
+
 	int t2 = 0;
 	int t3 = 0;
 	int t4 = 0;
 	int t5 = 0;
 
 	while (IS_RUNNING) {
-		line2->setSpeed(curLevel() * 5);
-		line3->setSpeed(curLevel() * 4);
-		line4->setSpeed(curLevel() * 3);
-		line5->setSpeed(curLevel() * 2);
 		if (t2 % 15 && line2->getLight()) {
 			//cPoint pos1(dx - t * 15, dy);
 			cPoint pos2(dx - t2 * 15, dy + 4);
@@ -379,7 +381,7 @@ void Game::renderObject(CPEOPLE& p) {
 
 		if (line2->getLight()) {
 			//line1->nextMove();
-			line2->nextMove(p, IS_RUNNING);
+			line2->nextMove(mPeople, IS_RUNNING);
 			t2++;
 			/*line3->nextMove();
 			line4->nextMove();
@@ -388,17 +390,17 @@ void Game::renderObject(CPEOPLE& p) {
 		}
 
 		if (line3->getLight()) {
-			line3->nextMove(p, IS_RUNNING);
+			line3->nextMove(mPeople, IS_RUNNING);
 			t3++;
 		}
 
 		if (line4->getLight()) {
-			line4->nextMove(p, IS_RUNNING);
+			line4->nextMove(mPeople, IS_RUNNING);
 			t4++;
 		}
 
 		if (line5->getLight()) {
-			line5->nextMove(p, IS_RUNNING);
+			line5->nextMove(mPeople, IS_RUNNING);
 			t5++;
 		}
 		Sleep(500);

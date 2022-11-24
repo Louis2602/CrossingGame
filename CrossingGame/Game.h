@@ -35,6 +35,6 @@ public:
 	void playGame(thread&, thread&);
 	void printHelp();
 	void renderLight();
-	void renderObject(CPEOPLE& );
+	void renderObject();
 };
 #endif // !Game

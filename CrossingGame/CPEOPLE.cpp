@@ -102,10 +102,12 @@ void CPEOPLE::Down(int& mY) {
 }
 
 bool CPEOPLE::isImpact(COBJECT* Object) {
-	if (getPosX() + 3 == Object->getX() || getPosX() == Object->getX() + Object->getWidth())
-		return true;
-	if ((getPosX() >= Object->getX() && getPosX() + 3 <= Object->getX() + Object->getWidth()) && getPosY() == Object->getY())
-		return true;
+	if (pos.getY() == Object->getY()) {
+		if (pos.getX() + 3 == Object->getX() || pos.getX() == Object->getX() + Object->getWidth())
+			return true;
+		if (pos.getX() >= Object->getX() && pos.getX() + 3 == Object->getX() + Object->getWidth())
+			return true;
+	}
 	return false;
 }
 
