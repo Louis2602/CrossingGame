@@ -8,10 +8,10 @@
 class Menu {
 public:	
 	void MainMenu();
-	void MenuGameplay();
 	void MenuRule();
 	void MenuAbout();
 	void MenuScore();
+	void MenuSettings();
 	void PlayGame();
 	void LoadGame();
 };

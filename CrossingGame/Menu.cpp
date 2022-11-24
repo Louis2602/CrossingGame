@@ -13,44 +13,22 @@ void Menu::MainMenu() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 	cout << (char)175;
 	Controller::GotoXY(56, 15);
-	cout << "Play    " << endl;
+	cout << "New Game    " << endl;
 	Controller::GotoXY(56, 16);
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	cout << "Rule       " << endl;
+	cout << "Load Game       " << endl;
 	Controller::GotoXY(50, 17);
-	cout << "      About      " << endl;
+	cout << "      Settings      " << endl;
 	Controller::GotoXY(50, 18);
-	cout << "      Score      " << endl;
+	cout << "      About      " << endl;
 	Controller::GotoXY(56, 19);
-	cout << "Quit Game      " << endl;
-	Controller::GotoXY(11, 28);
-	cout << "Music: On";
-	Sound bgSound;
+	cout << "Quit      " << endl;
 
 	while (true)
 	{
 		char s = toupper(_getch());
 		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
 		idx_t = idx;
-
-		if (bgSound.getState()) {
-			if (s == 'M') {
-				bgSound.setState(false);
-				bgSound.SoundBackground();
-				Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-				Controller::GotoXY(18, 28);
-				cout << "Off";
-			}
-		}
-		else {
-			if (s == 'M') {
-				bgSound.setState(true);
-				bgSound.SoundBackground();
-				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-				Controller::GotoXY(18, 28);
-				cout << "On ";
-			}
-		}
 
 		if (s == 'W' || s == KEY_UP)
 			idx--;
@@ -73,99 +51,6 @@ void Menu::MainMenu() {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 15)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Play" << endl;
-		Controller::GotoXY(56, 16);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 16)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Rule" << endl;
-		Controller::GotoXY(56, 17);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 17)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "About" << endl;
-		Controller::GotoXY(56, 18);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 18)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Score" << endl;
-		Controller::GotoXY(56, 19);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 19)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Quit Game" << endl;
-		if (s == 13)
-		{
-			idx -= 14;
-			break;
-		}
-
-	}
-	switch (idx)
-	{
-	case 1:
-		MenuGameplay();
-		break;
-	case 2:
-		MenuRule();
-		break;
-	case 3:
-		MenuAbout();
-		break;
-	case 4:
-		MenuScore();
-		break;
-	case 5:
-		Graphics::DrawGoodbyeScreen();
-		break;
-	}
-}
-
-void Menu::MenuGameplay() {
-	int idx = 15, idx_t = 15;
-	Controller::GotoXY(53, idx);
-	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	cout << (char)175;
-	Controller::GotoXY(56, 15);
-	cout << "New Game  " << endl;
-	Controller::GotoXY(56, 16);
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	cout << "Load Game" << endl;
-	Controller::GotoXY(56, 17);
-	cout << "Back " << endl;
-	Controller::GotoXY(56, 18);
-	cout << "Exit " << endl;
-	Controller::GotoXY(56, 19);
-	cout << "                 " << endl;
-	Controller::GotoXY(56, 20);
-	cout << "                 " << endl;
-	while (true) {
-		char s = toupper(_getch());
-		Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
-		idx_t = idx;
-
-		if (s == 'W' || s == KEY_UP)
-			idx--;
-		else
-			if (s == 'S' || s == KEY_DOWN)
-				idx++;
-		if (s == KEY_ESC)
-			Graphics::DrawGoodbyeScreen();
-
-		if (idx > 18)
-			idx = 15;
-		else
-			if (idx < 15)
-				idx = 18;
-		Controller::GotoXY(53, idx_t);
-		cout << "  ";
-		Controller::GotoXY(53, idx);
-		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << (char)175;
-		Controller::GotoXY(56, 15);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		if (idx == 15)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << "New Game" << endl;
 		Controller::GotoXY(56, 16);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
@@ -176,20 +61,23 @@ void Menu::MenuGameplay() {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 17)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Back" << endl;
+		cout << "Settings" << endl;
 		Controller::GotoXY(56, 18);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 18)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Exit " << endl;
-
-		if (s == 13)	//press Enter
+		cout << "About" << endl;
+		Controller::GotoXY(56, 19);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		if (idx == 19)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << "Quit" << endl;
+		if (s == 13)
 		{
 			idx -= 14;
 			break;
 		}
-		if (s == KEY_ESC)
-			Graphics::DrawGoodbyeScreen();
+
 	}
 	switch (idx)
 	{
@@ -200,14 +88,73 @@ void Menu::MenuGameplay() {
 		LoadGame();
 		break;
 	case 3:
-		MainMenu();
+		MenuSettings();
 		break;
 	case 4:
+		MenuAbout();
+		break;
+	case 5:
 		Graphics::DrawGoodbyeScreen();
 		break;
 	}
 }
+void Menu::MenuSettings() {
+	Controller::ClearConsole();
+	Graphics::LoadBackground();
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Graphics::DrawRectangle(45, 13, 35, 8);
+	Graphics::DrawRectangle(48, 18, 7, 2);
+	Graphics::DrawRectangle(71, 18, 6, 2);
 
+	Controller::GotoXY(49, 15);
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Sound bgSound;
+	cout << "Turn Background Music On/Off";
+	string str[2] = { "On", "Off" };
+	int left[] = { 46,51,58,69,74,80 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
+	bool choice = 1;
+	auto print1 = [&]()
+	{
+		int i = 0;
+		while (i < 2)
+		{
+			Controller::SetConsoleColor(BRIGHT_WHITE, color[i]);
+			Controller::GotoXY(left[choice * 3], top);        putchar(word[i * 2]);
+			Controller::GotoXY(left[choice * 3 + 1], top);    cout << str[choice];
+			Controller::GotoXY(left[choice * 3 + 2], top);    putchar(word[i * 2 + 1]);
+			if (!i++)
+				choice = !choice;
+		}
+	};
+	print1();
+	bool isOn = true;
+	while (true)
+	{
+		int key = Controller::GetConsoleInput();
+		if ((key == 3 && choice == 1) || (key == 4 && choice == 0))
+			print1();
+		else if (key == 6)
+		{
+			if (!choice)
+				isOn = true;
+			else
+				isOn = false;
+			break;
+		}
+	}
+
+	if (!isOn) {
+		bgSound.setState(false);
+		bgSound.SoundBackground();
+	}
+	else {
+		bgSound.setState(true);
+		bgSound.SoundBackground();
+	}
+
+	Controller::ClearConsole();
+	Menu::MainMenu();
+}
 void Menu::MenuRule() {
 	Controller::ClearConsole();
 	Graphics::LoadBackground();
@@ -218,27 +165,28 @@ void Menu::MenuRule() {
 	Controller::GotoXY(42, 15);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "L : ";
-	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Save game";
 	Controller::GotoXY(42, 16);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "P : ";
-	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Pause game";
 	Controller::GotoXY(42, 17);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "M : ";
-	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Turn off background music";
 	Controller::GotoXY(42, 18);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "Esc : ";
-	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_AQUA);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Exit";
-	Controller::GotoXY(45, 20);
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	Controller::GotoXY(45, 20);
 	cout << "Cross the road and dodge";
-	Controller::GotoXY(45, 21); cout << "obstacles (cars & animals)";
+	Controller::GotoXY(45, 21);
+	cout << "obstacles (cars & animals)";
 
 	Controller::GotoXY(78, 13);
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
@@ -400,7 +348,7 @@ void Menu::MenuScore() {
 	}
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	Controller::GotoXY(68, 9);
-	cout << "Mode";
+	cout << "Level";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	for (int i = 1; i < 17; i++)
 	{
@@ -471,6 +419,8 @@ void Menu::MenuScore() {
 	Controller::GotoXY(56, 28);
 	putchar(174);
 
+	Controller::GotoXY(45, 30);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	system("pause");
 	Controller::ClearConsole();
 	Menu::MainMenu();

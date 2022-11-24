@@ -1,0 +1,4 @@
+Player's name: buiminh
+ID: 123123
+Class: clc06
+Level: 2Score: 6

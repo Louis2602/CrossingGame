@@ -7,14 +7,14 @@ void Graphics::PrintInterface() {
 }
 void Graphics::DrawMenuBox() {
 	Controller::SetConsoleColor(BLACK, BLACK);
-	Controller::GotoXY(41, 11); cout << "==========================================";
-	Controller::GotoXY(41, 22); cout << "==========================================";
+	Controller::GotoXY(40, 11); cout << "============================================";
+	Controller::GotoXY(40, 22); cout << "============================================";
 
 	for (int i = 12; i < 22; i++)
 	{
-		Controller::GotoXY(41, i);
+		Controller::GotoXY(40, i);
 		cout << "||";
-		Controller::GotoXY(81, i);
+		Controller::GotoXY(82, i);
 		cout << "||";
 	}
 }

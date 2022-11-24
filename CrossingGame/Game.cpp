@@ -168,7 +168,7 @@ void Game::playGame(thread& tL, thread& tO) {
 	} 
 
 	Graphics::DrawGoodbyeScreen();
-	tL.join();
+	tL.join();	
 	tO.join();
 }
 void Game::EndGame(thread* game) {
@@ -189,7 +189,11 @@ void Game::SaveGame() {
 	cin >> filename;
 	Controller::ShowCursor(false);
 	filename = "./gameData/" + filename + ".txt";
-	
+
+	fstream saveFile("listFile.txt", ios::app);
+	saveFile << filename << endl;
+	saveFile.close();
+
 	if (_mkdir("./gameData") == -1) {
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(82, 26);
@@ -221,21 +225,65 @@ void Game::SaveGame() {
 void Game::LoadGame() {
 	Controller::ClearConsole();
 	Graphics::LoadBackground();
-	string path = "./gameData";
-	fstream fs(path, ios::in);
+	fstream fs("listFile.txt", ios::in);
 	string tmp;
 	while (!fs.eof()) {
 		getline(fs, tmp);
 		listSaveFile.push_back(tmp);
 	}
-
 	fs.close();
+	Controller::GotoXY(47, 11);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
+	cout << "Choose your saving game to load!";
 
+	int idx = 13, idx_t = 13;
 
-	for (int i = 0; i < listSaveFile.size(); i++) {
+	Controller::GotoXY(48, idx);
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	cout << (char)175;
+	for (int i = 0; i < 7; i++) {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		Controller::GotoXY(50, i + 30);
+		Controller::GotoXY(51, i + 13);
 		cout << listSaveFile[i];
+	}
+	while (true) {
+		switch (Controller::GetConsoleInput()) {
+		case 2:
+			idx--;
+		case 5:
+			idx++;
+		}
+		if (idx > 19)
+			idx = 13;
+		else if (idx < 13)
+			idx = 19;
+		Controller::GotoXY(48, idx_t);
+		cout << "  ";
+		Controller::GotoXY(48, idx);
+		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << (char)175;
+		Controller::GotoXY(51, 13);
+		if (idx == 13)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[0] << endl;
+		if (idx == 14)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[1] << endl;
+		if (idx == 15)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[2] << endl;
+		if (idx == 16)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[3] << endl;
+		if (idx == 17)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[4] << endl;
+		if (idx == 18)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[5] << endl;
+		if (idx == 19)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << listSaveFile[6] << endl;
 	}
 }
 void Game::printHelp() {
@@ -246,13 +294,12 @@ void Game::printHelp() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 	cout << "Instructions";
 
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge";
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge all the";
 	Controller::GotoXY(80, 23); cout << "obstacles (cars & animals)";
-
 	Controller::GotoXY(80, 24); cout << "- Use W, A, S, D to move";
 
-	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	Controller::GotoXY(80, 25); cout << "- Finish 5 levels to win!!!";
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);

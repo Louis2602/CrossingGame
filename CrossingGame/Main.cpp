@@ -9,8 +9,8 @@ int main() {
 	srand(time(NULL));
 
 	Controller::SetUpConsole();
-	/*Sound s;
-	s.SoundBackground();*/
+	Sound s;
+	s.SoundBackground();
 
 	Menu game;
 	game.MainMenu();
