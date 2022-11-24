@@ -1,9 +1,11 @@
 #include "CLIGHT.h"
 
 CLIGHT::CLIGHT() {
+	isPlay = true;
 	state = true;
 	posX = 0;
 	posY = 0;
+	timer = 0;
 }
 bool CLIGHT::getisPlay() {
 	return isPlay;
@@ -31,10 +33,9 @@ void CLIGHT::setPos(int x, int y) {
 }
 void CLIGHT::spawn_light(int x, int y) {
 	setPos(x, y);
-	if (this->getState()) {
+	if (state) {
 		//Draw green light.
 		mtx.lock();
-
 		Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
 		Controller::GotoXY(x, y + 1);
 		cout << TopDot;
@@ -46,7 +47,6 @@ void CLIGHT::spawn_light(int x, int y) {
 	else {
 		//Draw red light
 		mtx.lock();
-
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(x, y);
 		cout << BottomDot;
@@ -56,6 +56,4 @@ void CLIGHT::spawn_light(int x, int y) {
 		mtx.unlock();
 
 	}
-	//Set color back.
-	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 }

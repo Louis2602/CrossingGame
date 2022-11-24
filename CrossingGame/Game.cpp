@@ -7,20 +7,23 @@ Game::Game(int _level) {
 	SAVE_GAME = false;
 }
 void Game::renderLight() {
-	Sleep(10);
-	while (mLight.getState() && mLight.getisPlay()) {
-		// Green
-		mLight.spawn_light(70, 7);
-		mLight.spawn_light(70, 11);
-		mLight.spawn_light(70, 15);
-		mLight.spawn_light(70, 19);
-		mLight.setTimer(50);
-		// Red
-		mLight.spawn_light(70, 7);
-		mLight.spawn_light(70, 11);
-		mLight.spawn_light(70, 15);
-		mLight.spawn_light(70, 19);
-		mLight.setTimer(30);
+	while (mLight.getisPlay()) {
+		if (mLight.getState()) {
+			// Green
+			mLight.spawn_light(70, 7);
+			mLight.spawn_light(4, 11);
+			mLight.spawn_light(70, 15);
+			mLight.spawn_light(4, 19);
+			mLight.setTimer(50);
+		}
+		else {
+			// Red
+			mLight.spawn_light(70, 7);
+			mLight.spawn_light(4, 11);
+			mLight.spawn_light(70, 15);
+			mLight.spawn_light(4, 19);
+			mLight.setTimer(30);
+		}
 	}
 }
 void Game::SetUpGame() {
@@ -111,7 +114,6 @@ void Game::playGame(thread& tL, thread& tO) {
 				IS_RUNNING = false;
 				mLight.setisPlay(false);
 				mLight.setState(false);
-				Graphics::DrawGoodbyeScreen();
 				break;
 			case 2: //UP
 			{
@@ -138,19 +140,13 @@ void Game::playGame(thread& tL, thread& tO) {
 				break;
 			}
 			case 7: //PAUSE GAME
-				mLight.setisPlay(false);
-				mLight.setState(false);
 				PAUSE_STATE = true;
 				break;
 
 			case 8: // SAVE GAME
-				mLight.setisPlay(false);
-				mLight.setState(false);
 				SAVE_GAME = true;
 				break;
 			case 9: // HELP
-				mLight.setisPlay(false);
-				mLight.setState(false);
 				mtx.lock();
 				printHelp();
 				mtx.unlock();
@@ -190,11 +186,18 @@ void Game::SaveGame() {
 	Controller::GotoXY(81, 24);
 	cin >> filename;
 	Controller::ShowCursor(false);
-	filename = "gameData\\" + filename + ".txt";
+	filename = "./gameData/" + filename + ".txt";
+	
+	if (_mkdir("./gameData") == -1) {
+		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		Controller::GotoXY(82, 26);
+		cerr << " Error : " << strerror(errno) << endl;
+	}
+
 	fstream fs(filename, ios::app);
 	if (SAVE_GAME) {
 		fs << "Player's name: " << playerName << '\n' << "ID: " << playerID << '\n' << "Class: " <<
-			className << '\n' << "Score: " << mPeople.getScore() << '\n';
+			className << '\n' << "Level: " << level << "Score: " << mPeople.getScore() << '\n';
 	}
 	fs.close();
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
@@ -214,7 +217,24 @@ void Game::SaveGame() {
 	SAVE_GAME = false;
 }
 void Game::LoadGame() {
+	Controller::ClearConsole();
 	Graphics::LoadBackground();
+	string path = "./gameData";
+	fstream fs(path, ios::in);
+	string tmp;
+	while (!fs.eof()) {
+		getline(fs, tmp);
+		listSaveFile.push_back(tmp);
+	}
+
+	fs.close();
+
+
+	for (int i = 0; i < listSaveFile.size(); i++) {
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		Controller::GotoXY(50, i + 30);
+		cout << listSaveFile[i];
+	}
 }
 void Game::printHelp() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
@@ -224,7 +244,7 @@ void Game::printHelp() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 	cout << "Instructions";
 
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE); 
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge";
 	Controller::GotoXY(80, 23); cout << "obstacles (cars & animals)";
 
@@ -254,7 +274,6 @@ void Game::printHelp() {
 		}
 	}
 	mLight.setisPlay(true);
-	mLight.setState(true);
 }
 void Game::PauseGame() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
@@ -285,23 +304,18 @@ void Game::PauseGame() {
 	Sleep(10);
 	PAUSE_STATE = false;
 	mLight.setisPlay(true);
-	mLight.setState(true);
 }
 void Game::renderObject() {
 	int dx = -6, dy = 4;
 
-	//cLine* line1;
 	cLine* line2;
 	cLine* line3;
 	cLine* line4;
 	cLine* line5;
-	//cLine* line6;
-	//line1 = new cLine;
 	line2 = new cLine;
 	line3 = new cLine;
 	line4 = new cLine;
 	line5 = new cLine;
-	//line6 = new cLine;
 	int t2 = 0;
 	int t3 = 0;
 	int t4 = 0;

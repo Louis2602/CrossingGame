@@ -6,7 +6,7 @@ private:
 	char BottomDot = 220;
 	char TopDot = 223;
 	bool state; //red is false, green is true.
-	bool isPlay = true;
+	bool isPlay;
 	int posX, posY;
 	int timer;
 public:

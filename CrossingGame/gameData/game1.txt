@@ -1,0 +1,4 @@
+Player's name: unknown
+ID: unknown
+Class: unknown
+Score: 5

@@ -197,7 +197,7 @@ void Menu::MenuGameplay() {
 		PlayGame();
 		break;
 	case 2:
-		PlayGame();
+		LoadGame();
 		break;
 	case 3:
 		MainMenu();
@@ -481,4 +481,8 @@ void Menu::PlayGame() {
 	Game g(_EASY);
 	g.SetUpGame();
 	g.StartGame();
+}
+void Menu::LoadGame() {
+	Game g;
+	g.LoadGame();
 }
