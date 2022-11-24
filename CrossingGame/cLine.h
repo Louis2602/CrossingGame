@@ -10,6 +10,7 @@
 #include "Controller.h"
 #include "CBIRD.h"
 #include "CDINO.h"
+#include "CPEOPLE.h"
 
 #define LINE_1 8
 #define LINE_2 12
@@ -37,7 +38,7 @@ public:
 	void popObject();
 	void printObject(cPoint pos, char** shape, int height, int width);
 	void deleteObject(cPoint pos, char** shape, int height, int width);
-	void nextMove();
+	void nextMove(CPEOPLE, bool&);
 	void changeLight(bool light);
 	bool getLight();
 };

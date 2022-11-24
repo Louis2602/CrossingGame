@@ -95,8 +95,12 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 }
 
 
-void cLine::nextMove() {
+void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 	for (int i{}; i < lineData.size(); i++) {
+		if (p.isImpact(lineData[i])) {
+			IS_RUNNING = true;
+			return;
+		}
 		deleteObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 		lineData[i]->updatePosition(this->speed, 0);
 		printObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());

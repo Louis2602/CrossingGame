@@ -81,8 +81,8 @@ void Game::StartGame() {
 
 void Game::playGame(thread& tL, thread& tO) {
 	tL = thread([this] {renderLight(); });
-	tO = thread([&] {renderObject(); });
-	while (!PAUSE_STATE && IS_RUNNING) {
+	tO = thread([&] {renderObject(mPeople); });
+	while (IS_RUNNING) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(10, 1);
@@ -243,7 +243,7 @@ void Game::printHelp() {
 	while (Controller::GetConsoleInput() != 6) {
 		mSound.PlayerMove();
 	}
-	mSound.SoundSuccess();
+	mSound.SoundSuccess(); 
 	// Clear up HELP board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
@@ -287,7 +287,7 @@ void Game::PauseGame() {
 	mLight.setisPlay(true);
 	mLight.setState(true);
 }
-void Game::renderObject() {
+void Game::renderObject(CPEOPLE& p) {
 	int dx = -6, dy = 4;
 
 	//cLine* line1;
@@ -379,7 +379,7 @@ void Game::renderObject() {
 
 		if (line2->getLight()) {
 			//line1->nextMove();
-			line2->nextMove();
+			line2->nextMove(p, IS_RUNNING);
 			t2++;
 			/*line3->nextMove();
 			line4->nextMove();
@@ -388,17 +388,17 @@ void Game::renderObject() {
 		}
 
 		if (line3->getLight()) {
-			line3->nextMove();
+			line3->nextMove(p, IS_RUNNING);
 			t3++;
 		}
 
 		if (line4->getLight()) {
-			line4->nextMove();
+			line4->nextMove(p, IS_RUNNING);
 			t4++;
 		}
 
 		if (line5->getLight()) {
-			line5->nextMove();
+			line5->nextMove(p, IS_RUNNING);
 			t5++;
 		}
 		Sleep(500);
