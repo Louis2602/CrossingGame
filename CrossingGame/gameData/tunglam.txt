@@ -1,4 +1,5 @@
 Player's name: tunglam
 ID: 21127337
 Class: 21clc08
-Level: 3Score: 10
+Level: 3
+Score: 12

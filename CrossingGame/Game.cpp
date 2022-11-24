@@ -39,37 +39,37 @@ void Game::SetUpGame() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, LIGHT_BLUE);
 	Controller::GotoXY(45, 15);
 	cout << "Enter your name:  ";
-	cin.getline(playerName, 15);
+	getline(cin, playerName);
 	Controller::GotoXY(45, 17);
 	cout << "Enter your ID:  ";
-	cin.getline(playerID, 9);
+	getline(cin, playerID);
 	Controller::GotoXY(45, 19);
 	cout << "Enter your class's name:  ";
-	cin.getline(className, 8);
+	getline(cin, className);
 	Controller::ShowCursor(false);
 }
 void Game::StartGame() {
 	Graphics::PrintInterface();
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	Controller::GotoXY(85, 7);
-	if (strlen(playerName) != 0)
+	if (playerName.size() != 0)
 		cout << "Player's name: " << playerName;
 	else {
-		strcpy_s(playerName, "unknown");
+		playerName = "unknown";
 		cout << "Player's name: " << playerName;
 	}
 	Controller::GotoXY(85, 9);
-	if (strlen(playerID) != 0)
+	if (playerID.size() != 0)
 		cout << "Student's ID: " << playerID;
 	else {
-		strcpy_s(playerID, "unknown");
+		playerID = "unknown";
 		cout << "Student's ID: " << playerID;
 	}
 	Controller::GotoXY(85, 11);
-	if (strlen(className) != 0)
+	if (className.size() != 0)
 		cout << "Class: " << className;
 	else {
-		strcpy_s(className, "unknown");
+		className = "unknown";
 		cout << "Class: " << className;
 	}
 	thread light;
@@ -92,7 +92,9 @@ void Game::playGame(thread& tL, thread& tO) {
 		cout << "LEVEL: " << level;
 		Controller::GotoXY(88, 1);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-		cout << mPeople.getScore();
+		if (score == 0)
+			cout << mPeople.getScore();
+		else cout << score;
 		mtx.unlock();
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
@@ -165,10 +167,10 @@ void Game::playGame(thread& tL, thread& tO) {
 			PauseGame();
 			mtx.unlock();
 		}
-	} 
+	}
 
 	Graphics::DrawGoodbyeScreen();
-	tL.join();	
+	tL.join();
 	tO.join();
 }
 void Game::EndGame(thread* game) {
@@ -203,7 +205,7 @@ void Game::SaveGame() {
 	fstream fs(filename, ios::app);
 	if (SAVE_GAME) {
 		fs << "Player's name: " << playerName << '\n' << "ID: " << playerID << '\n' << "Class: " <<
-			className << '\n' << "Level: " << level << "Score: " << mPeople.getScore() << '\n';
+			className << '\n' << "Level: " << level << "\n" << "Score: " << mPeople.getScore() << '\n';
 	}
 	fs.close();
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
@@ -238,53 +240,84 @@ void Game::LoadGame() {
 
 	int idx = 13, idx_t = 13;
 
-	Controller::GotoXY(48, idx);
-	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	cout << (char)175;
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < listSaveFile.size(); i++) {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		Controller::GotoXY(51, i + 13);
 		cout << listSaveFile[i];
+		if (i > 6)
+			break;
 	}
+	Controller::GotoXY(48, idx);
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	cout << (char)175;
+	Controller::GotoXY(51, idx);
+	cout << listSaveFile[0] << endl;
+
 	while (true) {
-		switch (Controller::GetConsoleInput()) {
-		case 2:
+		char s = Controller::GetConsoleInput();
+		idx_t = idx;
+
+		if (s == 2) {
 			idx--;
-		case 5:
-			idx++;
+			if (idx < 13)
+				idx = 13;
+			Controller::GotoXY(51, idx);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+			cout << listSaveFile[idx - 13];
+			Controller::GotoXY(51, idx + 1);
+			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+			cout << listSaveFile[idx - 12];
 		}
-		if (idx > 19)
-			idx = 13;
-		else if (idx < 13)
-			idx = 19;
+		else if (s == 5) {
+			idx++;
+			if (idx > 12 + listSaveFile.size())
+				idx = 12 + listSaveFile.size();
+			Controller::GotoXY(51, idx);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+			cout << listSaveFile[idx - 13];
+			Controller::GotoXY(51, idx - 1);
+			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+			cout << listSaveFile[idx - 14];
+
+		}
+
 		Controller::GotoXY(48, idx_t);
 		cout << "  ";
 		Controller::GotoXY(48, idx);
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << (char)175;
-		Controller::GotoXY(51, 13);
-		if (idx == 13)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[0] << endl;
-		if (idx == 14)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[1] << endl;
-		if (idx == 15)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[2] << endl;
-		if (idx == 16)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[3] << endl;
-		if (idx == 17)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[4] << endl;
-		if (idx == 18)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[5] << endl;
-		if (idx == 19)
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << listSaveFile[6] << endl;
+
+		// if enter
+		if (s == 6)
+		{
+			idx -= 13;
+			break;
+		}
 	}
+	fstream readFile(listSaveFile[idx], ios::in);
+	while (!readFile.eof()) {
+		getline(readFile, tmp, ':');
+		readFile.get();
+		getline(readFile, playerName);
+		getline(readFile, tmp, ':');
+		readFile.get();
+		getline(readFile, playerID);
+		getline(readFile, tmp, ':');
+		readFile.get();
+		getline(readFile, className);
+		readFile.get();
+		getline(readFile, tmp, ':');
+		readFile.get();
+		readFile >> level;
+		readFile.ignore();
+		getline(readFile, tmp, ':');
+		readFile.get();
+		readFile >> score;
+		readFile.ignore();
+	}
+	readFile.close();
+	IS_RUNNING = true;
+	StartGame();
 }
 void Game::printHelp() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
@@ -312,7 +345,7 @@ void Game::printHelp() {
 	while (Controller::GetConsoleInput() != 6) {
 		mSound.PlayerMove();
 	}
-	mSound.SoundSuccess(); 
+	mSound.SoundSuccess();
 	// Clear up HELP board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)

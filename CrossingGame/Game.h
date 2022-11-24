@@ -10,7 +10,7 @@
 
 class Game {
 private:
-	char playerName[15] = "", playerID[9] = "", className[8] = "";
+	string playerName, playerID, className;
 	string filename;
 	vector<string> listSaveFile;
 	int level;
@@ -21,6 +21,7 @@ private:
 	CPEOPLE mPeople;
 	CLIGHT mLight;
 	Sound mSound;
+	int score = 0;
 public:
 	Game() = default;
 	Game(int);
