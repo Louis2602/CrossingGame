@@ -85,7 +85,7 @@ void Game::StartGame() {
 void Game::playGame(thread& tL, thread& tO) {
 	tL = thread([this] {renderLight(); });
 	tO = thread([&] {renderObject(); });
-	do{
+	while (IS_RUNNING) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(10, 1);
@@ -159,15 +159,13 @@ void Game::playGame(thread& tL, thread& tO) {
 			mtx.lock();
 			SaveGame();
 			mtx.unlock();
-			break;
 		}
 		if (PAUSE_STATE) {
 			mtx.lock();
 			PauseGame();
 			mtx.unlock();
-			break;
 		}
-	} while (IS_RUNNING);
+	} 
 
 	Graphics::DrawGoodbyeScreen();
 	tL.join();
@@ -217,8 +215,8 @@ void Game::SaveGame() {
 			cout << " ";
 		}
 	}
-	mLight.setisPlay(true);
 	SAVE_GAME = false;
+	mLight.setisPlay(true);
 }
 void Game::LoadGame() {
 	Controller::ClearConsole();
@@ -327,62 +325,30 @@ void Game::renderObject() {
 
 	while (IS_RUNNING) {
 		if (t2 % 15 && line2->getLight()) {
-			//cPoint pos1(dx - t * 15, dy);
 			cPoint pos2(dx - t2 * 15, dy + 4);
-			/*cPoint pos3(dx - t3 * 15, dy + 4 * 2);
-			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
-			cPoint pos5(dx - t5 * 15, dy + 4 * 4);*/
-			//cPoint pos6(dx - t * 15, dy + 4 * 5);
-
-			//COBJECT* car1;
 			COBJECT* car2;
-			/*COBJECT* car3;
-			COBJECT* car4;
-			COBJECT* car5;*/
-			//COBJECT* car6;
-
-			//car1 = new cCar(pos1);
 			car2 = new CBIRD(pos2);
-			//car3 = new cCar(pos3);
-			//car4 = new cTruck(pos4);
-			//car5 = new cCar(pos5);
-			//car6 = new cTruck(pos6);
-
-			//line1->pushObject(car1);
 			line2->pushObject(car2);
-			//line3->pushObject(car3);
-			//line4->pushObject(car4);
-			//line5->pushObject(car5);
-			//line6->pushObject(car6);
 		}
 
 		if (t3 % 15 && line3->getLight()) {
 			cPoint pos3(dx - t3 * 15, dy + 4 * 2);
-
 			COBJECT* car3;
-
 			car3 = new cCar(pos3);
-
 			line3->pushObject(car3);
 		}
 
 		if (t4 % 15 && line4->getLight()) {
 			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
-
 			COBJECT* car4;
-
 			car4 = new cTruck(pos4);
-
 			line4->pushObject(car4);
 		}
 
 		if (t5 % 15 && line5->getLight()) {
 			cPoint pos5(dx - t5 * 15, dy + 4 * 4);
-
 			COBJECT* car5;
-
 			car5 = new CDINO(pos5);
-
 			line5->pushObject(car5);
 		}
 
@@ -392,13 +358,8 @@ void Game::renderObject() {
 		line5->changeLight(mLight.getState());
 
 		if (line2->getLight()) {
-			//line1->nextMove();
 			line2->nextMove(mPeople, IS_RUNNING);
 			t2++;
-			/*line3->nextMove();
-			line4->nextMove();
-			line5->nextMove();*/
-			//line6->nextMove();
 		}
 
 		if (line3->getLight()) {
