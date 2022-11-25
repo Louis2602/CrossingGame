@@ -1,10 +1,18 @@
 ﻿#include "Game.h";
 
+Game::Game() {
+	IS_RUNNING = true;
+	PAUSE_STATE = false;
+	SAVE_GAME = false;
+	level = 1;
+	score = 0;
+}
 Game::Game(int _level) {
 	level = _level;
 	IS_RUNNING = true;
 	PAUSE_STATE = false;
 	SAVE_GAME = false;
+	score = 0;
 }
 void Game::renderLight() {
 	while (mLight.getisPlay()) {
@@ -293,7 +301,7 @@ void Game::LoadGame() {
 		}
 	}
 	fstream readFile(listSaveFile[idx], ios::in);
-	int posX, posY;
+	int posX{}, posY{};
 	while (!readFile.eof()) {
 		getline(readFile, tmp, ':');
 		readFile.get();

@@ -17,13 +17,12 @@ private:
 	bool IS_RUNNING;
 	bool PAUSE_STATE;
 	bool SAVE_GAME;
-	//CLINEAnimal mLine;
 	CPEOPLE mPeople;
 	CLIGHT mLight;
 	Sound mSound;
-	int score = 0;
+	int score;
 public:
-	Game() = default;
+	Game();
 	Game(int);
 	~Game() {};
 	int curLevel() {

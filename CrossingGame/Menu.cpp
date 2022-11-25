@@ -33,7 +33,7 @@ void Menu::MainMenu() {
 		if (s == 'W' || s == KEY_UP)
 			idx--;
 		else if (s == 'S' || s == KEY_DOWN)
-				idx++;
+			idx++;
 		if (s == KEY_ESC)
 			Graphics::DrawGoodbyeScreen();
 

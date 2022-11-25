@@ -3,8 +3,8 @@
 
 class CLIGHT {
 private:
-	char BottomDot = 220;
-	char TopDot = 223;
+	const char BottomDot = 220;
+	const char TopDot = 223;
 	bool state; //red is false, green is true.
 	bool isPlay;
 	int posX, posY;
