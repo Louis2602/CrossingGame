@@ -1,0 +1,6 @@
+Player's name: kim
+ID: 321
+Class: 123
+Level: 2
+Score: 7
+Position: 28,16

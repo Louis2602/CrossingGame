@@ -4,3 +4,4 @@
 ./gameData/binhvo.txt
 ./gameData/nguyenkim.txt
 ./gameData/test.txt
+./gameData/game_oop.txt

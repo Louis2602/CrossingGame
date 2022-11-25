@@ -92,9 +92,7 @@ void Game::playGame(thread& tL, thread& tO) {
 		cout << "LEVEL: " << level;
 		Controller::GotoXY(88, 1);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-		if (score == 0)
-			cout << mPeople.getScore();
-		else cout << score;
+		cout << score + mPeople.getScore();
 		mtx.unlock();
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
@@ -270,8 +268,8 @@ void Game::LoadGame() {
 		}
 		else if (s == 5) {
 			idx++;
-			if (idx > 12 + listSaveFile.size())
-				idx = 12 + listSaveFile.size();
+			if (idx > 11 + listSaveFile.size())
+				idx = 11 + listSaveFile.size();
 			Controller::GotoXY(51, idx);
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 			cout << listSaveFile[idx - 13];
