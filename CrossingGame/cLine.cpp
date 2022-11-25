@@ -1,4 +1,4 @@
-#include "cLine.h"
+﻿#include "cLine.h"
 
 cLine::cLine() {
 	objectInLine = 0;
@@ -65,12 +65,15 @@ void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 				Controller::GotoXY(x + j, y + i);
 				cout << shape[i][j - max(1, y)];
+				//cout << i << " " << j;
 				mtx.unlock();
 			}
-
 		}
 	}
-	if (x > 80) {
+	if (x > 80 && this->getDirection() == 0) {
+		popObject();
+	}
+	else if (x < -20 && this->getDirection() == 1) {
 		popObject();
 	}
 }
@@ -85,10 +88,16 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 				Controller::GotoXY(x + j, y + i);
 				cout << ' ';
 				mtx.unlock();
+				//cout << i << " " << j;
 			}
+
 		}
 	}
-	if (x > 80) {
+
+	if (x > 80 && this->getDirection() == 0) {
+		popObject();
+	}
+	else if (x < -20 && this->getDirection() == 1) {
 		popObject();
 	}
 }
@@ -103,7 +112,10 @@ void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 		}
 
 		deleteObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
-		lineData[i]->updatePosition(this->speed, 0);
+		if (this->direction)
+			lineData[i]->updatePosition(-(this->speed), 0); // phải qua trái
+		else
+			lineData[i]->updatePosition(this->speed, 0); // trái qua phải
 		printObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 
 		if (p.isImpact(lineData[i]))

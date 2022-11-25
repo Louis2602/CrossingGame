@@ -433,16 +433,22 @@ void Game::PauseGame() {
 }
 void Game::renderObject(thread& tL, thread& tO) {
 	int dx = -6, dy = 6;
-
+	int _dx = 58;
 	cLine* line2;
 	cLine* line3;
 	cLine* line4;
 	cLine* line5;
 	vector<COBJECT*> line;
 	line2 = new cLine;
+	//test
+	line2->setDirection(1);
+	//test
 	line3 = new cLine;
 	line4 = new cLine;
+	line4->setDirection(1);
+
 	line5 = new cLine;
+
 	int t2 = 0;
 	int t3 = 0;
 	int t4 = 0;
@@ -452,32 +458,64 @@ void Game::renderObject(thread& tL, thread& tO) {
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
 
 	while (IS_RUNNING) {
+		line2->setSpeed(curLevel() * 5);
+		line3->setSpeed(curLevel() * 4);
+		line4->setSpeed(curLevel() * 3);
+		line5->setSpeed(curLevel() * 2);
 		if (t2 % 15 && line2->getLight()) {
-			cPoint pos2(dx - t2 * 15, dy + 4);
-			COBJECT* car2;
-			car2 = new CBIRD(pos2);
-			line2->pushObject(car2);
+			cPoint pos2;
+			if (line2->getDirection())
+				pos2.setXY(_dx - t2 * 15, dy + 4); // phải qua trái
+			else
+				pos2.setXY(dx - t2 * 15, dy + 4); // trái qua phải
+			COBJECT* obj2;
+			obj2 = new CBIRD(pos2);
+			line2->pushObject(obj2);
 		}
 
 		if (t3 % 15 && line3->getLight()) {
-			cPoint pos3(dx - t3 * 15, dy + 4 * 2);
+			/*cPoint pos3(dx - t3 * 15, dy + 4 * 2);
 			COBJECT* car3;
 			car3 = new cCar(pos3);
-			line3->pushObject(car3);
+			line3->pushObject(car3);*/
+			cPoint pos3;
+			if (line3->getDirection())
+				pos3.setXY(_dx - t3 * 15, dy + 4 * 2); // phải qua trái
+			else
+				pos3.setXY(dx - t3 * 15, dy + 4 * 2); // trái qua phải
+			COBJECT* obj3;
+			obj3 = new cCar(pos3);
+			line3->pushObject(obj3);
 		}
 
 		if (t4 % 15 && line4->getLight()) {
-			cPoint pos4(dx - t4 * 15, dy + 4 * 3);
-			COBJECT* car4;
-			car4 = new cTruck(pos4);
-			line4->pushObject(car4);
+			//cPoint pos4(dx - t4 * 15, dy + 4 * 3);
+			//COBJECT* car4;
+			//car4 = new cTruck(pos4);
+			//line4->pushObject(car4);
+			cPoint pos4;
+			if (line4->getDirection())
+				pos4.setXY(_dx - t4 * 15, dy + 4 * 3); // phải qua trái
+			else
+				pos4.setXY(dx - t4 * 15, dy + 4 * 3); // trái qua phải
+			COBJECT* obj4;
+			obj4 = new cTruck(pos4);
+			line4->pushObject(obj4);
 		}
 
 		if (t5 % 15 && line5->getLight()) {
-			cPoint pos5(dx - t5 * 15, dy + 4 * 4);
-			COBJECT* car5;
-			car5 = new CDINO(pos5);
-			line5->pushObject(car5);
+			//cPoint pos5(dx - t5 * 15, dy + 4 * 4);
+			//COBJECT* car5;
+			//car5 = new CDINO(pos5);
+			//line5->pushObject(car5);
+			cPoint pos5;
+			if (line5->getDirection())
+				pos5.setXY(_dx - t5 * 15, dy + 4 * 4); // phải qua trái
+			else
+				pos5.setXY(dx - t5 * 15, dy + 4 * 4); // trái qua phải
+			COBJECT* obj5;
+			obj5 = new CDINO(pos5);
+			line5->pushObject(obj5);
 		}
 
 		line2->changeLight(mLight.getState());
@@ -487,27 +525,39 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		if (line2->getLight()) {
 			line2->nextMove(mPeople, IS_RUNNING);
-			t2++;
+			if (line2->getDirection())
+				t2--;
+			else
+				t2++;
 		}
 
 		if (line3->getLight()) {
 			line3->nextMove(mPeople, IS_RUNNING);
-			t3++;
+			if (line3->getDirection())
+				t3--;
+			else
+				t3++;
 		}
 
 		if (line4->getLight()) {
 			line4->nextMove(mPeople, IS_RUNNING);
-			t4++;
+			if (line4->getDirection())
+				t4--;
+			else
+				t4++;
 		}
 
 		if (line5->getLight()) {
 			line5->nextMove(mPeople, IS_RUNNING);
-			t5++;
+			if (line5->getDirection())
+				t5--;
+			else
+				t5++;
 		}
 
 		mtx.lock();
 		line = line2->getData();
-		for (int i{}; i < line.size(); i++) {
+		for (int i = 0; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;

@@ -10,20 +10,19 @@ CDINO::CDINO(cPoint pos) : COBJECT(pos) {
         for (int j = 0; j < DINO_WIDTH; j++)
             shape[i][j] = ' ';
     // Draw head
-    shape[0][2] = '(';
-    shape[0][3] = '`';
+    shape[0][1] = '(';
+    shape[0][2] = '`';
+    shape[0][3] = '~';
     shape[0][4] = '~';
-    shape[0][5] = '~';
-    shape[0][6] = ')';
+    shape[0][5] = ')';
 
-    shape[1][2] = '//';
-    shape[1][3] = '>';
-    shape[1][5] = '>';
+    shape[1][1] = '//';
+    shape[1][2] = '>';
+    shape[1][4] = '>';
 
-    shape[2][1] = '//';
-    shape[2][3] = ')';
-    shape[2][4] = '_';
-    shape[2][5] = ')';
+    shape[2][0] = '//';
+    shape[2][2] = ')';
+    shape[2][4] = ')';
 }
 
 CDINO::CDINO() {
@@ -42,20 +41,19 @@ CDINO::CDINO() {
             shape[i][j] = ' ';
 
     // Draw head
-    shape[0][2] = '(';
-    shape[0][3] = '`';
+    shape[0][1] = '(';
+    shape[0][2] = '`';
+    shape[0][3] = '~';
     shape[0][4] = '~';
-    shape[0][5] = '~';
-    shape[0][6] = ')';
+    shape[0][5] = ')';
 
-    shape[1][2] = '//';
-    shape[1][3] = '>';
-    shape[1][5] = '>';
+    shape[1][1] = '//';
+    shape[1][2] = '>';
+    shape[1][4] = '>';
 
-    shape[2][1] = '//';
-    shape[2][3] = ')';
-    shape[2][4] = '_';
-    shape[2][5] = ')';
+    shape[2][0] = '//';
+    shape[2][2] = ')';
+    shape[2][4] = ')';
 }
 
 CDINO::~CDINO() {

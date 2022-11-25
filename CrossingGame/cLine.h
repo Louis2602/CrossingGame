@@ -40,4 +40,10 @@ public:
 	void changeLight(bool light);
 	bool getLight();
 	vector<COBJECT*> getData();
+	void setDirection(bool _x) {
+		this->direction = _x;
+	}
+	bool getDirection() {
+		return this->direction;
+	}
 };
