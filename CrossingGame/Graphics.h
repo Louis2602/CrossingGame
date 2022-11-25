@@ -16,6 +16,7 @@ public:
 	static void DrawMap();
 	static void PrintInterface();
 	static void DrawGoodbyeScreen();
+	static void PrintLevel(int);
 };
 
 #endif // !Graphics

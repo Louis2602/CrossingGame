@@ -15,7 +15,7 @@ private:
 	int height = 3, width = 3;
 public:
 	CPEOPLE() {
-		pos.setXY(36, 24);
+		pos.setXY(36, 26);
 	}
 	~CPEOPLE() {};
 	int getPosX();     //Get mX value of character

@@ -69,7 +69,7 @@ void CPEOPLE::Delete(int mX, int mY) {
 void CPEOPLE::Up(int& mY) {
 	Sound s;
 	s.PlayerMove();
-	if (mY == 4)
+	if (mY == 6)
 		return;
 	mY -= 4;
 	setForward();
@@ -95,7 +95,7 @@ void CPEOPLE::Right(int& mX) {
 void CPEOPLE::Down(int& mY) {
 	Sound s;
 	s.PlayerMove();
-	if (mY + 3 == 27)
+	if (mY + 3 == 29)
 		return;
 	mY += 4;
 	setBack();
@@ -112,7 +112,7 @@ bool CPEOPLE::isImpact(COBJECT* Object) {
 }
 
 bool CPEOPLE::isFinish(int mX) {
-	if (pos.getY() == 4)
+	if (pos.getY() == 6)
 		return true;
 	return false;
 }

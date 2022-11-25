@@ -18,18 +18,18 @@ void Game::renderLight() {
 	while (mLight.getisPlay()) {
 		if (mLight.getState()) {
 			// Green
-			mLight.spawn_light(70, 7);
-			mLight.spawn_light(4, 11);
-			mLight.spawn_light(70, 15);
-			mLight.spawn_light(4, 19);
+			mLight.spawn_light(70, 9);
+			mLight.spawn_light(4, 13);
+			mLight.spawn_light(70, 17);
+			mLight.spawn_light(4, 21);
 			mLight.setTimer(50);
 		}
 		else {
 			// Red
-			mLight.spawn_light(70, 7);
-			mLight.spawn_light(4, 11);
-			mLight.spawn_light(70, 15);
-			mLight.spawn_light(4, 19);
+			mLight.spawn_light(70, 9);
+			mLight.spawn_light(4, 13);
+			mLight.spawn_light(70, 17);
+			mLight.spawn_light(4, 21);
 			mLight.setTimer(30);
 		}
 	}
@@ -96,8 +96,8 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(10, 1);
-		cout << "LEVEL: " << level;
-		Controller::GotoXY(88, 1);
+		Graphics::PrintLevel(level);
+		Controller::GotoXY(80, 1);
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 		cout << score + mPeople.getScore();
 		mtx.unlock();
@@ -145,7 +145,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		}
 		if (mPeople.isFinish(x))
 		{
-			mPeople.updatePos(36, 24);
+			mPeople.updatePos(36, 26);
 			level++;
 		}
 		else
@@ -431,7 +431,7 @@ void Game::PauseGame() {
 	mLight.setisPlay(true);
 }
 void Game::renderObject(thread& tL, thread& tO) {
-	int dx = -6, dy = 4;
+	int dx = -6, dy = 6;
 
 	cLine* line2;
 	cLine* line3;

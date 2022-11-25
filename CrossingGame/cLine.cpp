@@ -65,7 +65,6 @@ void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 				Controller::GotoXY(x + j, y + i);
 				cout << shape[i][j - max(1, y)];
-				//cout << i << " " << j;
 				mtx.unlock();
 			}
 
@@ -86,9 +85,7 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 				Controller::GotoXY(x + j, y + i);
 				cout << ' ';
 				mtx.unlock();
-				//cout << i << " " << j;
 			}
-
 		}
 	}
 	if (x > 80) {
