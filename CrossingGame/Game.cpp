@@ -97,9 +97,10 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		Controller::GotoXY(10, 1);
 		Graphics::PrintLevel(level);
-		Controller::GotoXY(80, 1);
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-		cout << score + mPeople.getScore();
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		Graphics::DrawRectangle(90, 0, 10, 2);
+		Controller::GotoXY(92, 1);
+		cout << "SCORE: " << score + mPeople.getScore();
 		mtx.unlock();
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
