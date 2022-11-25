@@ -2,7 +2,7 @@
 
 cLine::cLine() {
 	objectInLine = 0;
-	speed = 10;
+	speed = 2;
 }
 
 void cLine::changeLight(bool light) {
@@ -115,6 +115,10 @@ void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 			return;
 		}
 	}
+}
+
+vector<COBJECT*> cLine::getData() {
+	return this->lineData;
 }
 
 //void cLine::stillContainObject

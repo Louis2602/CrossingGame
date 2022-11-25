@@ -34,9 +34,9 @@ public:
 	void SaveGame();
 	void PauseGame();
 	void LoadGame();
-	void playGame(thread&, thread&);
+	void playGame(cLine*, cLine*, cLine*, cLine*);
 	void printHelp();
 	void renderLight();
-	void renderObject();
+	void renderObject(thread&, thread&);
 };
 #endif // !Game

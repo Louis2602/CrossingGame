@@ -81,18 +81,17 @@ void Game::StartGame() {
 		cout << "Class: " << className;
 	}
 	thread light;
-	thread Object;
+	thread people;
 
-	thread mainGame([&] {playGame(light, Object); });
+	thread mainGame([&] {renderObject(light, people); });
 
 	mainGame.join();
 	light.join();
-	Object.join();
+	people.join();
 }
 
-void Game::playGame(thread& tL, thread& tO) {
-	tL = thread([this] {renderLight(); });
-	tO = thread([&] {renderObject(); });
+void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
+	vector<COBJECT*> line;
 	while (IS_RUNNING) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
@@ -104,6 +103,40 @@ void Game::playGame(thread& tL, thread& tO) {
 		mtx.unlock();
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
+
+		mtx.lock();
+		line = line2->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line3->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line4->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line5->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+		mtx.unlock();
 
 		if (level == 5) {
 			mLight.setisPlay(false);
@@ -174,10 +207,6 @@ void Game::playGame(thread& tL, thread& tO) {
 			mtx.unlock();
 		}
 	}
-
-	Graphics::DrawGoodbyeScreen();
-	tL.join();
-	tO.join();
 }
 void Game::EndGame(thread* game) {
 	Controller::ClearConsole();
@@ -401,13 +430,14 @@ void Game::PauseGame() {
 	PAUSE_STATE = false;
 	mLight.setisPlay(true);
 }
-void Game::renderObject() {
+void Game::renderObject(thread& tL, thread& tO) {
 	int dx = -6, dy = 4;
 
 	cLine* line2;
 	cLine* line3;
 	cLine* line4;
 	cLine* line5;
+	vector<COBJECT*> line;
 	line2 = new cLine;
 	line3 = new cLine;
 	line4 = new cLine;
@@ -416,6 +446,9 @@ void Game::renderObject() {
 	int t3 = 0;
 	int t4 = 0;
 	int t5 = 0;
+
+	tL = thread([this] {renderLight(); });
+	tO = thread([&] {playGame(line2, line3, line4, line5); });
 
 	while (IS_RUNNING) {
 		if (t2 % 15 && line2->getLight()) {
@@ -470,8 +503,45 @@ void Game::renderObject() {
 			line5->nextMove(mPeople, IS_RUNNING);
 			t5++;
 		}
-		Sleep(500);
+
+		mtx.lock();
+		line = line2->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line3->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line4->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+
+		line = line5->getData();
+		for (int i{}; i < line.size(); i++) {
+			if (mPeople.isImpact(line[i])) {
+				IS_RUNNING = false;
+				break;
+			}
+		}
+		mtx.unlock();
+
+		Sleep(50);
 	}
 
-	PAUSE_STATE = true;
+	Graphics::DrawGoodbyeScreen();
+	tL.join();
+	tO.join();
 }

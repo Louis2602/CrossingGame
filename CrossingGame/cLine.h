@@ -39,4 +39,5 @@ public:
 	void nextMove(CPEOPLE, bool&);
 	void changeLight(bool light);
 	bool getLight();
+	vector<COBJECT*> getData();
 };
