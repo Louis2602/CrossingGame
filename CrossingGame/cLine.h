@@ -27,13 +27,14 @@ class cLine {
 	int objectInLine;
 public:
 	cLine();
-	cLine(int speed, bool direction, bool greenLight, int currentRow);
+	cLine(int, bool, string, int); //current line - direction - type of Obj - spacing
+	//cLine(int speed, bool direction, bool greenLight, int currentRow);
 	~cLine() = default;
-	void pushObject(COBJECT* Object);
-	COBJECT* generateObject(cPoint pos);
+	//void pushObject(COBJECT* Object);
+	//COBJECT* generateObject(cPoint pos);
 	void setSpeed(int _x);
-	bool doHaveSlot();
-	void popObject();
+	//bool doHaveSlot();
+	//void popObject();
 	void printObject(cPoint pos, char** shape, int height, int width);
 	void deleteObject(cPoint pos, char** shape, int height, int width);
 	void nextMove(CPEOPLE, bool&);
@@ -46,4 +47,5 @@ public:
 	bool getDirection() {
 		return this->direction;
 	}
+	void check(COBJECT*&);
 };
