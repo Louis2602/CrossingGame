@@ -18,18 +18,14 @@ void Game::renderLight() {
 	while (mLight.getisPlay()) {
 		if (mLight.getState()) {
 			// Green
-			mLight.spawn_light(70, 9);
 			mLight.spawn_light(4, 13);
-			mLight.spawn_light(70, 17);
-			mLight.spawn_light(4, 21);
+			mLight.spawn_light(70, 21);
 			mLight.setTimer(50);
 		}
 		else {
 			// Red
-			mLight.spawn_light(70, 9);
 			mLight.spawn_light(4, 13);
-			mLight.spawn_light(70, 17);
-			mLight.spawn_light(4, 21);
+			mLight.spawn_light(70, 21);
 			mLight.setTimer(30);
 		}
 	}
@@ -110,6 +106,8 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				break;
 			}
 		}
@@ -118,6 +116,8 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				break;
 			}
 		}
@@ -126,6 +126,8 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				break;
 			}
 		}
@@ -134,6 +136,8 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				break;
 			}
 		}
