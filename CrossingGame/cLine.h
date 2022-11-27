@@ -26,15 +26,10 @@ class cLine {
 	int currentRow;
 	int objectInLine;
 public:
-	cLine();
-	cLine(int, bool, string, int); //current line - direction - type of Obj - spacing
-	//cLine(int speed, bool direction, bool greenLight, int currentRow);
+	cLine() = default;
+	cLine(int, bool, string, int, int); //current line - direction - type of Obj - spacing - number of obj in 1 line
 	~cLine() = default;
-	//void pushObject(COBJECT* Object);
-	//COBJECT* generateObject(cPoint pos);
 	void setSpeed(int _x);
-	//bool doHaveSlot();
-	//void popObject();
 	void printObject(cPoint pos, char** shape, int height, int width);
 	void deleteObject(cPoint pos, char** shape, int height, int width);
 	void nextMove(CPEOPLE, bool&);

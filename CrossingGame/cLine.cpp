@@ -1,17 +1,11 @@
 ﻿#include "cLine.h"
 
-cLine::cLine() {
-	objectInLine = 0;
-	speed = 2;
-}
-
-/////////////////////
-cLine::cLine(int curLine, bool direction, string type, int spacing) {
+cLine::cLine(int curLine, bool direction, string type, int spacing, int numberOfObj) {
 	this->currentRow = curLine;
 	this->direction = direction;
 	cPoint pos;
 	COBJECT* obj;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < numberOfObj; i++) {
 		pos.setX(i * spacing);
 		pos.setY(6 + 4 * curLine);
 		if (type == "bird") {
@@ -39,48 +33,10 @@ bool cLine::getLight() {
 	return this->greenLight;
 }
 
-//cLine::cLine(int speed, bool direction, bool greenLight, int currentRow) {
-//	this->speed = speed;
-//	this->direction = direction;
-//	this->greenLight = greenLight;
-//	this->currentRow = currentRow;
-//	this->objectInLine = 0;
-//}
 void cLine::setSpeed(int _x) {
 	this->speed = _x;
 }
-//void cLine::pushObject(COBJECT* Object) {
-//	lineData.push_back(Object);
-//	printObject(Object->getPos(), Object->returnShape(), Object->getHeight(), Object->getWidth());
-//	objectInLine += 1;
-//}
 
-//COBJECT* cLine::generateObject(cPoint pos) {
-//	int randomType = rand() % 2;
-//	COBJECT* Object = NULL;
-//	switch (randomType) {
-//	case 0:
-//		Object = new cCar(pos);
-//	default:
-//		Object = new cTruck(pos);
-//	}
-//	return Object;
-//}
-
-//bool cLine::doHaveSlot() {
-//	if (this->objectInLine <= 4) {
-//		return true;
-//	}
-//	return false;
-//}
-//
-//void cLine::popObject() {
-//	if (objectInLine > 0) {
-//		lineData.erase(lineData.begin());
-//		this->objectInLine -= 1;
-//	}
-//
-//}
 
 void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
@@ -92,7 +48,6 @@ void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 				Controller::GotoXY(x + j, y + i);
 				cout << shape[i][j - max(1, y)];
-				//cout << i << " " << j;
 				mtx.unlock();
 			}
 		}
@@ -109,7 +64,6 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 				Controller::GotoXY(x + j, y + i);
 				cout << ' ';
 				mtx.unlock();
-				//cout << i << " " << j;
 			}
 
 		}
@@ -118,8 +72,8 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 
 
 void cLine::check(COBJECT* &obj) {
-	if (obj->getX() < -20 && this->direction == 1) {
-		obj->updatePosition(80, 0);
+	if (obj->getX() < -25 && this->direction == 1) {
+		obj->updatePosition(100, 0);
 		return;
 	}
 	if (obj->getX() > 70 && this->direction == 0) {
