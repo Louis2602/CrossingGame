@@ -440,8 +440,8 @@ void Game::renderObject(thread& tL, thread& tO) {
 	int _dx = 58;
 	int ObjSpace;
 	cLine* line2 = new cLine(1, 1, "bird", 15, 4);
-	cLine* line3 = new cLine(2, 0, "truck", 20, 3);
-	cLine* line4 = new cLine(3, 1, "dino", 20, 1);
+	cLine* line3 = new cLine(2, 1, "truck", 20, 3);
+	cLine* line4 = new cLine(3, 0, "dino", 20, 1);
 	cLine* line5 = new cLine(4, 0, "car", 30, 2);
 	vector<COBJECT*> line;
 	tL = thread([this] {renderLight(); });
@@ -453,22 +453,21 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line4->setSpeed(curLevel() * 3);
 		line5->setSpeed(curLevel() * 2);
 		
-		line2->changeLight(mLight.getState());
+		//line2->changeLight(mLight.getState());
 		line3->changeLight(mLight.getState());
-		line4->changeLight(mLight.getState());
+		//line4->changeLight(mLight.getState());
 		line5->changeLight(mLight.getState());
 
-		if (line2->getLight()) {
-			line2->nextMove(mPeople, IS_RUNNING);
-		}
-
+		
+		line2->nextMove(mPeople, IS_RUNNING);
+		
 		if (line3->getLight()) {
 			line3->nextMove(mPeople, IS_RUNNING);
 		}
 
-		if (line4->getLight()) {
-			line4->nextMove(mPeople, IS_RUNNING);
-		}
+	
+		line4->nextMove(mPeople, IS_RUNNING);
+		
 
 		if (line5->getLight()) {
 			line5->nextMove(mPeople, IS_RUNNING);
