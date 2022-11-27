@@ -101,10 +101,10 @@ void CPEOPLE::Down(int& mY) {
 	setBack();
 }
 
-bool CPEOPLE::isImpact(COBJECT* Object, int space) {
-	int ppX = this->getPosX();
+bool CPEOPLE::isImpact(COBJECT* Object) {
+	int ppX = this->getPosX() - 20;
 	int ppY = this->getPosY();
-	int objX = Object->getX() + space;
+	int objX = Object->getX() - 1;
 	int objY = Object->getY();
 	int width = Object->getWidth();
 	if (ppY == objY) {

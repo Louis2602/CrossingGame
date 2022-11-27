@@ -108,7 +108,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		mtx.lock();
 		line = line2->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line2->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -116,7 +116,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line3->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line3->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -124,7 +124,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line4->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line4->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -132,7 +132,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line5->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line5->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -434,10 +434,11 @@ void Game::PauseGame() {
 void Game::renderObject(thread& tL, thread& tO) {
 	int dx = -6, dy = 6;
 	int _dx = 58;
+	int ObjSpace;
 	cLine* line2 = new cLine(1, 1, "bird", 15, 4);
-	cLine* line3 = new cLine(2, 1, "bird", 50, 3);
-	cLine* line4 = new cLine(3, 1, "bird", 20, 2);
-	cLine* line5 = new cLine(4, 1, "bird", 30, 1);
+	cLine* line3 = new cLine(2, 0, "truck", 20, 3);
+	cLine* line4 = new cLine(3, 1, "dino", 20, 1);
+	cLine* line5 = new cLine(4, 0, "car", 30, 2);
 	vector<COBJECT*> line;
 	tL = thread([this] {renderLight(); });
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
@@ -472,7 +473,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 		mtx.lock();
 		line = line2->getData();
 		for (int i = 0; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line2->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				cout << "Line 2";
 				IS_RUNNING = false;
 				break;
@@ -481,7 +482,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line3->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line3->getSpace())) {
+			if (mPeople.isImpact(line[i])) {
 				cout << "Line 3";
 				IS_RUNNING = false;
 				break;
@@ -490,9 +491,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line4->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line4->getSpace())) {
-				cout << line[i]->getY() << "  " << line[i]->getX() << "/" << mPeople.getPosX() << " " << mPeople.getPosY();
-				Sleep(10000);
+			if (mPeople.isImpact(line[i])) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -500,15 +499,16 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line5->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i], line5->getSpace())) {
-				cout << line[i]->getY() << "  " << line[i]->getX()  + line5->getSpace() << "/" << mPeople.getPosX() << " " << mPeople.getPosY();
-				Sleep(10000);
+			if (mPeople.isImpact(line[i])) {
+				cout << line[i]->getX() << "|" << mPeople.getPosX();
+				Sleep(5000);
 				IS_RUNNING = false;
 				break;
 			}
 		}
-		mtx.unlock();
 
+
+		mtx.unlock();
 		Sleep(50);
 	}
 

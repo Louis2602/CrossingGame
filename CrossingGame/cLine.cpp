@@ -85,26 +85,23 @@ void cLine::check(COBJECT* &obj) {
 
 void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 	for (int i{}; i < lineData.size(); i++) {
-		if (p.isImpact(lineData[i], space))
+		if (p.isImpact(lineData[i]))
 		{
 			IS_RUNNING = false;
 			return;
 		}
-
 		deleteObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 		if (this->direction)
 			lineData[i]->updatePosition(-(this->speed), 0); // phải qua trái
 		else
 			lineData[i]->updatePosition(this->speed, 0); // trái qua phải
 		printObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
-
-		if (p.isImpact(lineData[i], space))
+		check(lineData[i]);
+		if (p.isImpact(lineData[i]))
 		{
 			IS_RUNNING = false;
 			return;
 		}
-
-		check(lineData[i]);
 	}
 }
 
