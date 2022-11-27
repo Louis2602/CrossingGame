@@ -2,6 +2,7 @@
 
 cLine::cLine(int curLine, bool direction, string type, int spacing, int numberOfObj) {
 	this->currentRow = curLine;
+	this->space = spacing;
 	this->direction = direction;
 	cPoint pos;
 	COBJECT* obj;
@@ -84,7 +85,7 @@ void cLine::check(COBJECT* &obj) {
 
 void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 	for (int i{}; i < lineData.size(); i++) {
-		if (p.isImpact(lineData[i]))
+		if (p.isImpact(lineData[i], space))
 		{
 			IS_RUNNING = false;
 			return;
@@ -97,7 +98,7 @@ void cLine::nextMove(CPEOPLE p, bool& IS_RUNNING) {
 			lineData[i]->updatePosition(this->speed, 0); // trái qua phải
 		printObject(lineData[i]->getPos(), lineData[i]->returnShape(), lineData[i]->getHeight(), lineData[i]->getWidth());
 
-		if (p.isImpact(lineData[i]))
+		if (p.isImpact(lineData[i], space))
 		{
 			IS_RUNNING = false;
 			return;

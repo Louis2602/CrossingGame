@@ -101,15 +101,16 @@ void CPEOPLE::Down(int& mY) {
 	setBack();
 }
 
-bool CPEOPLE::isImpact(COBJECT* Object) {
-	if (pos.getY() == Object->getY()) {
-		//if (pos.getX() + 2 == Object->getX() || pos.getX() == Object->getX() + Object->getWidth() - 1)
-		//	return true;
-		if ((pos.getX() + 2 >= Object->getX() && pos.getX() + 2 <= Object->getX() + Object->getWidth() - 1) || (pos.getX() <= (Object->getX() + Object->getWidth() - 1) && pos.getX() >= Object->getX()))
+bool CPEOPLE::isImpact(COBJECT* Object, int space) {
+	int ppX = this->getPosX();
+	int ppY = this->getPosY();
+	int objX = Object->getX() + space;
+	int objY = Object->getY();
+	int width = Object->getWidth();
+	if (ppY == objY) {
+		if ((ppX >= objX && ppX <= objX + width) ||
+			(ppX + 2 >= objX && ppX + 2 <= objX + width))
 			return true;
-		//if ((pos.getX() >= abs(Object->getX()) && pos.getX() <= abs(Object->getX()) + Object->getWidth()-1) ||
-		//	(pos.getX() + 2 >= abs(Object->getX()) && pos.getX() + 2 <= abs(Object->getX()) + Object->getWidth()-1))
-		//	return true;
 	}
 	return false;
 }

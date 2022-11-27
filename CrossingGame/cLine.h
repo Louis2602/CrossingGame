@@ -25,6 +25,7 @@ class cLine {
 	int speed;
 	int currentRow;
 	int objectInLine;
+	int space;
 public:
 	cLine() = default;
 	cLine(int, bool, string, int, int); //current line - direction - type of Obj - spacing - number of obj in 1 line
@@ -42,5 +43,6 @@ public:
 	bool getDirection() {
 		return this->direction;
 	}
+	int getSpace() { return this->space; }
 	void check(COBJECT*&);
 };

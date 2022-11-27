@@ -108,7 +108,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		mtx.lock();
 		line = line2->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line2->getSpace())) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -116,7 +116,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line3->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line3->getSpace())) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -124,7 +124,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line4->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line4->getSpace())) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -132,7 +132,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		line = line5->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line5->getSpace())) {
 				IS_RUNNING = false;
 				break;
 			}
@@ -472,7 +472,8 @@ void Game::renderObject(thread& tL, thread& tO) {
 		mtx.lock();
 		line = line2->getData();
 		for (int i = 0; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line2->getSpace())) {
+				cout << "Line 2";
 				IS_RUNNING = false;
 				break;
 			}
@@ -480,7 +481,8 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line3->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line3->getSpace())) {
+				cout << "Line 3";
 				IS_RUNNING = false;
 				break;
 			}
@@ -488,7 +490,9 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line4->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line4->getSpace())) {
+				cout << line[i]->getY() << "  " << line[i]->getX() << "/" << mPeople.getPosX() << " " << mPeople.getPosY();
+				Sleep(10000);
 				IS_RUNNING = false;
 				break;
 			}
@@ -496,7 +500,9 @@ void Game::renderObject(thread& tL, thread& tO) {
 
 		line = line5->getData();
 		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
+			if (mPeople.isImpact(line[i], line5->getSpace())) {
+				cout << line[i]->getY() << "  " << line[i]->getX()  + line5->getSpace() << "/" << mPeople.getPosX() << " " << mPeople.getPosY();
+				Sleep(10000);
 				IS_RUNNING = false;
 				break;
 			}

@@ -39,6 +39,6 @@ public:
 	void Right(int& mX);         //Move character right
 	void Down(int& mY);          //Move character down
 
-	bool isImpact(COBJECT* Object); //Check if player impact with Object
+	bool isImpact(COBJECT* Object, int space); //Check if player impact with Object
 	bool isFinish(int mX);             //Check if player has completed the stage
 };
