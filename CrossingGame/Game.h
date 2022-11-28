@@ -22,6 +22,12 @@ private:
 	Sound mSound;
 	int score;
 public:
+	string getPlayerName();
+	string getPlayerID();
+	string getClassName();
+	int getScore();
+	int getLevel();
+	void setInfo(string name, string id, string _class, int _score, int _level);
 	Game();
 	Game(int);
 	~Game() {};

@@ -1,5 +1,6 @@
-Player's name: tunglam
-ID: 21127337
-Class: 21clc08
-Level: 3
-Score: 10
+Player's name: superman
+ID: 260203
+Class: 22clc02
+Level: 1
+Score: 3
+Position: 28,16

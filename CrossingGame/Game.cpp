@@ -14,6 +14,28 @@ Game::Game(int _level) {
 	SAVE_GAME = false;
 	score = 0;
 }
+string Game::getPlayerName() {
+	return playerName;
+}
+string Game::getPlayerID() {
+	return playerID;
+}
+string Game::getClassName() {
+	return className;
+}
+int Game::getScore() {
+	return score;
+}
+int Game::getLevel() {
+	return level;
+}
+void Game::setInfo(string name, string id, string _class, int _score, int _level) {
+	playerName = name;
+	playerID = id;
+	className = _class;
+	score = _score;
+	level = _level;
+}
 void Game::renderLight() {
 	while (mLight.getisPlay()) {
 		if (mLight.getState()) {
@@ -145,6 +167,7 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 
 		if (level == 5) {
 			mLight.setisPlay(false);
+			mLight.setState(false);
 			IS_RUNNING = false;
 			break;
 		}
@@ -376,8 +399,8 @@ void Game::printHelp() {
 	cout << "Instructions";
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge all the";
-	Controller::GotoXY(80, 23); cout << "obstacles (cars & animals)";
+	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge all";
+	Controller::GotoXY(80, 23); cout << "the obstacles (cars & animals)";
 	Controller::GotoXY(80, 24); cout << "- Use W, A, S, D to move";
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
@@ -477,7 +500,9 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line = line2->getData();
 		for (int i = 0; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
-				cout << "Line 2";
+				//cout << "Line 2";
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				IS_RUNNING = false;
 				break;
 			}
@@ -486,7 +511,9 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line = line3->getData();
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
-				cout << "Line 3";
+				//cout << "Line 3";
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				IS_RUNNING = false;
 				break;
 			}
@@ -495,6 +522,8 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line = line4->getData();
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				IS_RUNNING = false;
 				break;
 			}
@@ -503,8 +532,10 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line = line5->getData();
 		for (int i{}; i < line.size(); i++) {
 			if (mPeople.isImpact(line[i])) {
-				cout << line[i]->getX() << "|" << mPeople.getPosX();
-				Sleep(5000);
+				//cout << line[i]->getX() << "|" << mPeople.getPosX();
+				//Sleep(5000);
+				mLight.setisPlay(false);
+				mLight.setState(false);
 				IS_RUNNING = false;
 				break;
 			}

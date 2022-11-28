@@ -8,9 +8,9 @@ void Graphics::PrintInterface() {
 void Graphics::DrawMenuBox() {
 	Controller::SetConsoleColor(BLACK, BLACK);
 	Controller::GotoXY(40, 11); cout << "============================================";
-	Controller::GotoXY(40, 22); cout << "============================================";
+	Controller::GotoXY(40, 23); cout << "============================================";
 
-	for (int i = 12; i < 22; i++)
+	for (int i = 12; i < 23; i++)
 	{
 		Controller::GotoXY(40, i);
 		cout << "||";

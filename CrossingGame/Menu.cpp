@@ -22,7 +22,11 @@ void Menu::MainMenu() {
 	Controller::GotoXY(50, 18);
 	cout << "      About      " << endl;
 	Controller::GotoXY(56, 19);
-	cout << "Quit      " << endl;
+	cout << "Help      " << endl;
+	Controller::GotoXY(56, 20);
+	cout << "Leaderboards      " << endl;
+	Controller::GotoXY(56, 21);
+	cout << "Exit      " << endl;
 
 	while (true)
 	{
@@ -37,10 +41,10 @@ void Menu::MainMenu() {
 		if (s == KEY_ESC)
 			Graphics::DrawGoodbyeScreen();
 
-		if (idx > 19)
+		if (idx > 21)
 			idx = 15;
 		else if (idx < 15)
-			idx = 19;
+			idx = 21;
 		Controller::GotoXY(53, idx_t);
 		cout << "  ";
 		Controller::GotoXY(53, idx);
@@ -70,7 +74,19 @@ void Menu::MainMenu() {
 		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 		if (idx == 19)
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		cout << "Quit" << endl;
+		cout << "Help" << endl;
+		Controller::GotoXY(56, 20);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		if (idx == 20)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << "Leaderboards" << endl;
+		Controller::GotoXY(56, 21);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+		if (idx == 21)
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+		cout << "Exit" << endl;
+
+
 		if (s == 13)
 		{
 			idx -= 14;
@@ -93,6 +109,12 @@ void Menu::MainMenu() {
 		MenuAbout();
 		break;
 	case 5:
+		MenuRule();
+		break;
+	case 6:
+		MenuScore();
+		break;
+	case 7:
 		Graphics::DrawGoodbyeScreen();
 		break;
 	}
@@ -173,14 +195,17 @@ void Menu::MenuRule() {
 	cout << "Pause game";
 	Controller::GotoXY(42, 17);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
-	cout << "M : ";
+	cout << "H : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-	cout << "Turn off background music";
+	cout << "Help";
 	Controller::GotoXY(42, 18);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "Esc : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Exit";
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Controller::GotoXY(42, 19);
+	cout << "Rules:";
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 	Controller::GotoXY(45, 20);
 	cout << "Cross the road and dodge";
@@ -370,43 +395,74 @@ void Menu::MenuScore() {
 		putchar(196);
 	}
 	int y = 11;
-	int lines = 8;
-	int n = 0;
-	/*string tmp;
-	fstream fs("rank\\leaderboard.txt", ios::in);
+	vector<string>listSaveFile;
 
+	fstream fs("listFile.txt", ios::in);
+	string tmp;
 	while (!fs.eof()) {
-		getline(fs, p[n].playerName);
-		getline(fs, p[n].playerID);
-		getline(fs, p[n].className);
-		getline(fs, p[n].mode);
-		fs >> p[n].score;
-		fs.ignore();
-		n++;
+		getline(fs, tmp);
+		listSaveFile.push_back(tmp);
 	}
+	int n = listSaveFile.size() - 1;
 	fs.close();
+	string playerName, playerID, className;
+	int level{}, score{};
+	int posX{}, posY{};
+	vector<Game> p;
 	for (int i = 0; i < n; i++) {
+		fstream readFile(listSaveFile[i], ios::in);
+		while (!readFile.eof()) {
+			getline(readFile, tmp, ':');
+			readFile.get();
+			getline(readFile, playerName);
+			getline(readFile, tmp, ':');
+			readFile.get();
+			getline(readFile, playerID);
+			getline(readFile, tmp, ':');
+			readFile.get();
+			getline(readFile, className);
+			readFile.get();
+			getline(readFile, tmp, ':');
+			readFile.get();
+			readFile >> level;
+			readFile.ignore();
+			getline(readFile, tmp, ':');
+			readFile.get();
+			readFile >> score;
+			readFile.ignore();
+			getline(readFile, tmp, ':');
+			readFile.get();
+			readFile >> posX;
+			readFile.ignore();
+			readFile >> posY;
+			readFile.ignore();
+		}
+		p[i].setInfo(playerName, playerID, className, level, score);
+		readFile.close();
+	}
+
+	/*for (int i = 0; i < n; i++) {
 		for (int j = i + 1; j < n; j++) {
-			if (p[j].score > p[i].score) {
+			if (p[j].getScore() > p[i].getScore()) {
 				swap(p[i], p[j]);
 			}
 		}
-	}
-	for (int i = 1; i < lines; i++) {
-		Controller::GotoXY(9, y);
-		cout << i;
-		Controller::GotoXY(16, y);
-		cout << p[i - 1].playerName;
-		Controller::GotoXY(33, y);
-		cout << p[i - 1].playerID;
-		Controller::GotoXY(50, y);
-		cout << p[i - 1].className;
-		Controller::GotoXY(68, y);
-		cout << p[i - 1].mode;
-		Controller::GotoXY(84, y);
-		cout << p[i - 1].score;
-		y += 2;
 	}*/
+	for (int i = 0; i < n; i++) {
+		Controller::GotoXY(9, y);
+		cout << i + 1;
+		Controller::GotoXY(16, y);
+		cout << p[i].getPlayerName();
+		Controller::GotoXY(33, y);
+		cout << p[i].getPlayerID();
+		Controller::GotoXY(50, y);
+		cout << p[i].getClassName();
+		Controller::GotoXY(68, y);
+		cout << p[i].getLevel();
+		Controller::GotoXY(84, y);
+		cout << p[i].getScore();
+		y += 2;
+	}
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	Graphics::DrawRectangle(45, 27, 8, 2);
