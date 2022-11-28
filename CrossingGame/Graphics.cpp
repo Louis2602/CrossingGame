@@ -103,15 +103,15 @@ void Graphics::LoadBackground() {
 	Controller::GotoXY(97, 28); cout << "//";
 
 	Controller::GotoXY(32, 28); cout << "========================";
-	Controller::GotoXY(72, 28); cout << "=========================";
+	Controller::GotoXY(69, 28); cout << "============================";
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
-	Controller::GotoXY(55, 24); cout << "    ||     ||     ";
-	Controller::GotoXY(55, 25); cout << "   |  |___|  |    ";
-	Controller::GotoXY(55, 26); cout << "  [    |_|    ]    ";
-	Controller::GotoXY(55, 27); cout << " [_____________]   ";
-	Controller::GotoXY(55, 28); cout << "[_______________]";
-	Controller::GotoXY(55, 29); cout << "    ||     ||       ";
+	Controller::GotoXY(53, 24); cout << "    ||     ||     ";
+	Controller::GotoXY(53, 25); cout << "   |  |___|  |    ";
+	Controller::GotoXY(53, 26); cout << "  [    |_|    ]    ";
+	Controller::GotoXY(53, 27); cout << " [_____________]   ";
+	Controller::GotoXY(53, 28); cout << "[_______________]";
+	Controller::GotoXY(53, 29); cout << "    ||     ||       ";
 }
 void Graphics::PrintInstruct() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);

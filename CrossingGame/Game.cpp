@@ -274,7 +274,7 @@ void Game::SaveGame() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
 	Controller::GotoXY(82, 26);
 	cout << "----Save game successfully----";
-	Sleep(500);
+	Sleep(1000);
 	// Clear up save game board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
@@ -297,64 +297,144 @@ void Game::LoadGame() {
 		listSaveFile.push_back(tmp);
 	}
 	fs.close();
-	Controller::GotoXY(47, 11);
-	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
-	cout << "Choose your saving game to load!";
-
 	int idx = 13, idx_t = 13;
-
-	for (int i = 0; i < listSaveFile.size(); i++) {
-		Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-		Controller::GotoXY(51, i + 13);
-		cout << listSaveFile[i] << endl;
-		if (i > 6)
-			break;
-	}
-	Controller::GotoXY(48, idx);
-	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	cout << (char)175;
-	Controller::GotoXY(51, idx);
-	cout << listSaveFile[0] << endl;
+	bool found = false;
 
 	while (true) {
-		char s = Controller::GetConsoleInput();
-		idx_t = idx;
+		if (found)
+			break;
+		Controller::GotoXY(47, 11);
+		Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
+		cout << "Choose your saving game to load!";
 
-		if (s == 2) {
-			idx--;
-			if (idx < 13)
-				idx = 13;
-			Controller::GotoXY(51, idx);
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-			cout << listSaveFile[idx - 13];
-			Controller::GotoXY(51, idx + 1);
+		for (int i = listSaveFile.size() - 2; i >= 0; i--) {
 			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-			cout << listSaveFile[idx - 12];
-		}
-		else if (s == 5) {
-			idx++;
-			if (idx > 11 + listSaveFile.size())
-				idx = 11 + listSaveFile.size();
-			Controller::GotoXY(51, idx);
-			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-			cout << listSaveFile[idx - 13];
-			Controller::GotoXY(51, idx - 1);
-			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-			cout << listSaveFile[idx - 14];
-
+			Controller::GotoXY(51, 11 + listSaveFile.size() - i);
+			cout << listSaveFile[i] << endl;
+			if (i < listSaveFile.size() - 8)
+				break;
 		}
 
-		Controller::GotoXY(48, idx_t);
-		cout << "  ";
+		if (listSaveFile.size() > 7) {
+			Controller::GotoXY(59, 21);
+			cout << ".......";
+			Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
+			Controller::GotoXY(37, 22);
+			cout << "press M to go to insert mode and enter your file name";
+		}
+
 		Controller::GotoXY(48, idx);
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << (char)175;
+		Controller::GotoXY(51, idx);
+		cout << listSaveFile[listSaveFile.size() - 2] << endl;
 
-		// if enter
-		if (s == 6)
-		{
-			idx -= 13;
-			break;
+		while (true) {
+
+			char s = Controller::GetConsoleInput();
+			idx_t = idx;
+
+			if (s == 2) {
+				idx--;
+				if (idx < 13)
+					idx = 13;
+				Controller::GotoXY(51, idx);
+				Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+				cout << listSaveFile[listSaveFile.size() - (idx - 13) - 2];
+				Controller::GotoXY(51, idx + 1);
+				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+				cout << listSaveFile[listSaveFile.size() - (idx - 12) - 2];
+			}
+			else if (s == 5) {
+				idx++;
+				if (idx > 20)
+					idx = 20;
+				Controller::GotoXY(51, idx);
+				Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+				cout << listSaveFile[listSaveFile.size() - (idx - 13) - 2];
+				Controller::GotoXY(51, idx - 1);
+				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+				cout << listSaveFile[listSaveFile.size() - (idx - 14) - 2];
+			}
+
+			Controller::GotoXY(48, idx_t);
+			cout << "  ";
+			Controller::GotoXY(48, idx);
+			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+			cout << (char)175;
+
+			// if enter
+			if (s == 6)
+			{
+				idx -= 13;
+				break;
+			}
+			// if press M
+			if (s == 10)
+			{
+				Controller::ClearConsole();
+				Graphics::LoadBackground();
+				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+				Graphics::DrawRectangle(46, 11, 31, 2);
+				Controller::GotoXY(50, 22);
+				Controller::ShowCursor(true);
+				string fileSave;
+				Controller::GotoXY(50, 10);
+				cout << "Enter your saved filename";
+				Controller::GotoXY(48, 12);
+				cin >> fileSave;
+				Controller::ShowCursor(false);
+				string tmp = fileSave;
+				fileSave = "./gameData/" + fileSave + ".txt";
+				int k = 16;
+				for (int i = 0; i < listSaveFile.size() - 1; i++) {
+					if (listSaveFile[i] == fileSave) {
+						idx = i;
+						Controller::GotoXY(47, 14);
+						Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+						cout << "[SUCCESS]: Ready to play!";
+						Controller::GotoXY(47, 15);
+						Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+						cout << listSaveFile[idx];
+						found = true;
+						break;
+					}
+					if (listSaveFile[i].find(tmp) != string::npos) {
+						Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+						Controller::GotoXY(47, 15);
+						cout << "But found some files: ";
+						if (k < 21) {
+							Controller::GotoXY(47, k++);
+							cout << listSaveFile[i] << "        ";
+						}
+					}
+					if (k > 20)
+					{
+						Controller::GotoXY(50, 21);
+						cout << ".......";
+					}
+				}
+				if (!found) {
+					Controller::GotoXY(47, 14);
+					Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+					cout << "[ERROR]: Cannot found " << tmp << "!!!";
+					Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+					Controller::GotoXY(58, 22);
+					putchar(175);
+					Controller::GotoXY(61, 22);
+					cout << "Back";
+					Controller::GotoXY(66, 22);
+					putchar(174);
+					while (Controller::GetConsoleInput() != 6) {
+						mSound.PlayerMove();
+					}
+					mSound.SoundSuccess();
+				}
+				Sleep(1000);
+				Controller::ClearConsole();
+				Graphics::LoadBackground();
+				break;
+			}
 		}
 	}
 	fstream readFile(listSaveFile[idx], ios::in);
@@ -471,26 +551,26 @@ void Game::renderObject(thread& tL, thread& tO) {
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
 
 	while (IS_RUNNING) {
-		line2->setSpeed(curLevel() );
-		line3->setSpeed(curLevel() );
-		line4->setSpeed(curLevel() );
-		line5->setSpeed(curLevel() );
-		
+		line2->setSpeed(curLevel());
+		line3->setSpeed(curLevel());
+		line4->setSpeed(curLevel());
+		line5->setSpeed(curLevel());
+
 		//line2->changeLight(mLight.getState());
 		line3->changeLight(mLight.getState());
 		//line4->changeLight(mLight.getState());
 		line5->changeLight(mLight.getState());
 
-		
+
 		line2->nextMove(mPeople, IS_RUNNING);
-		
+
 		if (line3->getLight()) {
 			line3->nextMove(mPeople, IS_RUNNING);
 		}
 
-	
+
 		line4->nextMove(mPeople, IS_RUNNING);
-		
+
 
 		if (line5->getLight()) {
 			line5->nextMove(mPeople, IS_RUNNING);

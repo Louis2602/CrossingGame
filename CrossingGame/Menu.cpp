@@ -411,6 +411,7 @@ void Menu::MenuScore() {
 	vector<Game> p;
 	for (int i = 0; i < n; i++) {
 		fstream readFile(listSaveFile[i], ios::in);
+		Game player;
 		while (!readFile.eof()) {
 			getline(readFile, tmp, ':');
 			readFile.get();
@@ -437,31 +438,35 @@ void Menu::MenuScore() {
 			readFile >> posY;
 			readFile.ignore();
 		}
-		p[i].setInfo(playerName, playerID, className, level, score);
+		player.setInfo(playerName, playerID, className, score, level);
+		p.push_back(player);
 		readFile.close();
 	}
+	vector<int> maxScores;
+	for (int i = 0; i < n; i++) {
+		maxScores.push_back(p[i].getScore());
+	}
+	sort(maxScores.begin(), maxScores.end(), greater<int>());
 
-	/*for (int i = 0; i < n; i++) {
-		for (int j = i + 1; j < n; j++) {
-			if (p[j].getScore() > p[i].getScore()) {
-				swap(p[i], p[j]);
+	for (int j = 0; j < 7; j++) {
+		Controller::GotoXY(9, y);
+		cout << j + 1;
+		for (int i = 0; i < n; i++) {
+			if (p[i].getScore() == maxScores[j]) {
+				Controller::GotoXY(16, y);
+				cout << p[i].getPlayerName();
+				Controller::GotoXY(33, y);
+				cout << p[i].getPlayerID();
+				Controller::GotoXY(50, y);
+				cout << p[i].getClassName();
+				Controller::GotoXY(68, y);
+				cout << p[i].getLevel();
+				Controller::GotoXY(84, y);
+				cout << p[i].getScore();
+				y += 2;
+				break;
 			}
 		}
-	}*/
-	for (int i = 0; i < n; i++) {
-		Controller::GotoXY(9, y);
-		cout << i + 1;
-		Controller::GotoXY(16, y);
-		cout << p[i].getPlayerName();
-		Controller::GotoXY(33, y);
-		cout << p[i].getPlayerID();
-		Controller::GotoXY(50, y);
-		cout << p[i].getClassName();
-		Controller::GotoXY(68, y);
-		cout << p[i].getLevel();
-		Controller::GotoXY(84, y);
-		cout << p[i].getScore();
-		y += 2;
 	}
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
