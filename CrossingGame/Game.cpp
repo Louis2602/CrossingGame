@@ -471,10 +471,10 @@ void Game::renderObject(thread& tL, thread& tO) {
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
 
 	while (IS_RUNNING) {
-		line2->setSpeed(curLevel() * 5);
-		line3->setSpeed(curLevel() * 4);
-		line4->setSpeed(curLevel() * 3);
-		line5->setSpeed(curLevel() * 2);
+		line2->setSpeed(curLevel() );
+		line3->setSpeed(curLevel() );
+		line4->setSpeed(curLevel() );
+		line5->setSpeed(curLevel() );
 		
 		//line2->changeLight(mLight.getState());
 		line3->changeLight(mLight.getState());
