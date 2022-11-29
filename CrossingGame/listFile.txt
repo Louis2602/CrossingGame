@@ -3,7 +3,15 @@
 ./gameData/trankha.txt
 ./gameData/binhvo.txt
 ./gameData/nguyenkim.txt
-./gameData/test.txt
+./gameData/test123.txt
 ./gameData/game_oop.txt
 ./gameData/test_game.txt
+<<<<<<< HEAD
 ./gameData/dcm.txt
+=======
+./gameData/test.txt
+./gameData/test1.txt
+./gameData/test2.txt
+./gameData/test3.txt
+./gameData/test4.txt
+>>>>>>> 75f481a9a219815251eabb897762c6ddac1efee8

@@ -3,8 +3,8 @@
 
 cTruck::cTruck(cPoint pos) : COBJECT(pos) {
 	//TRUCK shape
-	//.----.__
-	//|____|__|
+	// __.----.
+	//|__|____|
 	//'-0---0-'
 
 	shape = new char* [TRUCK_HEIGHT];
@@ -15,20 +15,24 @@ cTruck::cTruck(cPoint pos) : COBJECT(pos) {
 
 	//Row1
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
-		if (i == 0 || i == 5)
-			shape[0][i] = '.';
-		else if (i > 0 && i < 5)
-			shape[0][i] = '-';
-		else if (i == TRUCK_WIDTH - 1)
+		if (i == 0) {
 			shape[0][i] = ' ';
-		else
+		}
+		else if (i == 1 || i == 2) {
 			shape[0][i] = '_';
+		}
+		else if (i == 3 || i == 8) {
+			shape[0][i] = '.';
+		}
+		else {
+			shape[0][i] = '-';
+		}
 	}
 
 	//Row2
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 
-		if (i == 0 || i == 5 || i == 8)
+		if (i == 0 || i == 3 || i == 8)
 			shape[1][i] = '|';
 		else
 			shape[1][i] = '_';
@@ -48,8 +52,8 @@ cTruck::cTruck(cPoint pos) : COBJECT(pos) {
 
 cTruck::cTruck() {
 	//TRUCK shape
-	//.----.__
-	//|____|__|
+	// __.----.
+	//|__|____|
 	//'-0---0-'
 
 	shape = new char* [TRUCK_HEIGHT];
@@ -60,20 +64,24 @@ cTruck::cTruck() {
 
 	//Row1
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
-		if (i == 0 || i == 5)
-			shape[0][i] = '.';
-		else if (i > 0 && i < 5)
-			shape[0][i] = '-';
-		else if (i == TRUCK_WIDTH - 1)
+		if (i == 0) {
 			shape[0][i] = ' ';
-		else
+		}
+		else if (i == 1 || i == 2) {
 			shape[0][i] = '_';
+		}
+		else if (i == 3 || i == 8) {
+			shape[0][i] = '.';
+		}
+		else {
+			shape[0][i] = '-';
+		}
 	}
 
 	//Row2
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 
-		if (i == 0 || i == 5 || i == 8)
+		if (i == 0 || i == 3 || i == 8)
 			shape[1][i] = '|';
 		else
 			shape[1][i] = '_';
