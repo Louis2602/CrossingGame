@@ -6,3 +6,4 @@
 ./gameData/test.txt
 ./gameData/game_oop.txt
 ./gameData/test_game.txt
+./gameData/dcm.txt
