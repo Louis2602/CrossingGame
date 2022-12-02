@@ -446,13 +446,19 @@ void Menu::MenuScore() {
 	for (int i = 0; i < n; i++) {
 		maxScores.push_back(p[i].getScore());
 	}
+
 	sort(maxScores.begin(), maxScores.end(), greater<int>());
+
+	bool visited[1000];
+	for (int i = 0; i < n; i++)
+		visited[i] = false;
 
 	for (int j = 0; j < 7; j++) {
 		Controller::GotoXY(9, y);
 		cout << j + 1;
 		for (int i = 0; i < n; i++) {
-			if (p[i].getScore() == maxScores[j]) {
+			if (p[i].getScore() == maxScores[j] && !visited[i]) {
+				visited[i] = true;
 				Controller::GotoXY(16, y);
 				cout << p[i].getPlayerName();
 				Controller::GotoXY(33, y);
