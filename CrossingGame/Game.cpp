@@ -110,6 +110,7 @@ void Game::StartGame() {
 
 void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 	vector<COBJECT*> line;
+	
 	while (IS_RUNNING) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
@@ -179,6 +180,11 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		else
 		{
 			mPeople.DRAW_PEOPLE(mPeople.getPosX(), mPeople.getPosY());
+			if (PAUSE_STATE) {
+				mtx.lock();
+				PauseGame();
+				mtx.unlock();
+			}
 			switch (Controller::GetConsoleInput()) {
 			case 1:  //ESC
 				IS_RUNNING = false;
@@ -366,7 +372,8 @@ void Game::LoadGame() {
 			// if enter
 			if (s == 6)
 			{
-				idx -= 13;
+				idx = listSaveFile.size() - (idx - 13) - 2;
+				found = true;
 				break;
 			}
 			// if press M
@@ -395,7 +402,7 @@ void Game::LoadGame() {
 						cout << "[SUCCESS]: Ready to play!";
 						Controller::GotoXY(47, 15);
 						Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-						cout << listSaveFile[idx];
+						cout << listSaveFile[idx] << "                        ";
 						found = true;
 						break;
 					}
@@ -405,7 +412,7 @@ void Game::LoadGame() {
 						cout << "But found some files: ";
 						if (k < 21) {
 							Controller::GotoXY(47, k++);
-							cout << listSaveFile[i] << "        ";
+							cout << listSaveFile[i] << "                        ";
 						}
 					}
 					if (k > 20)
@@ -468,6 +475,7 @@ void Game::LoadGame() {
 	readFile.close();
 	IS_RUNNING = true;
 	mPeople.updatePos(posX, posY);
+	PAUSE_STATE = true;
 	StartGame();
 }
 void Game::printHelp() {

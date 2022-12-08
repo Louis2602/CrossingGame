@@ -1,0 +1,6 @@
+Player's name: lam
+ID: 123
+Class: aaa
+Level: 1
+Score: 2
+Position: 36,18
