@@ -13,11 +13,14 @@ private:
 	int level = 0, score = 0;
 	int back = 0, forward = 0;
 	int height = 3, width = 3;
+	Sound mSound;
 public:
 	CPEOPLE() {
 		pos.setXY(36, 26);
 	}
-	~CPEOPLE() {};
+	~CPEOPLE() {
+		//tSound.join();
+	};
 	int getPosX();     //Get mX value of character
 	int getPosY();     //Get mY value of character
 	int getScore();   //Get player's score

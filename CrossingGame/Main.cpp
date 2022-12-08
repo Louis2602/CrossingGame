@@ -10,7 +10,7 @@ int main() {
 
 	Controller::SetUpConsole();
 	Sound s;
-	s.SoundBackground();
+	s.SoundBackground(true);
 
 	Menu game;
 	game.MainMenu();

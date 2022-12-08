@@ -107,10 +107,78 @@ void Game::StartGame() {
 	light.join();
 	people.join();
 }
+void Game::winGame() {
+	mSound.SoundBackground(false);
+	const char winText[] = R"(
+		 __          _______ _   _ ______ _____   __          _______ _   _ ______ _____  
+		 \ \        / /_   _| \ | |  ____|  __ \  \ \        / /_   _| \ | |  ____|  __ \ 
+		  \ \  /\  / /  | | |  \| | |__  | |__) |  \ \  /\  / /  | | |  \| | |__  | |__) |
+		   \ \/  \/ /   | | | . ` |  __| |  _  /    \ \/  \/ /   | | | . ` |  __| |  _  / 
+		    \  /\  /   _| |_| |\  | |____| | \ \     \  /\  /   _| |_| |\  | |____| | \ \ 
+		   __\/_ \/   |_____|_| \_|______|_|  \_\  _ _\/  \/   |_____|_| \_|______|_|  \_\
+		  / ____| |   (_)    | |                  | (_)                                   
+		 | |    | |__  _  ___| | _____ _ __     __| |_ _ __  _ __   ___ _ __              
+		 | |    | '_ \| |/ __| |/ / _ \ '_ \   / _` | | '_ \| '_ \ / _ \ '__|             
+		 | |____| | | | | (__|   <  __/ | | | | (_| | | | | | | | |  __/ |                
+		  \_____|_| |_|_|\___|_|\_\___|_| |_|  \__,_|_|_| |_|_| |_|\___|_|                
+)";
+	Controller::ClearConsole();
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	cout << winText;
+	mSound.SoundWin();
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Graphics::DrawRectangle(45, 13, 35, 8);
+	Graphics::DrawRectangle(48, 18, 7, 2);
+	Graphics::DrawRectangle(71, 18, 6, 2);
 
+	Controller::GotoXY(49, 15);
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Sound bgSound;
+	cout << "Do you want to play again?";
+	string str[2] = { "Yes", "No" };
+	int left[] = { 46,51,58,69,74,80 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
+	bool choice = 1;
+	auto print1 = [&]()
+	{
+		int i = 0;
+		while (i < 2)
+		{
+			Controller::SetConsoleColor(BRIGHT_WHITE, color[i]);
+			Controller::GotoXY(left[choice * 3], top);        putchar(word[i * 2]);
+			Controller::GotoXY(left[choice * 3 + 1], top);    cout << str[choice];
+			Controller::GotoXY(left[choice * 3 + 2], top);    putchar(word[i * 2 + 1]);
+			if (!i++)
+				choice = !choice;
+		}
+	};
+	print1();
+	while (true)
+	{
+		int key = Controller::GetConsoleInput();
+		if ((key == 3 && choice == 1) || (key == 4 && choice == 0))
+			print1();
+		else if (key == 6)
+		{
+			if (!choice) {
+				IS_RUNNING = true;
+				mSound.SoundSuccess();
+				mSound.SoundBackground(true);
+				Menu mMenu;
+				mMenu.MainMenu();
+			}
+			else {
+				mSound.SoundSuccess();
+				IS_RUNNING = false;
+			}
+			break;
+		}
+		else
+			mSound.PlayerMove();
+	}
+}
 void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 	vector<COBJECT*> line;
-	
+
 	while (IS_RUNNING) {
 		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
@@ -165,13 +233,6 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 			}
 		}
 		mtx.unlock();
-
-		if (level == 5) {
-			mLight.setisPlay(false);
-			mLight.setState(false);
-			IS_RUNNING = false;
-			break;
-		}
 		if (mPeople.isFinish(x))
 		{
 			mPeople.updatePos(36, 26);
@@ -377,7 +438,7 @@ void Game::LoadGame() {
 				break;
 			}
 			// if press M
-			if (s == 10)
+			else if (s == 10)
 			{
 				Controller::ClearConsole();
 				Graphics::LoadBackground();
@@ -442,6 +503,10 @@ void Game::LoadGame() {
 				Graphics::LoadBackground();
 				break;
 			}
+			else {
+				Menu mMenu;
+				mMenu.MainMenu();
+			}
 		}
 	}
 	fstream readFile(listSaveFile[idx], ios::in);
@@ -488,7 +553,7 @@ void Game::printHelp() {
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	Controller::GotoXY(80, 22);	cout << "- Cross the road and dodge all";
-	Controller::GotoXY(80, 23); cout << "the obstacles (cars & animals)";
+	Controller::GotoXY(80, 23); cout << "obstacles (cars & animals)";
 	Controller::GotoXY(80, 24); cout << "- Use W, A, S, D to move";
 
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
@@ -557,7 +622,12 @@ void Game::renderObject(thread& tL, thread& tO) {
 	vector<COBJECT*> line;
 	tL = thread([this] {renderLight(); });
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
-
+	if (level == 5) {
+		mLight.setisPlay(false);
+		mLight.setState(false);
+		IS_RUNNING = false;
+		winGame();
+	}
 	while (IS_RUNNING) {
 		line2->setSpeed(curLevel());
 		line3->setSpeed(curLevel());
@@ -633,8 +703,76 @@ void Game::renderObject(thread& tL, thread& tO) {
 		mtx.unlock();
 		Sleep(50);
 	}
-
+	if (!IS_RUNNING) {
+		loseGame();
+	}
 	Graphics::DrawGoodbyeScreen();
 	tL.join();
 	tO.join();
+}
+void Game::loseGame() {
+	mSound.SoundBackground(false);
+	const char loseText[] = R"(
+		  /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$        /$$$$$$  /$$    /$$ /$$$$$$$$ /$$$$$$$ 
+		 /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/       /$$__  $$| $$   | $$| $$_____/| $$__  $$
+		| $$  \__/| $$  \ $$| $$$$  /$$$$| $$            | $$  \ $$| $$   | $$| $$      | $$  \ $$
+		| $$ /$$$$| $$$$$$$$| $$ $$/$$ $$| $$$$$         | $$  | $$|  $$ / $$/| $$$$$   | $$$$$$$/
+		| $$|_  $$| $$__  $$| $$  $$$| $$| $$__/         | $$  | $$ \  $$ $$/ | $$__/   | $$__  $$
+		| $$  \ $$| $$  | $$| $$\  $ | $$| $$            | $$  | $$  \  $$$/  | $$      | $$  \ $$
+		|  $$$$$$/| $$  | $$| $$ \/  | $$| $$$$$$$$      |  $$$$$$/   \  $/   | $$$$$$$$| $$  | $$
+		 \______/ |__/  |__/|__/     |__/|________/       \______/     \_/    |________/|__/  |__/              
+)";
+	Controller::ClearConsole();
+	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
+	cout << loseText;
+	mSound.SoundLose();
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	Graphics::DrawRectangle(45, 13, 35, 8);
+	Graphics::DrawRectangle(48, 18, 7, 2);
+	Graphics::DrawRectangle(71, 18, 6, 2);
+
+	Controller::GotoXY(49, 15);
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Sound bgSound;
+	cout << "Do you want to play again?";
+	string str[2] = { "Yes", "No" };
+	int left[] = { 46,51,58,69,74,80 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
+	bool choice = 1;
+	auto print1 = [&]()
+	{
+		int i = 0;
+		while (i < 2)
+		{
+			Controller::SetConsoleColor(BRIGHT_WHITE, color[i]);
+			Controller::GotoXY(left[choice * 3], top);        putchar(word[i * 2]);
+			Controller::GotoXY(left[choice * 3 + 1], top);    cout << str[choice];
+			Controller::GotoXY(left[choice * 3 + 2], top);    putchar(word[i * 2 + 1]);
+			if (!i++)
+				choice = !choice;
+		}
+	};
+	print1();
+	while (true)
+	{
+		int key = Controller::GetConsoleInput();
+		if ((key == 3 && choice == 1) || (key == 4 && choice == 0))
+			print1();
+		else if (key == 6)
+		{
+			if (!choice) {
+				IS_RUNNING = true;
+				mSound.SoundSuccess();
+				mSound.SoundBackground(true);
+				Menu mMenu;
+				mMenu.MainMenu();
+			}
+			else {
+				mSound.SoundSuccess();
+				IS_RUNNING = false;
+			}
+			break;
+		}
+		else
+			mSound.PlayerMove();
+	}
 }

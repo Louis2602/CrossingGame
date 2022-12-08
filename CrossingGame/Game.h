@@ -44,5 +44,7 @@ public:
 	void printHelp();
 	void renderLight();
 	void renderObject(thread&, thread&);
+	void winGame();
+	void loseGame();
 };
 #endif // !Game

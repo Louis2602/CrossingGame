@@ -1,6 +1,7 @@
 ﻿#include "Menu.h";
 
 void Menu::MainMenu() {
+	Controller::ClearConsole();
 	Graphics::LoadBackground();
 	Graphics::DrawMenuBox();
 	Controller::GotoXY(43, 12);
@@ -166,11 +167,11 @@ void Menu::MenuSettings() {
 
 	if (!isOn) {
 		bgSound.setState(false);
-		bgSound.SoundBackground();
+		bgSound.SoundBackground(false);
 	}
 	else {
 		bgSound.setState(true);
-		bgSound.SoundBackground();
+		bgSound.SoundBackground(true);
 	}
 
 	Controller::ClearConsole();
@@ -183,34 +184,38 @@ void Menu::MenuRule() {
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	cout << "FUNCTION KEYS";
 
-	Controller::GotoXY(42, 15);
+	Controller::GotoXY(42, 14);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "L : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Save game";
-	Controller::GotoXY(42, 16);
+	Controller::GotoXY(42, 15);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "P : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Pause game";
-	Controller::GotoXY(42, 17);
+	Controller::GotoXY(42, 16);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "H : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Help";
-	Controller::GotoXY(42, 18);
+	Controller::GotoXY(42, 17);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
 	cout << "Esc : ";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLUE);
 	cout << "Exit";
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	Controller::GotoXY(42, 19);
+	Controller::GotoXY(42, 18);
 	cout << "Rules:";
 	Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-	Controller::GotoXY(45, 20);
+	Controller::GotoXY(45, 19);
 	cout << "Cross the road and dodge";
-	Controller::GotoXY(45, 21);
+	Controller::GotoXY(45, 20);
 	cout << "obstacles (cars & animals)";
+
+	Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
+	Controller::GotoXY(42, 21);
+	cout << "Finish 5 levels to win!!!";
 
 	Controller::GotoXY(78, 13);
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
@@ -276,7 +281,7 @@ void Menu::MenuAbout() {
 	printf("     - Truong Toan Thinh                        ");
 	Controller::GotoXY(41, 14);
 	Controller::SetConsoleColor(BRIGHT_WHITE, YELLOW);
-	printf(" Code by:                                          ");
+	printf(" Developers:                                          ");
 	Controller::GotoXY(41, 15);
 	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 	printf("     - 21127337: Tran Tung Lam                 ");
