@@ -192,47 +192,6 @@ void Game::playGame(cLine* line2, cLine* line3, cLine* line4, cLine* line5) {
 		int x = mPeople.getPosX();
 		int y = mPeople.getPosY();
 
-		mtx.lock();
-		line = line2->getData();
-		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
-				IS_RUNNING = false;
-				mLight.setisPlay(false);
-				mLight.setState(false);
-				break;
-			}
-		}
-
-		line = line3->getData();
-		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
-				IS_RUNNING = false;
-				mLight.setisPlay(false);
-				mLight.setState(false);
-				break;
-			}
-		}
-
-		line = line4->getData();
-		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
-				IS_RUNNING = false;
-				mLight.setisPlay(false);
-				mLight.setState(false);
-				break;
-			}
-		}
-
-		line = line5->getData();
-		for (int i{}; i < line.size(); i++) {
-			if (mPeople.isImpact(line[i])) {
-				IS_RUNNING = false;
-				mLight.setisPlay(false);
-				mLight.setState(false);
-				break;
-			}
-		}
-		mtx.unlock();
 		if (mPeople.isFinish(x))
 		{
 			mPeople.updatePos(36, 26);
@@ -643,7 +602,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line2->nextMove(mPeople, IS_RUNNING);
 
 		if (line3->getLight()) {
-			line3->nextMove(mPeople, IS_RUNNING);
+			line3->nextMove (mPeople, IS_RUNNING);
 		}
 
 
