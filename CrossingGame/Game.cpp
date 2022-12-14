@@ -371,7 +371,7 @@ void Game::LoadGame() {
 				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
 				cout << listSaveFile[listSaveFile.size() - (idx - 12) - 2];
 			}
-			else if (s == 5) {
+			if (s == 5) {
 				idx++;
 				if (idx > 20)
 					idx = 20;
@@ -397,7 +397,7 @@ void Game::LoadGame() {
 				break;
 			}
 			// if press M
-			else if (s == 10)
+			if (s == 10)
 			{
 				Controller::ClearConsole();
 				Graphics::LoadBackground();
@@ -462,7 +462,7 @@ void Game::LoadGame() {
 				Graphics::LoadBackground();
 				break;
 			}
-			else {
+			if (s != 2 && s != 5 && s != 10 && s != 6) {
 				Menu mMenu;
 				mMenu.MainMenu();
 			}
@@ -602,7 +602,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 		line2->nextMove(mPeople, IS_RUNNING);
 
 		if (line3->getLight()) {
-			line3->nextMove (mPeople, IS_RUNNING);
+			line3->nextMove(mPeople, IS_RUNNING);
 		}
 
 
