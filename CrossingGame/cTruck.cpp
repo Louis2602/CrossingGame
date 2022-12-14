@@ -117,3 +117,7 @@ int cTruck::getWidth() {
 int cTruck::getHeight() {
 	return TRUCK_HEIGHT;
 }
+
+int cTruck::inGameWidth() {
+	return 6;
+}

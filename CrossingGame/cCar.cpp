@@ -148,3 +148,6 @@ int cCar::getHeight() {
 	return CAR_HEIGHT;
 }
 
+int cCar::inGameWidth() {
+	return 5;
+}

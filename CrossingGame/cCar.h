@@ -18,6 +18,7 @@ public:
 	char** returnShape();
 	int getWidth();
 	int getHeight();
+	int inGameWidth();
 };
 
 #endif // !cCar_h

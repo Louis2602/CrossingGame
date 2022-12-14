@@ -18,6 +18,7 @@ public:
 	char** returnShape();
 	int getHeight();
 	int getWidth();
+	int inGameWidth();
 };
 
 #endif 

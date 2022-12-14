@@ -74,3 +74,7 @@ int CDINO::getHeight() {
 int CDINO::getWidth() {
     return DINO_WIDTH;
 }
+
+int CDINO::inGameWidth() {
+    return 5;
+}

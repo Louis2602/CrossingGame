@@ -64,3 +64,7 @@ int CBIRD::getHeight() {
 int CBIRD::getWidth() {
     return BIRD_WIDTH;
 }
+
+int CBIRD::inGameWidth() {
+    return 3;
+}

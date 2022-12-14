@@ -96,7 +96,7 @@ void CPEOPLE::Down(int& mY) {
 bool CPEOPLE::isImpact(COBJECT* Object) {
 	int ppX = this->getPosX();
 	int ppY = this->getPosY();
-	int width = 4;
+	int width = Object->inGameWidth();
 	int objX = Object->getX();
 	int objY = Object->getY();
 	
