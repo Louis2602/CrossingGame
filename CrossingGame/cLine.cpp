@@ -1,13 +1,14 @@
 ﻿#include "cLine.h"
 
 cLine::cLine(int curLine, bool direction, string type, int spacing, int numberOfObj) {
+	int left = 6, right = 66;
 	this->currentRow = curLine;
 	this->space = spacing;
 	this->direction = direction;
 	cPoint pos;
 	COBJECT* obj;
 	for (int i = 0; i < numberOfObj; i++) {
-		pos.setX(i * spacing);
+		pos.setX(6 + i * spacing);
 		pos.setY(6 + 4 * curLine);
 		if (type == "bird") {
 			obj = new CBIRD(pos);
@@ -42,43 +43,70 @@ void cLine::setSpeed(int _x) {
 void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
+	//cout << x << ":" << y;
+	//Sleep(2000);
+	//for (int i = 0; i < height; i++) {
+	//	for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
+	//		if ((x + j > 5) && (x + j < 67)) {
+	//			mtx.lock();
+	//			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	//			Controller::GotoXY(x + j, y + i);
+	//			cout << x + j << "|" << y + i;
+	//			Sleep(2000);
+	//			cout << shape[i][j - max(1, y)];
+	//			mtx.unlock();
+	//		}
+	//	}
+	//}
+	Controller::GotoXY(x, y);
+	if (x > 58 || x < 6)
+		return;
 	for (int i = 0; i < height; i++) {
-		for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
-			if ((x + j > 5) && (x + j < 67)) {
-				mtx.lock();
-				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-				Controller::GotoXY(x + j, y + i);
-				cout << shape[i][j - max(1, y)];
+		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
+			mtx.lock();
+			cout << shape[i][j - max(1,y)];
 				mtx.unlock();
-			}
 		}
+		Controller::GotoXY(x, y+ i + 1);
 	}
+		
 }
 
 void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
-	for (int i = 0; i < height; i++) {
-		for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
-			if ((x + j > 5) && (x + j < 67)) {
-				mtx.lock();
-				Controller::GotoXY(x + j, y + i);
-				cout << ' ';
-				mtx.unlock();
-			}
+	//for (int i = 0; i < height; i++) {
+	//	for (int j = max(1, y); j <= min(58, y + width - 1); j++) {
+	//		if ((x + j > 5) && (x + j < 67)) {
+	//			mtx.lock();
+	//			Controller::GotoXY(x + j, y + i);
+	//			cout << ' ';
+	//			mtx.unlock();
+	//		}
 
+	//	}
+	//}
+	Controller::GotoXY(x, y);
+	if (x > 58 || x < 6)
+		return;
+	for (int i = 0; i < height; i++) {
+		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
+			mtx.lock();
+			cout <<" ";
+			mtx.unlock();
 		}
+		Controller::GotoXY(x, y + i + 1);
 	}
 }
 
 
 void cLine::check(COBJECT* &obj) {
 	if (obj->getX() < -25 && this->direction == 1) {
-		obj->updatePosition(100, 0);
+		obj->newPosition(70, obj->getY());
 		return;
 	}
 	if (obj->getX() > 70 && this->direction == 0) {
-		obj->updatePosition(-90, 0);
+		obj->newPosition(-25, obj->getY());
 		return;
 	}
 }

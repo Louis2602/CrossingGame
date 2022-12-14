@@ -96,8 +96,8 @@ void CPEOPLE::Down(int& mY) {
 bool CPEOPLE::isImpact(COBJECT* Object) {
 	int ppX = this->getPosX();
 	int ppY = this->getPosY();
-	int width = Object->getWidth();
-	int objX = Object->getX() - width + 1;
+	int width = 4;
+	int objX = Object->getX();
 	int objY = Object->getY();
 	
 	/*if (ppY == objY) {
@@ -107,10 +107,12 @@ bool CPEOPLE::isImpact(COBJECT* Object) {
 	}*/
 
 	if (ppY == objY) {
-		if (ppX + 2 == objX || ppX == objX + width - 1) {
-			return true;
-		}
-		if ((ppX >= objX && ppX <= objX + width - 1) || (ppX + 2 >= objX && ppX + 2 <= objX))
+		//if (ppX + 2 == objX || ppX == objX + width - 1) {
+		//	cout << ppX << "|" << objX;
+		//	Sleep(10000);
+		//	return true;
+		//}
+		if ((ppX >= objX && ppX <= objX + width - 1) || (ppX + 2 >= objX && ppX + 2 <= objX + width -1))
 		{
 			return true;
 		}
