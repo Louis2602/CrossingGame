@@ -58,18 +58,19 @@ void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	//		}
 	//	}
 	//}
+	mtx.lock();
 	Controller::GotoXY(x, y);
-	if (x > 58 || x < 6)
+	if (x > 58 || x < 6) {
+		mtx.unlock();
 		return;
+	}
 	for (int i = 0; i < height; i++) {
 		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
-			mtx.lock();
 			cout << shape[i][j - max(1,y)];
-				mtx.unlock();
 		}
 		Controller::GotoXY(x, y+ i + 1);
 	}
-		
+	mtx.unlock();
 }
 
 void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
@@ -86,17 +87,19 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 
 	//	}
 	//}
+	mtx.lock();
 	Controller::GotoXY(x, y);
-	if (x > 58 || x < 6)
+	if (x > 58 || x < 6) {
+		mtx.unlock();
 		return;
+	}
 	for (int i = 0; i < height; i++) {
 		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
-			mtx.lock();
 			cout <<" ";
-			mtx.unlock();
 		}
 		Controller::GotoXY(x, y + i + 1);
 	}
+	mtx.unlock();
 }
 
 
