@@ -58,19 +58,19 @@ void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	//		}
 	//	}
 	//}
-	mtx.lock();
 	Controller::GotoXY(x, y);
 	if (x > 58 || x < 6) {
-		mtx.unlock();
 		return;
 	}
 	for (int i = 0; i < height; i++) {
 		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
-			cout << shape[i][j - max(1,y)];
+			mtx.lock();
+			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+			cout << shape[i][j - max(1, y)];
+			mtx.unlock();
 		}
-		Controller::GotoXY(x, y+ i + 1);
+		Controller::GotoXY(x, y + i + 1);
 	}
-	mtx.unlock();
 }
 
 void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
@@ -87,23 +87,23 @@ void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 
 	//	}
 	//}
-	mtx.lock();
 	Controller::GotoXY(x, y);
 	if (x > 58 || x < 6) {
-		mtx.unlock();
 		return;
 	}
 	for (int i = 0; i < height; i++) {
 		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
-			cout <<" ";
+			mtx.lock();
+			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+			cout << " ";
+			mtx.unlock();
 		}
 		Controller::GotoXY(x, y + i + 1);
 	}
-	mtx.unlock();
 }
 
 
-void cLine::check(COBJECT* &obj) {
+void cLine::check(COBJECT*& obj) {
 	if (obj->getX() < -25 && this->direction == 1) {
 		obj->newPosition(70, obj->getY());
 		return;
