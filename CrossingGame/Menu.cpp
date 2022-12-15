@@ -133,7 +133,7 @@ void Menu::MenuSettings() {
 	Sound bgSound;
 	cout << "Turn Background Music On/Off";
 	string str[2] = { "On", "Off" };
-	int left[] = { 46,51,58,69,74,80 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
+	int left[] = { 46,51,58,69,73,80 }, word[] = { 32,32,175,174 }, color[] = { BLACK, GREEN }, top = 19;
 	bool choice = 1;
 	auto print1 = [&]()
 	{
