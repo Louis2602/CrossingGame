@@ -1,20 +1,20 @@
 #pragma once
 
-#ifndef CBIRD_h
-#define CBIRD_h
+#ifndef CDINO_h
+#define CDINO_h
 
 #include "COBJECT.h"
-#define BIRD_HEIGHT 3
-#define BIRD_WIDTH 5
+#define DINO_HEIGHT 3
+#define DINO_WIDTH 6
 
-class CBIRD : public COBJECT {
+class CDINO : public COBJECT {
 private:
 	char** shape;
 
 public:
-	CBIRD(cPoint);
-	CBIRD();
-	~CBIRD();
+	CDINO(cPoint);
+	CDINO();
+	~CDINO();
 	char** returnShape();
 	int getHeight();
 	int getWidth();

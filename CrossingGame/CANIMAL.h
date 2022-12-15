@@ -4,9 +4,7 @@
 
 #include "cPoint.h"
 #include "Controller.h"
-#include <Windows.h>
-#include <iostream>
-#include <mmsystem.h>
+
 
 class CANIMAL {
 private:

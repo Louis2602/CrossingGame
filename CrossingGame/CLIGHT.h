@@ -3,17 +3,20 @@
 
 class CLIGHT {
 private:
-	char BottomDot = 220;
-	char TopDot = 223;
+	const char BottomDot = 220;
+	const char TopDot = 223;
 	bool state; //red is false, green is true.
-	bool isPlay = true;
+	bool isPlay;
+	int posX, posY;
+	int timer;
 public:
 	CLIGHT();
 	~CLIGHT() {};
-	void update_light();
+	void spawn_light(int, int);
 	bool getisPlay();
 	void setisPlay(bool);
 	bool getState();
 	void setState(bool);
-	void mainLight();
+	void setTimer(int);
+	void setPos(int, int);
 };

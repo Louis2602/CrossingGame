@@ -1,7 +1,11 @@
 #include "CLIGHT.h"
 
 CLIGHT::CLIGHT() {
+	isPlay = true;
 	state = true;
+	posX = 0;
+	posY = 0;
+	timer = 0;
 }
 bool CLIGHT::getisPlay() {
 	return isPlay;
@@ -15,61 +19,41 @@ bool CLIGHT::getState() {
 void CLIGHT::setState(bool _state) {
 	state = _state;
 }
-
-void CLIGHT::update_light() {
-	if (getState()) {
+void CLIGHT::setTimer(int timer) {
+	while (timer && isPlay) {
+		spawn_light(posX, posY);
+		Sleep(1000);
+		timer -= 10;
+	}
+	this->setState(!state);
+}
+void CLIGHT::setPos(int x, int y) {
+	posX = x;
+	posY = y;
+}
+void CLIGHT::spawn_light(int x, int y) {
+	setPos(x, y);
+	if (state) {
 		//Draw green light.
+		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-		Controller::GotoXY(4, 21);
-		cout << TopDot;
-		Controller::GotoXY(70, 17);
-		cout << TopDot;
-		Controller::GotoXY(4, 13);
-		cout << TopDot;
-		Controller::GotoXY(70, 9);
+		Controller::GotoXY(x, y + 1);
 		cout << TopDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-		Controller::GotoXY(4, 20);
+		Controller::GotoXY(x, y);
 		cout << BottomDot;
-		Controller::GotoXY(70, 16);
-		cout << BottomDot;
-		Controller::GotoXY(4, 12);
-		cout << BottomDot;
-		Controller::GotoXY(70, 8);
-		cout << BottomDot;
-		setState(false);
+		mtx.unlock();
 	}
 	else {
 		//Draw red light
+		mtx.lock();
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-		Controller::GotoXY(4, 20);
-		cout << BottomDot;
-		Controller::GotoXY(70, 16);
-		cout << BottomDot;
-		Controller::GotoXY(4, 12);
-		cout << BottomDot;
-		Controller::GotoXY(70, 8);
+		Controller::GotoXY(x, y);
 		cout << BottomDot;
 		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-		Controller::GotoXY(4, 21);
+		Controller::GotoXY(x, y + 1);
 		cout << TopDot;
-		Controller::GotoXY(70, 17);
-		cout << TopDot;
-		Controller::GotoXY(4, 13);
-		cout << TopDot;
-		Controller::GotoXY(70, 9);
-		cout << TopDot;
-		setState(true);
-	}
+		mtx.unlock();
 
-	//Set color back.
-	//Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
-}
-
-void CLIGHT::mainLight() {
-	CLIGHT light;
-	while (state) {
-		light.update_light();
-		Sleep(1000);
 	}
 }

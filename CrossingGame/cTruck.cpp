@@ -1,10 +1,10 @@
 #include "cTruck.h"
 
 
-cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
+cTruck::cTruck(cPoint pos) : COBJECT(pos) {
 	//TRUCK shape
-	//.----.__
-	//|____|__|
+	// __.----.
+	//|__|____|
 	//'-0---0-'
 
 	shape = new char* [TRUCK_HEIGHT];
@@ -15,18 +15,24 @@ cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 
 	//Row1
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
-		if (i == 0 || i == 5)
-			shape[0][i] = '.';
-		else if (i > 0 && i < 5)
-			shape[0][i] = '-';
-		else
+		if (i == 0) {
+			shape[0][i] = ' ';
+		}
+		else if (i == 1 || i == 2) {
 			shape[0][i] = '_';
+		}
+		else if (i == 3 || i == 8) {
+			shape[0][i] = '.';
+		}
+		else {
+			shape[0][i] = '-';
+		}
 	}
 
 	//Row2
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 
-		if (i == 0 || i == 5 || i == 8)
+		if (i == 0 || i == 3 || i == 8)
 			shape[1][i] = '|';
 		else
 			shape[1][i] = '_';
@@ -37,7 +43,7 @@ cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 		if (i == 0 || i == 8)
 			shape[2][i] = '\'';
-		else if (i == 2 && i == 6)
+		else if (i == 2 || i == 6)
 			shape[2][i] = '0';
 		else
 			shape[2][i] = '-';
@@ -46,8 +52,8 @@ cTruck::cTruck(cPoint pos) : CVEHICLE(pos) {
 
 cTruck::cTruck() {
 	//TRUCK shape
-	//.----.__
-	//|____|__|
+	// __.----.
+	//|__|____|
 	//'-0---0-'
 
 	shape = new char* [TRUCK_HEIGHT];
@@ -58,29 +64,35 @@ cTruck::cTruck() {
 
 	//Row1
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
-		if (i == 0 || i == 5)
-			shape[0][i] = '.';
-		else if (i > 0 && i < 5)
-			shape[0][i] = '-';
-		else
+		if (i == 0) {
+			shape[0][i] = ' ';
+		}
+		else if (i == 1 || i == 2) {
 			shape[0][i] = '_';
+		}
+		else if (i == 3 || i == 8) {
+			shape[0][i] = '.';
+		}
+		else {
+			shape[0][i] = '-';
+		}
 	}
 
 	//Row2
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 
-		if (i == 0 || i == 5 || i == 8)
+		if (i == 0 || i == 3 || i == 8)
 			shape[1][i] = '|';
 		else
 			shape[1][i] = '_';
-		
+
 	}
 
 	//Row3
 	for (int i = 0; i < TRUCK_WIDTH; i++) {
 		if (i == 0 || i == 8)
 			shape[2][i] = '\'';
-		else if (i == 2 && i == 6)
+		else if (i == 2 || i == 6)
 			shape[2][i] = '0';
 		else
 			shape[2][i] = '-';
@@ -104,4 +116,8 @@ int cTruck::getWidth() {
 
 int cTruck::getHeight() {
 	return TRUCK_HEIGHT;
+}
+
+int cTruck::inGameWidth() {
+	return 6;
 }

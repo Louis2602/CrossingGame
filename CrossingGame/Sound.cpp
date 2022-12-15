@@ -8,38 +8,40 @@ void Sound::setState(bool state) {
 	isOn = state;
 }
 
-void Sound::SoundBackground() {
-	if (getState())
+void Sound::SoundBackground(bool state) {
+	if (state)
 		PlaySound(TEXT("LegendaryAmadeus.wav"), NULL, SND_ASYNC);
 	else
 		PlaySound(NULL, NULL, SND_ASYNC);
+
 }
 
 void Sound::SoundByeBye() {
-	if(getState())
-		PlaySound(TEXT("ByeBye.wav"), NULL, SND_ASYNC);
-	else
-		PlaySound(NULL, NULL, SND_ASYNC);
+	PlaySound(TEXT("ByeBye.wav"), NULL, SND_ASYNC);
+
 }
 
 void Sound::EndSoundGame() {
-	if(getState())
-		PlaySound(NULL, NULL, SND_FILENAME);
-	else
-		PlaySound(NULL, NULL, SND_ASYNC);
+	PlaySound(NULL, NULL, SND_FILENAME);
+
 }
 
 void Sound::SoundRocket() {
-	Sound s;
-	if(s.getState())
-		PlaySound(TEXT("SoundRocket.wav"), NULL, SND_ASYNC);
-	else
-		PlaySound(NULL, NULL, SND_ASYNC);
+	PlaySound(TEXT("SoundRocket.wav"), NULL, SND_ASYNC);
+
 }
 
 void Sound::PlayerMove() {
-	if(getState())
-		PlaySound(TEXT("Move.wav"), NULL, SND_ASYNC);
-	else
-		PlaySound(NULL, NULL, SND_ASYNC);
+	PlaySound(TEXT("Move.wav"), NULL, SND_ASYNC);
+
+}
+void Sound::SoundSuccess() {
+	PlaySound(TEXT("Success.wav"), NULL, SND_ASYNC);
+
+}
+void Sound::SoundWin() {
+	PlaySound(TEXT("win.wav"), NULL, SND_ASYNC);
+}
+void Sound::SoundLose() {
+	PlaySound(TEXT("lose.wav"), NULL, SND_ASYNC);
 }

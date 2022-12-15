@@ -1,7 +1,7 @@
-#pragma once
+	#pragma once
 
-#ifndef cVehicle_h
-#define cVehicle_h
+#ifndef COBJECT_h
+#define COBJECT_h
 
 
 #include "CPOINT.h"
@@ -10,7 +10,7 @@
 #include <mmsystem.h>
 
 
-class CVEHICLE {
+class COBJECT {
 private:
 	cPoint pos;
 public:
@@ -25,9 +25,9 @@ public:
 	}
 
 
-	CVEHICLE();
-	CVEHICLE(cPoint);
-	virtual ~CVEHICLE() = default;
+	COBJECT();
+	COBJECT(cPoint);
+	virtual ~COBJECT() = default;
 	virtual char** returnShape() = 0;
 
 	void newPosition(int dx, int dy);
@@ -35,8 +35,8 @@ public:
 	virtual int getWidth() = 0;
 	virtual int getHeight() = 0;
 
-
+	virtual int inGameWidth() = 0;
 	void updatePosition(int dx, int dy);
 };
 
-#endif // !cVehicle_h
+#endif // !COBJECT_h
