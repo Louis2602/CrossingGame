@@ -43,62 +43,31 @@ void cLine::setSpeed(int _x) {
 void cLine::printObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
-	//cout << x << ":" << y;
-	//Sleep(2000);
-	//for (int i = 0; i < height; i++) {
-	//	for (int j = max(1, y); j <= min(58, y + width - 1); ++j) {
-	//		if ((x + j > 5) && (x + j < 67)) {
-	//			mtx.lock();
-	//			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-	//			Controller::GotoXY(x + j, y + i);
-	//			cout << x + j << "|" << y + i;
-	//			Sleep(2000);
-	//			cout << shape[i][j - max(1, y)];
-	//			mtx.unlock();
-	//		}
-	//	}
-	//}
-	Controller::GotoXY(x, y);
-	if (x > 58 || x < 6) {
-		return;
-	}
 	for (int i = 0; i < height; i++) {
-		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
+		for (int j = 0; j < width; j++) {
+			if (x + j < 6 || x + j > 68)
+				continue;
 			mtx.lock();
 			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-			cout << shape[i][j - max(1, y)];
+			Controller::GotoXY(x + j, y + i);
+			cout << shape[i][j];
 			mtx.unlock();
 		}
-		Controller::GotoXY(x, y + i + 1);
 	}
 }
 
 void cLine::deleteObject(cPoint pos, char** shape, int height, int width) {
 	int x = pos.getX();
 	int y = pos.getY();
-	//for (int i = 0; i < height; i++) {
-	//	for (int j = max(1, y); j <= min(58, y + width - 1); j++) {
-	//		if ((x + j > 5) && (x + j < 67)) {
-	//			mtx.lock();
-	//			Controller::GotoXY(x + j, y + i);
-	//			cout << ' ';
-	//			mtx.unlock();
-	//		}
-
-	//	}
-	//}
-	Controller::GotoXY(x, y);
-	if (x > 58 || x < 6) {
-		return;
-	}
 	for (int i = 0; i < height; i++) {
-		for (int j = max(6, y); j <= min(58, y + width - 1); j++) {
+		for (int j = 0; j < width; j++) {
+			if (x + j < 6 || x + j > 68)
+				continue;
 			mtx.lock();
-			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+			Controller::GotoXY(x + j, y + i);
 			cout << " ";
 			mtx.unlock();
 		}
-		Controller::GotoXY(x, y + i + 1);
 	}
 }
 
