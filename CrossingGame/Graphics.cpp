@@ -6,16 +6,19 @@ void Graphics::PrintInterface() {
 	PrintInfo();
 }
 void Graphics::DrawMenuBox() {
-	Controller::SetConsoleColor(BLACK, BLACK);
-	Controller::GotoXY(40, 11); cout << "============================================";
-	Controller::GotoXY(40, 23); cout << "============================================";
-
-	for (int i = 12; i < 23; i++)
+	Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+	for (int i = 40; i < 83; i++) {
+		Controller::GotoXY(i, 11);
+		putchar(178);
+		Controller::GotoXY(i, 23);
+		putchar(178);
+	}
+	for (int i = 11; i < 24; i++)
 	{
 		Controller::GotoXY(40, i);
-		cout << "||";
+		putchar(219);
 		Controller::GotoXY(82, i);
-		cout << "||";
+		putchar(219);
 	}
 }
 void Graphics::DrawRectangle(int left, int top, int width, int height) {
@@ -197,6 +200,20 @@ void Graphics::DrawMap() {
 		}
 		Sleep(5);
 	}
+
+	for (int j = 1; j <= 3; j++) {
+		Controller::GotoXY(left + 2, j + top);
+		for (int i = 1; i < size * 8; i++)
+		{
+			Sleep(5);
+			if (i % 2 == 0 && j % 2 == 0)
+				putchar(178);
+			else if(i % 2 != 0 && j % 2 != 0)
+				putchar(178);
+			else
+				putchar(176);
+		}
+	}
 }
 
 void Graphics::PrintInfo() {
@@ -349,42 +366,44 @@ void Graphics::DrawGoodbyeScreen() {
 	exit(0);
 }
 void Graphics::PrintLevel(int level) {
-	const char levelASCII[] = R"(  _             _ 
- | |_____ _____| |
- | / -_) V / -_) |
- |_\___|\_/\___|_|)";
+	const char levelASCII[] = R"(  
+			  _             _ 
+			 | |_____ _____| |
+			 | / -_) V / -_) |
+			 |_\___|\_/\___|_|
+)";
 	
 	Controller::GotoXY(0, 0);
 	cout << levelASCII;
 	if (level == 1) {
-		Controller::GotoXY(20, 0); cout << " _";
-		Controller::GotoXY(20, 1); cout << "/ |";
-		Controller::GotoXY(20, 2); cout << "| |";
-		Controller::GotoXY(20, 3); cout << "|_|";
+		Controller::GotoXY(45, 1); cout << " _";
+		Controller::GotoXY(45, 2); cout << "/ |";
+		Controller::GotoXY(45, 3); cout << "| |";
+		Controller::GotoXY(45, 4); cout << "|_|";
 	}
 	else if (level == 2) {
-		Controller::GotoXY(20, 0); cout << " ___ ";
-		Controller::GotoXY(20, 1); cout << "|_  )";
-		Controller::GotoXY(20, 2); cout << " / / ";
-		Controller::GotoXY(20, 3); cout << "/___|";
+		Controller::GotoXY(45, 1); cout << " ___ ";
+		Controller::GotoXY(45, 2); cout << "|_  )";
+		Controller::GotoXY(45, 3); cout << " / / ";
+		Controller::GotoXY(45, 4); cout << "/___|";
 	}
 	else if (level == 3) {
-		Controller::GotoXY(20, 0); cout << " ____";
-		Controller::GotoXY(20, 1); cout << "|__ /";
-		Controller::GotoXY(20, 2); cout << " |_ \\";
-		Controller::GotoXY(20, 3); cout << "|___/ ";
+		Controller::GotoXY(45, 1); cout << " ____";
+		Controller::GotoXY(45, 2); cout << "|__ /";
+		Controller::GotoXY(45, 3); cout << " |_ \\";
+		Controller::GotoXY(45, 4); cout << "|___/ ";
 	}
 	else if (level == 4) {
-		Controller::GotoXY(20, 0); cout << " _ _ ";
-		Controller::GotoXY(20, 1); cout << "| | | ";
-		Controller::GotoXY(20, 2); cout << "|_  _|";
-		Controller::GotoXY(20, 3); cout << "  |_| ";
+		Controller::GotoXY(45, 1); cout << " _ _ ";
+		Controller::GotoXY(45, 2); cout << "| | | ";
+		Controller::GotoXY(45, 3); cout << "|_  _|";
+		Controller::GotoXY(45, 4); cout << "  |_| ";
 	}
 	else if (level == 5) {
-		Controller::GotoXY(20, 0); cout << " ___ ";
-		Controller::GotoXY(20, 1); cout << "| __|";
-		Controller::GotoXY(20, 2); cout << "|__ \\";
-		Controller::GotoXY(20, 3); cout << "|___/";
+		Controller::GotoXY(45, 1); cout << " ___ ";
+		Controller::GotoXY(45, 2); cout << "| __| ";
+		Controller::GotoXY(45, 3); cout << "|__ \\ ";
+		Controller::GotoXY(45, 4); cout << "|___/ ";
 	}
 	else {
 		return;
