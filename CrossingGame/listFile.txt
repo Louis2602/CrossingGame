@@ -13,3 +13,4 @@
 ./gameData/test3.txt
 ./gameData/test4.txt
 ./gameData/haha.txt
+./gameData/buiminh.txt
