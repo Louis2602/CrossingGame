@@ -505,10 +505,7 @@ void Game::printHelp() {
 	cout << "Close";
 	Controller::GotoXY(99, 27);
 	putchar(174);
-	while (Controller::GetConsoleInput() != 6) {
-		mSound.PlayerMove();
-	}
-	mSound.SoundSuccess();
+
 	// Clear up HELP board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
@@ -533,10 +530,6 @@ void Game::PauseGame() {
 	Controller::GotoXY(88, 27);
 	cout << "Press enter to Resume";
 
-	while (Controller::GetConsoleInput() != 6) {
-		mSound.PlayerMove();
-	}
-	mSound.SoundSuccess();
 	// Clear up Pause board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
