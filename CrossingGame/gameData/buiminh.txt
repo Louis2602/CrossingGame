@@ -1,6 +1,6 @@
-Player's name: superman
-ID: 260203
-Class: 22clc02
-Level: 1
-Score: 3
-Position: 28,16
+Player's name: lam
+ID: 123
+Class: aaa
+Level: 4
+Score: 13
+Position: 36,26

@@ -103,8 +103,6 @@ int Controller::GetConsoleInput()
 			return 8;
 		else if (c == 72 || c == 104) //H, h
 			return 9;
-		else if (c == 77 || c == 109) //M, m
-			return 10;
 		else
 			return 0;                 //others
 	}

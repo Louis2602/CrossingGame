@@ -281,7 +281,7 @@ void Game::SaveGame() {
 	Controller::ShowCursor(false);
 	filename = "./gameData/" + filename + ".txt";
 
-	fstream saveFile("listFile.txt", ios::app);
+	fstream saveFile("listFile.txt", ios::in);
 	saveFile << filename << "\n";
 	saveFile.close();
 
@@ -323,9 +323,9 @@ void Game::LoadGame() {
 		listSaveFile.push_back(tmp);
 	}
 	fs.close();
-	int idx = 13, idx_t = 13;
+	int idx = 13, idx_t = 13, it = 13;
 	bool found = false;
-
+	string name;
 	while (true) {
 		if (found)
 			break;
@@ -334,26 +334,25 @@ void Game::LoadGame() {
 		cout << "Choose your saving game to load!";
 
 		for (int i = listSaveFile.size() - 2; i >= 0; i--) {
-			Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-			Controller::GotoXY(51, 11 + listSaveFile.size() - i);
-			cout << listSaveFile[i] << endl;
-			if (i < listSaveFile.size() - 8)
-				break;
+			if (i >= listSaveFile.size() - 9) {
+				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+				Controller::GotoXY(61, 11 + listSaveFile.size() - i);
+				name = listSaveFile[i].substr(11, listSaveFile[i].size() - 15);
+				cout << name << "       ";
+			}
 		}
 
-		if (listSaveFile.size() > 7) {
-			Controller::GotoXY(59, 21);
-			cout << ".......";
-			Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
-			Controller::GotoXY(37, 22);
-			cout << "press M to go to insert mode and enter your file name";
-		}
+		Controller::SetConsoleColor(BRIGHT_WHITE, GRAY);
+		Controller::GotoXY(46, 22);
+		cout << "Press any keys to go back to menu";
 
-		Controller::GotoXY(48, idx);
+		Controller::GotoXY(58, idx);
 		Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 		cout << (char)175;
-		Controller::GotoXY(51, idx);
-		cout << listSaveFile[listSaveFile.size() - 2] << endl;
+		Controller::GotoXY(61, idx);
+		name = listSaveFile[listSaveFile.size() - 2].substr(11, listSaveFile[listSaveFile.size() - 2].size() - 15);
+		cout << name << "       ";
+		//cout << listSaveFile[listSaveFile.size() - 2] << "       ";
 
 		while (true) {
 
@@ -362,30 +361,77 @@ void Game::LoadGame() {
 
 			if (s == 2) {
 				idx--;
+				if (idx < 13) {
+					it--;
+					if (it < 13) {
+						it = 13;
+					}
+				}
+				else it--;
+
 				if (idx < 13)
 					idx = 13;
-				Controller::GotoXY(51, idx);
+
+				if (idx > 13) {
+					Controller::GotoXY(61, idx + 1);
+					Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+					name = listSaveFile[listSaveFile.size() - (it - 12) - 2].substr(11, listSaveFile[listSaveFile.size() - (it - 12) - 2].size() - 15);
+					cout << name << "       ";
+				}
+				else {
+					for (int i = listSaveFile.size() - 2; i >= 0; i--) {
+						if (i >= listSaveFile.size() - 9) {
+							Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+							Controller::GotoXY(61, 11 + listSaveFile.size() - i);
+							name = listSaveFile[i - (it - idx)].substr(11, listSaveFile[i - (it - idx)].size() - 15);
+							cout << name << "       ";
+						}
+					}
+				}
+				Controller::GotoXY(61, idx);
 				Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-				cout << listSaveFile[listSaveFile.size() - (idx - 13) - 2];
-				Controller::GotoXY(51, idx + 1);
-				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-				cout << listSaveFile[listSaveFile.size() - (idx - 12) - 2];
+				name = listSaveFile[listSaveFile.size() - (it - 13) - 2].substr(11, listSaveFile[listSaveFile.size() - (it - 13) - 2].size() - 15);
+				cout << name << "       ";
 			}
 			if (s == 5) {
 				idx++;
+				if (idx > 20) {
+					it++;
+					if (it > 13 + listSaveFile.size() - 2) {
+						it = 13 + listSaveFile.size() - 2;
+					}
+				}
+				else it = idx;
+				
 				if (idx > 20)
 					idx = 20;
-				Controller::GotoXY(51, idx);
+				
+				Controller::GotoXY(61, idx);
 				Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-				cout << listSaveFile[listSaveFile.size() - (idx - 13) - 2];
-				Controller::GotoXY(51, idx - 1);
-				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-				cout << listSaveFile[listSaveFile.size() - (idx - 14) - 2];
+				name = listSaveFile[listSaveFile.size() - (it - 13) - 2].substr(11, listSaveFile[listSaveFile.size() - (it - 13) - 2].size() - 15);
+				cout << name << "       ";
+				
+				if (it <= 20) {
+					Controller::GotoXY(61, idx - 1);
+					Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+					name = listSaveFile[listSaveFile.size() - (it - 14) - 2].substr(11, listSaveFile[listSaveFile.size() - (it - 14) - 2].size() - 15);
+					cout << name << "       ";
+				}
+				else {
+					for (int i = listSaveFile.size() - 2; i >= 0; i--) {
+						if (i >= listSaveFile.size() - 8) {
+							Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
+							Controller::GotoXY(61, 11 + listSaveFile.size() - i);
+							name = listSaveFile[i - (it - idx)].substr(11, listSaveFile[i - (it - idx)].size() - 15);
+							cout << name << "       ";
+						}
+					}
+				}
 			}
 
-			Controller::GotoXY(48, idx_t);
+			Controller::GotoXY(58, idx_t);
 			cout << "  ";
-			Controller::GotoXY(48, idx);
+			Controller::GotoXY(58, idx);
 			Controller::SetConsoleColor(BRIGHT_WHITE, RED);
 			cout << (char)175;
 
@@ -396,73 +442,7 @@ void Game::LoadGame() {
 				found = true;
 				break;
 			}
-			// if press M
-			if (s == 10)
-			{
-				Controller::ClearConsole();
-				Graphics::LoadBackground();
-				Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-				Graphics::DrawRectangle(46, 11, 31, 2);
-				Controller::GotoXY(50, 22);
-				Controller::ShowCursor(true);
-				string fileSave;
-				Controller::GotoXY(50, 10);
-				cout << "Enter your saved filename";
-				Controller::GotoXY(48, 12);
-				cin >> fileSave;
-				Controller::ShowCursor(false);
-				string tmp = fileSave;
-				fileSave = "./gameData/" + fileSave + ".txt";
-				int k = 16;
-				for (int i = 0; i < listSaveFile.size() - 1; i++) {
-					if (listSaveFile[i] == fileSave) {
-						idx = i;
-						Controller::GotoXY(47, 14);
-						Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-						cout << "[SUCCESS]: Ready to play!";
-						Controller::GotoXY(47, 15);
-						Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-						cout << listSaveFile[idx] << "                        ";
-						found = true;
-						break;
-					}
-					if (listSaveFile[i].find(tmp) != string::npos) {
-						Controller::SetConsoleColor(BRIGHT_WHITE, BLACK);
-						Controller::GotoXY(47, 15);
-						cout << "But found some files: ";
-						if (k < 21) {
-							Controller::GotoXY(47, k++);
-							cout << listSaveFile[i] << "                        ";
-						}
-					}
-					if (k > 20)
-					{
-						Controller::GotoXY(50, 21);
-						cout << ".......";
-					}
-				}
-				if (!found) {
-					Controller::GotoXY(47, 14);
-					Controller::SetConsoleColor(BRIGHT_WHITE, RED);
-					cout << "[ERROR]: Cannot found " << tmp << "!!!";
-					Controller::SetConsoleColor(BRIGHT_WHITE, GREEN);
-					Controller::GotoXY(58, 22);
-					putchar(175);
-					Controller::GotoXY(61, 22);
-					cout << "Back";
-					Controller::GotoXY(66, 22);
-					putchar(174);
-					while (Controller::GetConsoleInput() != 6) {
-						mSound.PlayerMove();
-					}
-					mSound.SoundSuccess();
-				}
-				Sleep(1000);
-				Controller::ClearConsole();
-				Graphics::LoadBackground();
-				break;
-			}
-			if (s != 2 && s != 5 && s != 10 && s != 6) {
+			if (s != 2 && s != 5 && s != 6) {
 				Menu mMenu;
 				mMenu.MainMenu();
 			}
@@ -525,10 +505,7 @@ void Game::printHelp() {
 	cout << "Close";
 	Controller::GotoXY(99, 27);
 	putchar(174);
-	while (Controller::GetConsoleInput() != 6) {
-		mSound.PlayerMove();
-	}
-	mSound.SoundSuccess();
+
 	// Clear up HELP board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
@@ -553,10 +530,6 @@ void Game::PauseGame() {
 	Controller::GotoXY(88, 27);
 	cout << "Press enter to Resume";
 
-	while (Controller::GetConsoleInput() != 6) {
-		mSound.PlayerMove();
-	}
-	mSound.SoundSuccess();
 	// Clear up Pause board
 	Controller::SetConsoleColor(BRIGHT_WHITE, BRIGHT_WHITE);
 	for (int i = 79; i < 114; i++)
@@ -581,12 +554,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 	vector<COBJECT*> line;
 	tL = thread([this] {renderLight(); });
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
-	if (level == 5) {
-		mLight.setisPlay(false);
-		mLight.setState(false);
-		IS_RUNNING = false;
-		winGame();
-	}
+
 	while (IS_RUNNING) {
 		line2->setSpeed(curLevel());
 		line3->setSpeed(curLevel());
@@ -657,12 +625,16 @@ void Game::renderObject(thread& tL, thread& tO) {
 				break;
 			}
 		}
-
-
+		if (level == 6) {
+			mLight.setisPlay(false);
+			mLight.setState(false);
+			IS_RUNNING = false;
+			winGame();
+		}
 		mtx.unlock();
 		Sleep(50);
 	}
-	if (!IS_RUNNING) {
+	if (!IS_RUNNING && level != 6) {
 		loseGame();
 	}
 	Graphics::DrawGoodbyeScreen();
