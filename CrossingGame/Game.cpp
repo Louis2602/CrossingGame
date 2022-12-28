@@ -554,12 +554,7 @@ void Game::renderObject(thread& tL, thread& tO) {
 	vector<COBJECT*> line;
 	tL = thread([this] {renderLight(); });
 	tO = thread([&] {playGame(line2, line3, line4, line5); });
-	if (level == 6) {
-		mLight.setisPlay(false);
-		mLight.setState(false);
-		IS_RUNNING = false;
-		winGame();
-	}
+
 	while (IS_RUNNING) {
 		line2->setSpeed(curLevel());
 		line3->setSpeed(curLevel());
@@ -630,12 +625,16 @@ void Game::renderObject(thread& tL, thread& tO) {
 				break;
 			}
 		}
-
-
+		if (level == 6) {
+			mLight.setisPlay(false);
+			mLight.setState(false);
+			IS_RUNNING = false;
+			winGame();
+		}
 		mtx.unlock();
 		Sleep(50);
 	}
-	if (!IS_RUNNING) {
+	if (!IS_RUNNING && level != 6) {
 		loseGame();
 	}
 	Graphics::DrawGoodbyeScreen();
