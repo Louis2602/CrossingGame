@@ -1,20 +1,47 @@
 #pragma once
 
 #include "CANIMAL.h"
-#include "CVEHICLE.h"
+#include "COBJECT.h"
+#include "CLIGHT.h"
+#include "Sound.h"
+#include "cPoint.h"
+
 
 class CPEOPLE {
-	int mX, mY;
-	bool mState;		// dead or alive state
+private:
+	cPoint pos; //Position of character
+	int level = 0, score = 0;
+	int back = 0, forward = 0;
+	int height = 3, width = 3;
+	Sound mSound;
 public:
-	CPEOPLE() {};
-	~CPEOPLE() {};
-	void Up(int);
-	void Left(int);
-	void Right(int);
-	void Down(int);
-	bool isImpact(const CVEHICLE*&);
-	bool isImpact(const CANIMAL*&);
-	bool isFinish();
-	bool isDead();
+	CPEOPLE() {
+		pos.setXY(36, 26);
+	}
+	~CPEOPLE() {
+		//tSound.join();
+	};
+	int getPosX();     //Get mX value of character
+	int getPosY();     //Get mY value of character
+	int getScore();   //Get player's score
+	int getForward();
+	int getBack();
+	int getHeight();
+	int getWidth();
+
+	void updateScore(); //Update score when player move
+	void updatePos(int, int);  //Update position of character after move
+	void setForward();
+	void setBack();
+
+	void DRAW_PEOPLE(int mX, int mY);  //Draw player's character to screen
+	void Delete(int mX, int mY); //Delete character at previous position
+
+	void Up(int& mY);            //Move character up
+	void Left(int& mX);          //Move character left
+	void Right(int& mX);         //Move character right
+	void Down(int& mY);          //Move character down
+
+	bool isImpact(COBJECT* Object); //Check if player impact with Object
+	bool isFinish(int mX);             //Check if player has completed the stage
 };

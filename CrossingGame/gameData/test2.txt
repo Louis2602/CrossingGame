@@ -1,0 +1,6 @@
+Player's name: kha
+ID: 1012301
+Class: 10a2
+Level: 3
+Score: 11
+Position: 32,22

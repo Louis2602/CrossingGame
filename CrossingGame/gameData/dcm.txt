@@ -1,0 +1,6 @@
+Player's name: unknown
+ID: unknown
+Class: unknown
+Level: 1
+Score: 2
+Position: 36,18

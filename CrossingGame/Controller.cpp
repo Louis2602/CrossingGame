@@ -71,21 +71,21 @@ int Controller::GetConsoleInput()
 	{
 		switch (_getch())
 		{
-		case KEY_UP:				//lên
+		case KEY_UP:				//up
 			return 2;
-		case KEY_LEFT:				//trái
+		case KEY_LEFT:				//left
 			return 3;
-		case KEY_RIGHT:				//phải
+		case KEY_RIGHT:				//right
 			return 4;
-		case KEY_DOWN:				//xuống
+		case KEY_DOWN:				//down
 			return 5;
-		default:				//nút khác
+		default:					//others
 			return 0;
 		}
 	}
 	else
 	{
-		if (c == KEY_ESC)                  //esc
+		if (c == KEY_ESC)             //Esc
 			return 1;
 		else if (c == 87 || c == 119) //W, w
 			return 2;
@@ -97,11 +97,13 @@ int Controller::GetConsoleInput()
 			return 5;
 		else if (c == 13)             //Enter
 			return 6;
-		else if (c == 72 || c == 104) //H, h
+		else if (c == 80 || c == 112) //P, p
 			return 7;
-		else if (c == 77 || c == 109) // M, m
+		else if (c == 76 || c == 108) //L, l
 			return 8;
+		else if (c == 72 || c == 104) //H, h
+			return 9;
 		else
-			return 0;                 //nút khác
+			return 0;                 //others
 	}
 }

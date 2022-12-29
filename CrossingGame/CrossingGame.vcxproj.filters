@@ -39,7 +39,31 @@
     <ClInclude Include="CANIMAL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CVEHICLE.h">
+    <ClInclude Include="COBJECT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CLIGHT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPOSITION.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cTruck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBIRD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDINO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,7 +77,7 @@
     <ClCompile Include="CPEOPLE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CVEHICLE.cpp">
+    <ClCompile Include="COBJECT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CANIMAL.cpp">
@@ -69,6 +93,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CLIGHT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cTruck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBIRD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDINO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

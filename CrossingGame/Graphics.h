@@ -1,5 +1,8 @@
 #pragma once
-#include "Header.h"
+#ifndef Graphics
+
+#include "Controller.h"
+#include "Sound.h"
 
 class Graphics {
 public:
@@ -9,7 +12,11 @@ public:
 	static void DrawMenuBox();
 	static void DrawRectangle(int, int, int, int);
 	static void PrintInstruct();
-	static void PrintScoreboard();
+	static void PrintInfo();
 	static void DrawMap();
 	static void PrintInterface();
+	static void DrawGoodbyeScreen();
+	static void PrintLevel(int);
 };
+
+#endif // !Graphics

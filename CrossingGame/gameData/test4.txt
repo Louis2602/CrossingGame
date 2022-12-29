@@ -1,0 +1,6 @@
+Player's name: asdasd
+ID: 1012301
+Class: 10a2
+Level: 3
+Score: 15
+Position: 32,22

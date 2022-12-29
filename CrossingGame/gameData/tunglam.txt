@@ -1,0 +1,6 @@
+Player's name: provip123
+ID: 260203
+Class: 22clc02
+Level: 4
+Score: 18
+Position: 28,16

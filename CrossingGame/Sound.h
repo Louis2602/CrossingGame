@@ -2,14 +2,18 @@
 #include "Header.h"
 
 class Sound {
+	bool isOn = true;
 public:
 	Sound() {};
 	~Sound() {};
-	static void SoundBackground();
-	//void SoundGameOver();		//Sound Game over when you lost
-	//void SoundGameWin();		//Sound Gamw when you win the game
-	static void SoundByeBye();
-	static void SoundRocket();
-	static void EndSoundGame();         //End sound game
-	static void PlayerMove();
+	bool getState();
+	void setState(bool);
+	void SoundBackground(bool);
+	void SoundByeBye();
+	void SoundRocket();
+	void EndSoundGame();         //End sound game
+	void PlayerMove();
+	void SoundSuccess();
+	void SoundWin();
+	void SoundLose();
 };

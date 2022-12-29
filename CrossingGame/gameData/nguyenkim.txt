@@ -1,0 +1,6 @@
+Player's name: speed
+ID: 260203
+Class: 22clc02
+Level: 2
+Score: 6
+Position: 28,16
