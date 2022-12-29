@@ -1,6 +1,6 @@
 Player's name: unknown
 ID: unknown
 Class: unknown
-Level: 1
-Score: 2
-Position: 36,18
+Level: 2
+Score: 5
+Position: 38,26
