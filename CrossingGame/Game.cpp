@@ -281,7 +281,7 @@ void Game::SaveGame() {
 	Controller::ShowCursor(false);
 	filename = "./gameData/" + filename + ".txt";
 
-	fstream saveFile("listFile.txt", ios::in);
+	fstream saveFile("listFile.txt", ios::app);
 	saveFile << filename << "\n";
 	saveFile.close();
 
